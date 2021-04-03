@@ -20,8 +20,8 @@ public class PnlMenu extends javax.swing.JPanel {
         initComponents();
         tomarOrden= fmPrincipal;
         //setLayout(new GroupLayout(this));
-        this.setSize(1360, 200);
-        this.setLocation(556, 15);
+        this.setSize(1360, 216);
+        this.setLocation(546, 0);
              // Menú
 //        tbtnHotdogs.setSelected(true);
 //        btn1.setText("Yaqui");
@@ -111,7 +111,7 @@ public class PnlMenu extends javax.swing.JPanel {
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbtnHotdogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbtnBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +121,7 @@ public class PnlMenu extends javax.swing.JPanel {
                 .addGap(34, 34, 34))
         );
 
-        add(jpMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        add(jpMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 190));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbtnHotdogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnHotdogsActionPerformed

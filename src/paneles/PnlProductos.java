@@ -24,7 +24,7 @@ public class PnlProductos extends javax.swing.JPanel {
         this.tomarOrden=fmPrincipal;
 //        setLayout(new GroupLayout(this));
         this.setSize(1360, 800);
-        this.setLocation(556,216);
+        this.setLocation(546,216);
     }
 
     /**

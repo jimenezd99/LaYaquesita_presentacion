@@ -21,9 +21,8 @@ public class PnlPersonalizar extends javax.swing.JPanel {
         initComponents();
         this.tomarOrden=fmPrincipal;
 //        setLayout(new GroupLayout(this));
-        this.setSize(1000, 750);
-        this.setLocation(15, 0);
-        this.setBackground(Color.yellow);
+        this.setSize(1360, 800);
+        this.setLocation(546,216);
     }
 
     /**
