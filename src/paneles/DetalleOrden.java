@@ -6,6 +6,7 @@
 package paneles;
 
 import vistas.FmPrincipal;
+import java.awt.Dimension;
 
 /**
  *
@@ -14,14 +15,31 @@ import vistas.FmPrincipal;
 public class DetalleOrden extends javax.swing.JPanel {
 
     private FmPrincipal tomarOrden;
+    private Dimension tamPrincipal;
+    private Dimension tamText;
+    private Dimension tamPanel;
     /**
      * Creates new form DetalleOrden
      */
     public DetalleOrden(FmPrincipal fmPrincipal) {
         initComponents();
-        setSize(550, 1000);
         this.setLocation(0, 0);
         this.tomarOrden=fmPrincipal;
+        int ancho = tomarOrden.getWidth()/4;
+        int largo = tomarOrden.getHeight();
+        tamPrincipal = new Dimension(ancho, largo);
+        setSize(tamPrincipal);
+        
+        int anchoPanel = ancho - 20;
+        int largoPanel = largo - 50;
+        jPanel1.setSize(anchoPanel, largoPanel);
+        jPanel1.setLocation(10,25);
+        tamPanel = new Dimension(anchoPanel, largoPanel);
+        
+        int ancho2 = anchoPanel/2;
+        int largo2 = anchoPanel-btnSiguiente.getHeight();
+        txtArea.setSize(largo2, ancho2);
+        tamText = new Dimension(ancho2, largo2);
 //        setResizable(false);
 //        setLocationRelativeTo(null);
     }
@@ -42,15 +60,16 @@ public class DetalleOrden extends javax.swing.JPanel {
         txtArea = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(226, 207, 169));
-        setMinimumSize(new java.awt.Dimension(785, 1000));
-        setPreferredSize(new java.awt.Dimension(550, 900));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(tamPrincipal);
 
         jPanel1.setBackground(new java.awt.Color(254, 244, 222));
-        jPanel1.setPreferredSize(new java.awt.Dimension(530, 810));
+        jPanel1.setPreferredSize(tamPanel);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlblOrden.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jlblOrden.setText("Orden: 001");
+        jPanel1.add(jlblOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 0, -1, -1));
 
         btnSiguiente.setBackground(new java.awt.Color(247, 157, 68));
         btnSiguiente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -60,47 +79,36 @@ public class DetalleOrden extends javax.swing.JPanel {
                 btnSiguienteActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 545, 120, 70));
 
         txtArea.setEditable(false);
         txtArea.setColumns(20);
         txtArea.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtArea.setRows(5);
-        txtArea.setMinimumSize(new java.awt.Dimension(260, 95));
+        txtArea.setMargin(null);
+        txtArea.setMinimumSize(null);
+        txtArea.setName(""); // NOI18N
+        txtArea.setPreferredSize(tamText);
         jScrollPane1.setViewportView(txtArea);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(160, 160, 160)
-                            .addComponent(jlblOrden))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(300, 300, 300)
-                            .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jlblOrden)
-                    .addGap(7, 7, 7)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, 280, 420));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed

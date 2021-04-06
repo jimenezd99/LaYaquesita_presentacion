@@ -5,6 +5,7 @@
  */
 package paneles;
 
+import java.awt.Point;
 import vistas.FmPrincipal;
 
 /**
@@ -16,12 +17,12 @@ public class PnlMenu extends javax.swing.JPanel {
     /**
      * Creates new form PnlMenu
      */
-    public PnlMenu(FmPrincipal fmPrincipal) {
+    public PnlMenu(FmPrincipal fmPrincipal, Point location) {
         initComponents();
         tomarOrden= fmPrincipal;
         //setLayout(new GroupLayout(this));
         this.setSize(1360, 216);
-        this.setLocation(546, 0);
+        this.setLocation(location);
              // Menú
 //        tbtnHotdogs.setSelected(true);
 //        btn1.setText("Yaqui");
@@ -46,6 +47,7 @@ public class PnlMenu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(226, 207, 169));
         setAlignmentX(1.0F);
+        setMinimumSize(null);
         setPreferredSize(new java.awt.Dimension(1360, 200));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

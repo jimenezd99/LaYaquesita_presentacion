@@ -9,6 +9,9 @@ import paneles.DetalleOrden;
 import paneles.PnlMenu;
 import paneles.PnlPersonalizar;
 import paneles.PnlProductos;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 //import java.util.ArrayList;
 /**
  *
@@ -25,6 +28,8 @@ public class FmPrincipal extends javax.swing.JFrame {
     private DetalleOrden ticket;
     private PnlProductos productos;
     private PnlPersonalizar personalizar;
+    private Toolkit tk = Toolkit.getDefaultToolkit();
+    private Dimension tam = tk.getScreenSize();
 
     /**
      * Creates new form NewJFrame
@@ -35,15 +40,15 @@ public class FmPrincipal extends javax.swing.JFrame {
         //this.add(new TabbedPanelMenu());
         initComponents();
         this.setTitle("Tomar orden");
-        this.setSize(1920, 1080);
         notasOrden = "";
 //        platillos = new ArrayList<>();
 //        COrden = new OrdenJpaController();
 //        CUsuarios = new UsuariosJpaController();
 //        cPlatillo = new PlatilloJpaController();
-        this.menu = new PnlMenu(this);
+        
         this.ticket = new DetalleOrden(this);
-        this.productos= new PnlProductos(this);
+        this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
+        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
         this.personalizar= new PnlPersonalizar(this);
         initPantalla();
         //cOrdenHasPlatillo = new OrdenHasPlatilloJpaController();
@@ -73,8 +78,9 @@ public class FmPrincipal extends javax.swing.JFrame {
         setTitle("Tomar Orden");
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(226, 207, 169));
-        setMinimumSize(new java.awt.Dimension(1820, 1000));
+        setMinimumSize(new java.awt.Dimension(100, 100));
         setResizable(false);
+        setSize(tam);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

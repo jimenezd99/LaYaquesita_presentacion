@@ -9,6 +9,7 @@ import vistas.FmPrincipal;
 import paneles.hardcord.Cuate;
 import paneles.hardcord.Yaqui;
 import java.awt.Color;
+import java.awt.Point;
 /**
  *
  * @author Diana Jiménez
@@ -19,12 +20,12 @@ public class PnlProductos extends javax.swing.JPanel {
     /**
      * Creates new form Productos
      */
-    public PnlProductos(FmPrincipal fmPrincipal) {
+    public PnlProductos(FmPrincipal fmPrincipal, Point location) {
         initComponents();
         this.tomarOrden=fmPrincipal;
 //        setLayout(new GroupLayout(this));
         this.setSize(1360, 800);
-        this.setLocation(546,216);
+        this.setLocation(location);
     }
 
     /**
