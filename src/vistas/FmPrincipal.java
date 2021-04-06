@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 //import java.util.ArrayList;
+
 /**
  *
  * @author Jbran
@@ -45,22 +46,30 @@ public class FmPrincipal extends javax.swing.JFrame {
 //        COrden = new OrdenJpaController();
 //        CUsuarios = new UsuariosJpaController();
 //        cPlatillo = new PlatilloJpaController();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        pack();
+
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
         
         this.ticket = new DetalleOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
-        this.personalizar= new PnlPersonalizar(this);
+        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        this.personalizar = new PnlPersonalizar(this);
         initPantalla();
         //cOrdenHasPlatillo = new OrdenHasPlatilloJpaController();
         //panelPrincipal.add(new Panel(Vistas.Paneles.panelMenu));
     }
 
     public void initPantalla() {
+
         this.add(menu);
         this.add(ticket);
         this.add(productos);
         //lógica para cambiar productos por personalizar debe ir después de seleecionar el producto
         //this.add(personalizar);
+
         setResizable(true);
         setLocationRelativeTo(null);
     }
