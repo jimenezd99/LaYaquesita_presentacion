@@ -7,6 +7,7 @@ package paneles;
 
 import vistas.FmPrincipal;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 
 /**
  *
@@ -25,21 +26,24 @@ public class DetalleOrden extends javax.swing.JPanel {
         initComponents();
         this.setLocation(0, 0);
         this.tomarOrden=fmPrincipal;
-        int ancho = tomarOrden.getWidth()/4;
+        int ancho = tomarOrden.getWidth()/3;
         int largo = tomarOrden.getHeight();
         tamPrincipal = new Dimension(ancho, largo);
         setSize(tamPrincipal);
         
-        int anchoPanel = ancho - 20;
-        int largoPanel = largo - 50;
-        jPanel1.setSize(anchoPanel, largoPanel);
-        jPanel1.setLocation(10,25);
+        int anchoPanel = ancho;
+        int largoPanel = largo;
+//        jPanel1.setSize(anchoPanel, largoPanel);
         tamPanel = new Dimension(anchoPanel, largoPanel);
+        jPanel1.setPreferredSize(tamPanel);
         
         int ancho2 = anchoPanel/2;
-        int largo2 = anchoPanel-btnSiguiente.getHeight();
-        txtArea.setSize(largo2, ancho2);
+        int largo2 = largoPanel/8;
+        txtArea.setSize(ancho2, largo2);
+        jScrollPane1.setSize(ancho2, largo2);
         tamText = new Dimension(ancho2, largo2);
+        jScrollPane1.setPreferredSize(tamText);
+        txtArea.setPreferredSize(tamText);
 //        setResizable(false);
 //        setLocationRelativeTo(null);
     }
@@ -64,12 +68,11 @@ public class DetalleOrden extends javax.swing.JPanel {
         setPreferredSize(tamPrincipal);
 
         jPanel1.setBackground(new java.awt.Color(254, 244, 222));
+        jPanel1.setMinimumSize(null);
         jPanel1.setPreferredSize(tamPanel);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlblOrden.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jlblOrden.setText("Orden: 001");
-        jPanel1.add(jlblOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 0, -1, -1));
 
         btnSiguiente.setBackground(new java.awt.Color(247, 157, 68));
         btnSiguiente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -79,19 +82,48 @@ public class DetalleOrden extends javax.swing.JPanel {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 545, 120, 70));
+
+        jScrollPane1.setMaximumSize(tamText);
+        jScrollPane1.setMinimumSize(null);
+        jScrollPane1.setName(""); // NOI18N
+        jScrollPane1.setPreferredSize(tamText);
 
         txtArea.setEditable(false);
         txtArea.setColumns(20);
         txtArea.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtArea.setRows(5);
         txtArea.setMargin(null);
+        txtArea.setMaximumSize(tamText);
         txtArea.setMinimumSize(null);
         txtArea.setName(""); // NOI18N
         txtArea.setPreferredSize(tamText);
         jScrollPane1.setViewportView(txtArea);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, 280, 420));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jlblOrden)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,14 +131,14 @@ public class DetalleOrden extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
