@@ -7,6 +7,7 @@ package fachadaLogica;
 
 import Entidades.Platillo;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,10 +15,21 @@ import java.util.ArrayList;
  */
 public class FachadaLogica implements IFachadaLogica {
 
+    FachadaPlatillo fachadaPlatillo;
+
+    public FachadaLogica() {
+        this.fachadaPlatillo = new FachadaPlatillo();
+    }
+
     @Override
     public void guardarOrden(ArrayList<Platillo> platillos, String notasOrden) {
         TomarOrden tomarOrden = new TomarOrden(platillos, notasOrden);
         tomarOrden.generarOrden();
+    }
+
+    @Override
+    public List<Platillo> consultarPlatillos() {
+        return fachadaPlatillo.consultarPlatillos();
     }
 
 }

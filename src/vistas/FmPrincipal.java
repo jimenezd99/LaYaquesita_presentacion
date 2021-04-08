@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import Entidades.Platillo;
 import paneles.DetalleOrden;
 import paneles.PnlMenu;
 import paneles.PnlPersonalizar;
@@ -12,6 +13,9 @@ import paneles.PnlProductos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JToggleButton;
+import paneles.codigo.PnlProductosPrueba;
 //import java.util.ArrayList;
 /**
  *
@@ -20,13 +24,11 @@ import java.awt.Toolkit;
 public class FmPrincipal extends javax.swing.JFrame {
 
     private String notasOrden;
-//    private ArrayList<Platillo> platillos;
-//    private OrdenJpaController COrden;
-//    private UsuariosJpaController CUsuarios;
-//    private PlatilloJpaController cPlatillo;
+    private ArrayList<Platillo> platillos;
     private PnlMenu menu;
     private DetalleOrden ticket;
-    private PnlProductos productos;
+    //private PnlProductos productos;
+     private PnlProductosPrueba productos;
     private PnlPersonalizar personalizar;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
@@ -36,15 +38,11 @@ public class FmPrincipal extends javax.swing.JFrame {
      */
     public FmPrincipal() {
 
-        //this.add(new PanelOrden());
-        //this.add(new TabbedPanelMenu());
         initComponents();
         this.setTitle("Tomar orden");
         notasOrden = "";
-//        platillos = new ArrayList<>();
-//        COrden = new OrdenJpaController();
-//        CUsuarios = new UsuariosJpaController();
-//        cPlatillo = new PlatilloJpaController();
+        platillos = new ArrayList<>();
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
 
@@ -55,11 +53,11 @@ public class FmPrincipal extends javax.swing.JFrame {
 
         this.ticket = new DetalleOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        this.productos= new PnlProductosPrueba(this, new Point(ticket.getWidth(), menu.getHeight()));
         this.personalizar= new PnlPersonalizar(this);
         initPantalla();
-        //cOrdenHasPlatillo = new OrdenHasPlatilloJpaController();
-        //panelPrincipal.add(new Panel(Vistas.Paneles.panelMenu));
+        setPanelProductos();
+        
     }
 
     public void initPantalla() {
@@ -70,6 +68,24 @@ public class FmPrincipal extends javax.swing.JFrame {
         //this.add(personalizar);
         setResizable(true);
         setLocationRelativeTo(null);
+    }
+    
+    
+     public void setPanelProductos(){
+         JToggleButton menu = this.menu.getSelected();
+        
+        switch (menu.getText()){
+            case "HotDogs":
+                productos.cargarHotdogs();
+                break;
+            case "Bebidas":
+                productos.cargarBebidas();
+                break;
+            case "Extras":
+                productos.cargarExtras();
+                break;
+        }
+                
     }
 
     /**
@@ -103,75 +119,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//    public ArrayList getPlatillos() {
-//        return platillos;
-//    }
-//    public float calcularOrden() {
-//        float total = 0F;
-//
-//        for (Platillo platillo : platillos) {
-//            total += platillo.getCosto();
-//        }
-//
-//        return total;
-//    }
-//    public void guardarOrden() {
-////        List<Usuarios> usuarios = CUsuarios.findUsuariosEntities();
-////        List<Platillo> platillos = cPlatillo.findPlatilloEntities();
-////        Usuarios usuario = usuarios.get(0);
-//
-//        Orden orden = new Orden();
-//        orden.setFecha(new Date());
-////        orden.setIdusuario(usuario);
-//
-//        orden.setTotal(calcularOrden());
-//
-////        COrden.create(orden);
-//
-////        guardarOrdenHasPlatillos(orden);
-//    }
-//    public void guardarOrdenHasPlatillos2(Orden orden, OrdenHasPlatillo ordenHasPlatillos, List<OrdenHasPlatillo> ordHasList) {
-//        OrdenHasPlatilloJpaController cOrdenHasPlatillo = new OrdenHasPlatilloJpaController();
-//        ordenHasPlatillos.setCantidad(1);
-//        ordenHasPlatillos.setOrden(orden);
-//        orden.setOrdenHasPlatilloList(ordHasList);
-//
-//        try {
-//            cOrdenHasPlatillo.create(ordenHasPlatillos);
-//        } catch (Exception ex) {
-//            System.out.println("Preexisting entity");
-//        }
-//    }
-//    public void guardarOrdenHasPlatillos(Orden orden) {
-//
-////        List<Platillo> platillosBD = cPlatillo.findPlatilloEntities();
-//        ArrayList<OrdenHasPlatillo> platillos2 = new ArrayList<>();
-//        // ArrayList<Platillo> platillos = new ArrayList<>();
-//
-//        for (int i = 0; i < platillosBD.size(); i++) {
-//
-//            for (Platillo platillo : platillos) {
-//
-//                if (platillo.getNombre().equalsIgnoreCase(platillosBD.get(i).getNombre())) {
-//                    OrdenHasPlatillo ordenHasPlatillos = new OrdenHasPlatillo();
-//                    ordenHasPlatillos.setPlatillo(platillosBD.get(i));
-//                    platillos2.add(ordenHasPlatillos);
-//                    ordenHasPlatillos.setPrecio(platillo.getCosto());
-//                    ordenHasPlatillos.setNotas(platillo.toString());
-//                    platillos2.add(ordenHasPlatillos);
-//                    guardarOrdenHasPlatillos2(orden, ordenHasPlatillos, platillos2);
-//                }
-//
-//            }
-//
-//        }
-//
-//    }
-//    public void notasOrden(Platillo platillo) {
-//
-//        notasOrden = notasOrden.concat(platillo.toString() + "\n");
-////        txtArea.setText(notasOrden);
-//    }
+
     /**
      * @param args the command line arguments
      */

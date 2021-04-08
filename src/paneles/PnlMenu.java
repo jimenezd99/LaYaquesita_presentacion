@@ -6,6 +6,8 @@
 package paneles;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import javax.swing.JToggleButton;
 import vistas.FmPrincipal;
 
 /**
@@ -13,22 +15,28 @@ import vistas.FmPrincipal;
  * @author Diana Jiménez
  */
 public class PnlMenu extends javax.swing.JPanel {
+
     private FmPrincipal tomarOrden;
+    private ArrayList<JToggleButton> botonesMenu;
+ 
+
     /**
      * Creates new form PnlMenu
      */
     public PnlMenu(FmPrincipal fmPrincipal, Point location) {
         initComponents();
-        tomarOrden= fmPrincipal;
+        tomarOrden = fmPrincipal;
+       
         //setLayout(new GroupLayout(this));
         this.setSize(1360, 216);
         this.setLocation(location);
-             // Menú
-//        tbtnHotdogs.setSelected(true);
-//        btn1.setText("Yaqui");
-//        btn2.setText("Cuate");
-       
+        botonesMenu = new ArrayList();
+        llenarBotonesMenu();
+        tbtnHotdogs.setSelected(true);
+
     }
+
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,31 +138,39 @@ public class PnlMenu extends javax.swing.JPanel {
         tbtnHotdogs.setSelected(true);
         tbtnExtras.setSelected(false);
         tbtnBebidas.setSelected(false);
+        tomarOrden.setPanelProductos();
 
-//        btn1.setText("Yaqui");
-//        btn2.setText("Cuate");
     }//GEN-LAST:event_tbtnHotdogsActionPerformed
 
     private void tbtnBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnBebidasActionPerformed
         tbtnHotdogs.setSelected(false);
         tbtnExtras.setSelected(false);
         tbtnBebidas.setSelected(true);
-//        btn1.setText("Coca L");
-//        btn2.setText("Coca B");
+        tomarOrden.setPanelProductos();
     }//GEN-LAST:event_tbtnBebidasActionPerformed
 
     private void tbtnExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnExtrasActionPerformed
         tbtnHotdogs.setSelected(false);
         tbtnExtras.setSelected(true);
         tbtnBebidas.setSelected(false);
-//        btn1.setText("Queso de Nacho");
-//        btn2.setText("Salsa Valiente");
+        tomarOrden.setPanelProductos();
     }//GEN-LAST:event_tbtnExtrasActionPerformed
 
-    public void llenarBotones(String producto){
-        
+    public void llenarBotonesMenu() {
+        botonesMenu.add(tbtnHotdogs);
+        botonesMenu.add(tbtnExtras);
+        botonesMenu.add(tbtnBebidas);
     }
 
+    public JToggleButton getSelected() {
+        for (JToggleButton menu : botonesMenu) {
+            if (menu.isSelected()) {
+                return menu;
+            }
+        }
+
+        return null;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpMenu;
     private javax.swing.JSeparator jsMenu;

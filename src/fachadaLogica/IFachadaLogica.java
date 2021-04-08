@@ -7,6 +7,7 @@ package fachadaLogica;
 
 import Entidades.Platillo;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface IFachadaLogica {
     
     public void guardarOrden(ArrayList<Platillo> platillos, String notasOrden);
     
-    
+     public List<Platillo> consultarPlatillos();
     
     
     
