@@ -17,43 +17,34 @@ public class FachadaUsuarios {
         CUsuarios = new UsuariosJpaController();
     }
     
-    public boolean registrarUsuario(Usuarios usuario){
-       try{
-            CUsuarios.create(usuario);
-            return true;
-        } catch (Exception x) {
-            System.out.println(x.getMessage());
-            return false;
-        }
+    public void registrarUsuario(Usuarios usuario){
+        CUsuarios.create(usuario);
     }
     
-    public boolean editarUsuario(Usuarios usuario_a_Actualizar) {
+    public String editarUsuario(Usuarios usuario_a_Actualizar) {
         try {
 
             CUsuarios.edit(usuario_a_Actualizar);
-            return true;
+            return "Usuario registrado";
         } catch (Exception x) {
             System.out.println(x.getMessage());
-            return false;
+            return "El usuario no fue encontrado";
         }
     }
 
-    public boolean eliminarUsuario(Integer idUsuario) {
+    public String eliminarUsuario(Integer idUsuario) {
         try {
             CUsuarios.destroy(idUsuario);
-            return true;
+            return "Usuario eliminado";
         } catch (Exception x) {
             System.out.println(x.getMessage());
-            return false;
+            return "El usuario no fue encontrado";
         }
 
     }
     
     public List<Usuarios> consultarUsuarios(){
         List<Usuarios> usuarios= CUsuarios.findUsuariosEntities();
-        if(usuarios.isEmpty()){
-            System.out.println("No hay usuarios registrados");
-        }
         return usuarios;
     }
     
