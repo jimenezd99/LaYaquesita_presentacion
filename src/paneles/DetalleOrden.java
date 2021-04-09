@@ -29,25 +29,27 @@ public class DetalleOrden extends javax.swing.JPanel {
         int ancho = tomarOrden.getWidth()/3;
         int largo = tomarOrden.getHeight();
         tamPrincipal = new Dimension(ancho, largo);
+        
         this.setSize(tamPrincipal);
         
-        int anchoPanel = ancho;
-        int largoPanel = largo;
-//        jPanel1.setSize(anchoPanel, largoPanel);
+        int anchoPanel = ancho-20;
+        int largoPanel = largo-50;
         tamPanel = new Dimension(anchoPanel, largoPanel);
+        
         pnlCremita.setSize(tamPrincipal);
-       // pnlCremita.setPreferredSize(tamPanel);
+        pnlCremita.setPreferredSize(tamPanel);
         
-        int ancho2 = anchoPanel;
-        int largo2 = largoPanel;
-        txtArea.setSize(ancho, largo);
-        jScrollPane1.setSize(ancho, largo);
-        tamText = new Dimension(ancho, largo);
-        jScrollPane1.setPreferredSize(tamText);
-        txtArea.setPreferredSize(tamText);
+        int ancho2 = ancho/3;
+        int largo2 = largo/10;
         
-//        setResizable(false);
-//        setLocationRelativeTo(null);
+        
+        txtATicket.setSize(ancho2, largo2);
+        spTicket.setSize(ancho2, largo2);
+        
+        tamText = new Dimension(ancho2, largo2);
+        spTicket.setPreferredSize(tamText);
+        txtATicket.setPreferredSize(tamText);
+        
     }
 
     /**
@@ -62,14 +64,16 @@ public class DetalleOrden extends javax.swing.JPanel {
         pnlCremita = new javax.swing.JPanel();
         jlblOrden = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtArea = new javax.swing.JTextArea();
+        spTicket = new javax.swing.JScrollPane();
+        txtATicket = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(226, 207, 169));
         setMinimumSize(new java.awt.Dimension(0, 0));
         setPreferredSize(tamPrincipal);
 
         pnlCremita.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCremita.setMaximumSize(tamPanel);
+        pnlCremita.setMinimumSize(tamPanel);
         pnlCremita.setPreferredSize(tamPanel);
 
         jlblOrden.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -84,21 +88,21 @@ public class DetalleOrden extends javax.swing.JPanel {
             }
         });
 
-        jScrollPane1.setMaximumSize(tamText);
-        jScrollPane1.setMinimumSize(null);
-        jScrollPane1.setName(""); // NOI18N
-        jScrollPane1.setPreferredSize(tamText);
+        spTicket.setMaximumSize(tamText);
+        spTicket.setMinimumSize(null);
+        spTicket.setName(""); // NOI18N
+        spTicket.setPreferredSize(tamText);
 
-        txtArea.setEditable(false);
-        txtArea.setColumns(20);
-        txtArea.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtArea.setRows(5);
-        txtArea.setMargin(null);
-        txtArea.setMaximumSize(tamText);
-        txtArea.setMinimumSize(null);
-        txtArea.setName(""); // NOI18N
-        txtArea.setPreferredSize(tamText);
-        jScrollPane1.setViewportView(txtArea);
+        txtATicket.setEditable(false);
+        txtATicket.setColumns(20);
+        txtATicket.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtATicket.setRows(5);
+        txtATicket.setMargin(null);
+        txtATicket.setMaximumSize(tamText);
+        txtATicket.setMinimumSize(null);
+        txtATicket.setName(""); // NOI18N
+        txtATicket.setPreferredSize(tamText);
+        spTicket.setViewportView(txtATicket);
 
         javax.swing.GroupLayout pnlCremitaLayout = new javax.swing.GroupLayout(pnlCremita);
         pnlCremita.setLayout(pnlCremitaLayout);
@@ -112,7 +116,7 @@ public class DetalleOrden extends javax.swing.JPanel {
                         .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCremitaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(spTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlCremitaLayout.setVerticalGroup(
@@ -120,7 +124,7 @@ public class DetalleOrden extends javax.swing.JPanel {
             .addGroup(pnlCremitaLayout.createSequentialGroup()
                 .addComponent(jlblOrden)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(spTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -132,14 +136,14 @@ public class DetalleOrden extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCremita, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(pnlCremita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(pnlCremita, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addComponent(pnlCremita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -151,9 +155,9 @@ public class DetalleOrden extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlblOrden;
     private javax.swing.JPanel pnlCremita;
-    private javax.swing.JTextArea txtArea;
+    private javax.swing.JScrollPane spTicket;
+    private javax.swing.JTextArea txtATicket;
     // End of variables declaration//GEN-END:variables
 }

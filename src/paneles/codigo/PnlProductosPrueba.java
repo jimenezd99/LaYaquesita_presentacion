@@ -27,6 +27,10 @@ public class PnlProductosPrueba extends JPanel {
     private List<Platillo> platillos;
     private ArrayList<JToggleButton> botonesProductos;
     private javax.swing.JPanel jPanelOrden;
+    private Dimension sizePrincipal;
+    private Dimension minSize;
+    private final Color cafecito = new java.awt.Color(226, 207, 169);
+    private final Color cremita = new java.awt.Color(254, 244, 222);
 
     public PnlProductosPrueba(FmPrincipal fmPrincipal, Point location) {
 
@@ -36,18 +40,21 @@ public class PnlProductosPrueba extends JPanel {
 
         botonesProductos = new ArrayList();
         this.platillos = fachadaLogica.consultarPlatillos();
+        this.sizePrincipal = new Dimension((this.tomarOrden.getWidth() / 3) * 2, (this.tomarOrden.getHeight() / 10) * 8);
+        this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight()/4)*3+20);
+
         initPanel(location);
     }
 
     public void initPanel(Point location) {
-        this.setBackground(new java.awt.Color(226, 207, 169));
-        this.setPreferredSize(new java.awt.Dimension(1360, 800));
-        this.setSize(1360, 800);
+        this.setBackground(cafecito);
+        this.setPreferredSize(sizePrincipal);
+        this.setSize(sizePrincipal);
         this.setLocation(location);
-        this.jPanelOrden.setBackground(new java.awt.Color(254, 244, 222));
+        this.jPanelOrden.setBackground(cremita);
         this.jPanelOrden.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        this.jPanelOrden.setMinimumSize(new java.awt.Dimension(1340, 400));
-        this.jPanelOrden.setPreferredSize(new java.awt.Dimension(1340, 400));
+        this.jPanelOrden.setMinimumSize(minSize);
+        this.jPanelOrden.setPreferredSize(minSize);
         this.add(jPanelOrden);
     }
 
@@ -122,7 +129,6 @@ public class PnlProductosPrueba extends JPanel {
         for (JToggleButton producto : productosTemp) {
             producto.setLocation(x, y);
             jPanelOrden.add(producto);
-
 
             x += 10;
 

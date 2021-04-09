@@ -46,8 +46,8 @@ public class FmPrincipal extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
 
-        int width = (int) screenSize.getWidth()-15;
-        int height = (int) screenSize.getHeight()-15;
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
         this.setSize(width, height);
 
 
