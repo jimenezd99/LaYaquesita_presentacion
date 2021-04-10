@@ -65,6 +65,7 @@ public class PnlProductosPrueba extends JPanel {
     }
 
     public Platillo getPlatillo(String nombre) {
+        this.platillos = fachadaLogica.consultarPlatillos();
         for (Platillo platillo : platillos) {
             if (platillo.getNombre().equalsIgnoreCase(nombre)) {
                 return platillo;
@@ -163,6 +164,7 @@ public class PnlProductosPrueba extends JPanel {
                 jPanelOrden.setVisible(false);
                 personalizar.setVisible(true);
                 personalizar.setIngredientes(getPlatillo(boton.getText()));
+                boton.setSelected(false);
             }
         };
         

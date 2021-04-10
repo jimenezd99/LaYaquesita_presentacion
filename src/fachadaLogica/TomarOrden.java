@@ -29,12 +29,12 @@ public class TomarOrden {
     PlatilloJpaController cPlatillo;
     ArrayList<Platillo> platillos;
 
-    public TomarOrden(ArrayList<Platillo> platillos, String notasOrden) {
+    public TomarOrden(ArrayList<Platillo> platillos) {
         COrden = new OrdenJpaController();
         CUsuarios = new UsuariosJpaController();
         cPlatillo = new PlatilloJpaController();
         this.platillos = platillos;
-        this.notasOrden = notasOrden;
+      
     }
 
     public void generarOrden() {

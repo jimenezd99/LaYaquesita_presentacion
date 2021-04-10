@@ -22,8 +22,8 @@ public class FachadaLogica implements IFachadaLogica {
     }
 
     @Override
-    public void guardarOrden(ArrayList<Platillo> platillos, String notasOrden) {
-        TomarOrden tomarOrden = new TomarOrden(platillos, notasOrden);
+    public void guardarOrden(ArrayList<Platillo> platillos) {
+        TomarOrden tomarOrden = new TomarOrden(platillos);
         tomarOrden.generarOrden();
     }
 

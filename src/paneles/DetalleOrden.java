@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import Entidades.Platillo;
 import vistas.FmPrincipal;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
+import fachadaLogica.FachadaLogica;
 
 /**
  *
@@ -19,37 +22,43 @@ public class DetalleOrden extends javax.swing.JPanel {
     private Dimension tamPrincipal;
     private Dimension tamText;
     private Dimension tamPanel;
+    private ArrayList<Platillo> platillos;
+    private FachadaLogica fachadaLogica;
+  
+
     /**
      * Creates new form DetalleOrden
      */
     public DetalleOrden(FmPrincipal fmPrincipal) {
         initComponents();
         this.setLocation(0, 0);
-        this.tomarOrden=fmPrincipal;
-        int ancho = tomarOrden.getWidth()/3;
+        this.tomarOrden = fmPrincipal;
+        int ancho = tomarOrden.getWidth() / 3;
         int largo = tomarOrden.getHeight();
         tamPrincipal = new Dimension(ancho, largo);
-        
+
         this.setSize(tamPrincipal);
-        
-        int anchoPanel = ancho-20;
-        int largoPanel = largo-50;
+
+        int anchoPanel = ancho - 20;
+        int largoPanel = largo - 50;
         tamPanel = new Dimension(anchoPanel, largoPanel);
-        
+
         pnlCremita.setSize(tamPrincipal);
         pnlCremita.setPreferredSize(tamPanel);
-        
-        int ancho2 = ancho/3;
-        int largo2 = largo/10;
-        
-        
+
+        int ancho2 = ancho / 3;
+        int largo2 = largo / 10;
+
         txtATicket.setSize(ancho2, largo2);
         spTicket.setSize(ancho2, largo2);
-        
+
         tamText = new Dimension(ancho2, largo2);
         spTicket.setPreferredSize(tamText);
         txtATicket.setPreferredSize(tamText);
-        
+
+        platillos = new ArrayList<>();
+        this.fachadaLogica = new FachadaLogica();
+
     }
 
     /**
@@ -149,10 +158,25 @@ public class DetalleOrden extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        //guardarOrden();
+        if(!txtATicket.getText().isEmpty()){
+            fachadaLogica.guardarOrden(platillos);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    public ArrayList getPlatillos() {
+        return platillos;
+    }
 
+    public void addPlatillo(Platillo platillo) {
+        platillos.add(platillo);
+        notasOrden(platillo);
+    }
+
+    public void notasOrden(Platillo platillo) {
+
+       txtATicket.append(platillo.toString() + "\n");
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jlblOrden;

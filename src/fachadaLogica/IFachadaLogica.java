@@ -16,7 +16,7 @@ import java.util.List;
 public interface IFachadaLogica {
     
     
-    public void guardarOrden(ArrayList<Platillo> platillos, String notasOrden);
+    public void guardarOrden(ArrayList<Platillo> platillos);
     
      public List<Platillo> consultarPlatillos();
     

@@ -37,10 +37,15 @@ public class PnlPersonalizarPrueba extends JPanel {
     private final Color cafecito = new java.awt.Color(226, 207, 169);
     private final Color cremita = new java.awt.Color(254, 244, 222);
     private JButton btnCancelar;
+    private JButton btnAgregar;
+    private JToggleButton CT;
+    private JToggleButton plain;
+    private Platillo platillo;
 
     public PnlPersonalizarPrueba(FmPrincipal fmPrincipal, Point location, PnlProductosPrueba jPanelProductos) {
 
         // this.jPanelOrden = new javax.swing.JPanel();
+        this.platillo = new Platillo();
         this.fmPrincipal = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
         this.botonesIngredientes = new ArrayList();
@@ -60,37 +65,54 @@ public class PnlPersonalizarPrueba extends JPanel {
         this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         this.setMinimumSize(minSize);
         this.setPreferredSize(minSize);
-        //this.add(jPanelOrden);
-
-        this.setBotonCancelar();
-
+        btnCancelar = new JButton();
+        btnAgregar = new JButton();
+        CT = new JToggleButton();
+        plain = new JToggleButton();
+//        setBoton(CT, "CT");
+//        setBoton(btnCancelar, "Cancelar");
+//        setBoton(btnAgregar, "Agregar");
+        setActionBotonCancelar(btnCancelar);
+        setActionBotonAgregar(btnAgregar);
     }
 
     public void setIngredientes(Platillo platillo) {
+        this.platillo = platillo;
+        //this.platillo.getIngredientesList().addAll(platillo.getIngredientesList());
         ArrayList<Ingredientes> ingredientesTemp = new ArrayList<>();
         removeBotones();
-        ingredientesTemp.addAll(platillo.getIngredientesList());
+        this.botonesIngredientes.add(CT);
+        this.botonesIngredientes.add(plain);
+        this.add(btnAgregar);
+        this.add(btnCancelar);
+        CT.setSelected(false);
+        plain.setSelected(false);
+        ingredientesTemp.addAll(this.platillo.getIngredientesList());
         crearBotones(ingredientesTemp);
     }
+    
 
-    public void setBotonCancelar() {
+
+    public void setBoton(JButton boton, String texto) {
         Dimension tamBoton = new Dimension(188, 88);
-        this.btnCancelar = new JButton();
-        btnCancelar.setMaximumSize(tamBoton);
-        btnCancelar.setMinimumSize(tamBoton);
-        btnCancelar.setPreferredSize(tamBoton);
-        btnCancelar.setText("Cancelar");
-        this.btnCancelar.setLocation(0, 100);
-        this.setActionBoton(btnCancelar);
-        this.add(btnCancelar);
+        boton.setMaximumSize(tamBoton);
+        boton.setMinimumSize(tamBoton);
+        boton.setPreferredSize(tamBoton);
+        boton.setText(texto);
+        boton.setLocation(0, 100);
+
     }
 
     public void removeBotones() {
+        botonesIngredientes.clear();
         removeAll();
         revalidate();
         repaint();
-        botonesIngredientes.clear();
-        setBotonCancelar();
+
+        this.setBoton(CT, "CT");
+        this.setBoton(plain, "Plain");
+        this.setBoton(btnCancelar, "Cancelar");
+        this.setBoton(btnAgregar, "Agregar");
     }
 
     public void crearBotones(ArrayList<Ingredientes> ingredientes) {
@@ -98,7 +120,7 @@ public class PnlPersonalizarPrueba extends JPanel {
             JToggleButton ingredienteTemp = new JToggleButton();
 
             botonesIngredientes.add(ingredienteTemp);
-            setBoton(ingredienteTemp, ingrediente.getAbreviacion());
+            PnlPersonalizarPrueba.this.setBoton(ingredienteTemp, ingrediente.getAbreviacion());
 
         }
         setPosicionBoton(botonesIngredientes);
@@ -134,7 +156,7 @@ public class PnlPersonalizarPrueba extends JPanel {
 
     }
 
-    public void setActionBoton(JButton boton) {
+    public void setActionBotonCancelar(JButton boton) {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -148,6 +170,41 @@ public class PnlPersonalizarPrueba extends JPanel {
 
         boton.addActionListener(actionListener);
 
+    }
+
+    public void setActionBotonAgregar(JButton boton) {
+
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
+                boolean selected = abstractButton.getModel().isSelected();
+                jPanelProductos.getPanelOrden().setVisible(true);
+                setIngredientes();
+                fmPrincipal.getPanelOrden().addPlatillo(platillo);
+                setVisible(false);
+
+            }
+        };
+
+        boton.addActionListener(actionListener);
+
+    }
+
+    public void setIngredientes() {
+        platillo.getIngredientesList().clear();
+        for (JToggleButton botonesIngrediente : botonesIngredientes) {
+            Ingredientes ingrediente = new Ingredientes();
+            if (botonesIngrediente.isSelected() && botonesIngrediente.getText().equalsIgnoreCase("CT")) {
+                ingrediente.setNombre("CT");
+                platillo.getIngredientesList().add(ingrediente);
+            } else if (botonesIngrediente.isSelected() && botonesIngrediente.getText().equalsIgnoreCase("Plain")) {
+                ingrediente.setNombre(botonesIngrediente.getText());
+                platillo.getIngredientesList().add(ingrediente);
+            } else if (botonesIngrediente.isSelected()) {
+                ingrediente.setNombre(botonesIngrediente.getText());
+                platillo.getIngredientesList().add(ingrediente);
+            }
+        }
     }
 
 }
