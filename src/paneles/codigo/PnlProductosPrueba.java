@@ -10,8 +10,11 @@ import fachadaLogica.FachadaLogica;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import vistas.FmPrincipal;
@@ -29,6 +32,7 @@ public class PnlProductosPrueba extends JPanel {
     private javax.swing.JPanel jPanelOrden;
     private Dimension sizePrincipal;
     private Dimension minSize;
+    private PnlPersonalizarPrueba personalizar;
     private final Color cafecito = new java.awt.Color(226, 207, 169);
     private final Color cremita = new java.awt.Color(254, 244, 222);
 
@@ -37,13 +41,15 @@ public class PnlProductosPrueba extends JPanel {
         this.jPanelOrden = new javax.swing.JPanel();
         this.tomarOrden = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
-
+        this.personalizar = new PnlPersonalizarPrueba(tomarOrden, location, this);
+        this.add(personalizar);
+        personalizar.setVisible(false);
         botonesProductos = new ArrayList();
         this.platillos = fachadaLogica.consultarPlatillos();
         this.sizePrincipal = new Dimension((this.tomarOrden.getWidth() / 3) * 2, (this.tomarOrden.getHeight() / 10) * 8);
-        this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight()/4)*3+20);
-
+        this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight() / 4) * 3 + 20);
         initPanel(location);
+
     }
 
     public void initPanel(Point location) {
@@ -56,6 +62,15 @@ public class PnlProductosPrueba extends JPanel {
         this.jPanelOrden.setMinimumSize(minSize);
         this.jPanelOrden.setPreferredSize(minSize);
         this.add(jPanelOrden);
+    }
+
+    public Platillo getPlatillo(String nombre) {
+        for (Platillo platillo : platillos) {
+            if (platillo.getNombre().equalsIgnoreCase(nombre)) {
+                return platillo;
+            }
+        }
+        return null;
     }
 
     public void cargarBebidas() {
@@ -118,6 +133,7 @@ public class PnlProductosPrueba extends JPanel {
         producto.setMaximumSize(tamBoton);
         producto.setMinimumSize(tamBoton);
         producto.setPreferredSize(tamBoton);
+        setActionBoton(producto);
 
     }
 
@@ -135,6 +151,29 @@ public class PnlProductosPrueba extends JPanel {
         }
         revalidate();
 
+    }
+
+
+    public void setActionBoton(JToggleButton boton) {
+
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
+                boolean selected = abstractButton.getModel().isSelected();
+                jPanelOrden.setVisible(false);
+                personalizar.setVisible(true);
+                personalizar.setIngredientes(getPlatillo(boton.getText()));
+            }
+        };
+        
+        
+        boton.addActionListener(actionListener);
+
+    }
+    
+    
+    public javax.swing.JPanel getPanelOrden() {
+        return jPanelOrden;
     }
 
 }

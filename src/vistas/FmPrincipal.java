@@ -64,8 +64,6 @@ public class FmPrincipal extends javax.swing.JFrame {
         this.add(menu);
         this.add(ticket);
         this.add(productos);
-        //lógica para cambiar productos por personalizar debe ir después de seleecionar el producto
-        //this.add(personalizar);
         setResizable(true);
         setLocationRelativeTo(null);
     }
