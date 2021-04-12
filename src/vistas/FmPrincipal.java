@@ -104,6 +104,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         setTitle("Tomar Orden");
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(226, 207, 169));
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setMinimumSize(new java.awt.Dimension(100, 100));
         setResizable(false);
         setSize(tam);
@@ -121,7 +122,6 @@ public class FmPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     /**
      * @param args the command line arguments

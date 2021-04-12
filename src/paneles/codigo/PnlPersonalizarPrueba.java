@@ -83,12 +83,12 @@ public class PnlPersonalizarPrueba extends JPanel {
         removeBotones();
         this.botonesIngredientes.add(CT);
         this.botonesIngredientes.add(plain);
-        this.add(btnAgregar);
-        this.add(btnCancelar);
         CT.setSelected(false);
         plain.setSelected(false);
         ingredientesTemp.addAll(this.platillo.getIngredientesList());
         crearBotones(ingredientesTemp);
+        this.add(btnAgregar);
+        this.add(btnCancelar);
     }
     
 

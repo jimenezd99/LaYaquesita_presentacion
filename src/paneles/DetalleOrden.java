@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import fachadaLogica.FachadaLogica;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,6 +162,8 @@ public class DetalleOrden extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if(!txtATicket.getText().isEmpty()){
             fachadaLogica.guardarOrden(platillos);
+            JOptionPane.showMessageDialog(this, "Orden guardada", "Confirmación", JOptionPane.PLAIN_MESSAGE);
+            txtATicket.setText("");
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
