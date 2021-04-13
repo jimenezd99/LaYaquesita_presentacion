@@ -6,6 +6,7 @@
 package vistas;
 
 import Entidades.Ingredientes;
+import Entidades.OrdenHasPlatillo;
 import Entidades.Platillo;
 import Entidades.Usuarios;
 import com.sun.glass.events.KeyEvent;
@@ -317,7 +318,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     
     private DefaultTableModel platillosTableModel(List<Platillo> lstplatillos){
         Object tabla[][];
-        String[] nombreCols = {"ID", "TipoProducto", "Nombre", "Descripción", "Costo"};
+        String[] nombreCols = {"ID", "TipoProducto", "Nombre","Costo" , "Descripción"};
         if(lstplatillos != null){
             DefaultTableModel modelo = new DefaultTableModel(){
                 @Override
@@ -343,6 +344,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
     private void tablaPlatillosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPlatillosMouseClicked
 
+        ingredientesActuales.clear();
         txtIdPlatillo.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 0).toString());
         switch(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 1).toString()){
             case "HOTDOG":
@@ -361,48 +363,56 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         
         
         
-        /** ¿Cómo funcionan los IngredientesList aquí? PlatilloHasIngredientes?
-        ingredientesActuales =  platillos.consultarPlatilloID(
-                Integer.parseInt(
-                        tablaPlatillos.getValueAt(
-                                tablaPlatillos.getSelectedRow(),0).toString()
-                                    )).getIngredientesList();
-        **/
+        // ¿Cómo funcionan los IngredientesList aquí? PlatilloHasIngredientes?
+        
+        int id = Integer.parseInt(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 0).toString());
+        Platillo aux = platillos.consultarPlatilloID(id);
+        ingredientesActuales.addAll(aux.getIngredientesList());
+        
         cargarTablaIngredientesActuales();
     }//GEN-LAST:event_tablaPlatillosMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-        if(!ingredientesActuales.isEmpty()){
+
         Platillo platillo = new Platillo();
-        platillo.setNombre(txtNombrePlatillo.getText());
-        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-        platillo.setDescripcion(txtDescripcion.getText());
-        platillo.setIngredientesList(ingredientesActuales);
         switch(cbxTipoProducto.getSelectedIndex()){
             case 0:
-                platillo.setTipoProducto("HOTDOG");
+                if(!ingredientesActuales.isEmpty()){
+                     platillo.setNombre(txtNombrePlatillo.getText());
+                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                     platillo.setDescripcion(txtDescripcion.getText());
+                     platillo.setIngredientesList(ingredientesActuales);
+                     platillo.setTipoProducto("HOTDOG");
+                     platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha agregado el platillo.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
+                }
                 break;
                 
             case 1:
-                platillo.setTipoProducto("BEBIDA");
-                break;
-                
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("BEBIDA");
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+            break;
+            
             case 2:
-                platillo.setTipoProducto("EXTRA");
-                break;
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("EXTRA");
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+                    break;
         }
-        
-        
-        platillos.registrarPlatillo(platillo);
+    
         cargarTablaPlatillos();
         limpiar();
-        JOptionPane.showMessageDialog(null, "Se ha agregado el platillo.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
-        }
-        
-        
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -459,36 +469,50 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     
     //Tengo dudas en este actualizar
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        if(!ingredientesActuales.isEmpty()){
         Platillo platillo = new Platillo();
-        platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
-        platillo.setNombre(txtNombrePlatillo.getText());
-        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-        platillo.setDescripcion(txtDescripcion.getText());
-        platillo.setIngredientesList(ingredientesActuales);
-        
         switch(cbxTipoProducto.getSelectedIndex()){
             case 0:
-                platillo.setTipoProducto("HOTDOG");
+                if(!ingredientesActuales.isEmpty()){
+                     platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                     platillo.setDescripcion(txtDescripcion.getText());
+                     platillo.setIngredientesList(ingredientesActuales);
+                     platillo.setTipoProducto("HOTDOG");
+                     platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                     platillos.editarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha actualizado el platillo.");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
+                }
                 break;
                 
             case 1:
-                platillo.setTipoProducto("BEBIDA");
-                break;
-                
-            case 2:
-                platillo.setTipoProducto("EXTRA");
-                break;
+                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("BEBIDA");
+                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.editarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha actualizado la bebida.");
+            break;
+                case 2:
+                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("EXTRA");
+                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha actualizado el extra.");
+                    platillos.editarPlatillo(platillo);
+                    break;        
         }
-            
-        platillos.editarPlatillo(platillo);
         limpiar();
         cargarTablaPlatillos();
-        JOptionPane.showMessageDialog(null, "Se ha actualizado el platillo.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
-        }
-        
         
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -525,6 +549,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         txtIdPlatillo.setText("");
         txtNombrePlatillo.setText("");
         ingredientesActuales.clear();
+        cargarTablaIngredientesActuales();
     }
     
     
