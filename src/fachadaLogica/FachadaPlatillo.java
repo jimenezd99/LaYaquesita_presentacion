@@ -59,4 +59,8 @@ public class FachadaPlatillo {
         return platillos;
     }
     
+    public Platillo consultarPlatilloID(Integer id){
+        return CPlatillo.findPlatillo(id);
+    }
+    
 }

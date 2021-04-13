@@ -8,6 +8,7 @@ package fachadaLogica;
 import Controladores.UsuariosJpaController;
 import Entidades.Usuarios;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class FachadaUsuarios {
     
@@ -17,35 +18,52 @@ public class FachadaUsuarios {
         CUsuarios = new UsuariosJpaController();
     }
     
-    public void registrarUsuario(Usuarios usuario){
-        CUsuarios.create(usuario);
-    }
+    public boolean registrarUsuario(Usuarios usuario){
+       try{
+            CUsuarios.create(usuario);
+            return true;
+        } catch (Exception x) {
+            System.out.println(x.getMessage());
+            return false;
+        }
+    } 
     
-    public String editarUsuario(Usuarios usuario_a_Actualizar) {
+    public boolean editarUsuario(Usuarios usuario_a_Actualizar) {
         try {
 
             CUsuarios.edit(usuario_a_Actualizar);
-            return "Usuario registrado";
+            return true;
         } catch (Exception x) {
             System.out.println(x.getMessage());
-            return "El usuario no fue encontrado";
+            return false;
         }
     }
 
-    public String eliminarUsuario(Integer idUsuario) {
+    public boolean eliminarUsuario(Integer idUsuario) {
         try {
             CUsuarios.destroy(idUsuario);
-            return "Usuario eliminado";
+            return true;
         } catch (Exception x) {
             System.out.println(x.getMessage());
-            return "El usuario no fue encontrado";
+            return false;
         }
 
     }
     
     public List<Usuarios> consultarUsuarios(){
         List<Usuarios> usuarios= CUsuarios.findUsuariosEntities();
+        if(usuarios.isEmpty()){
+                     JOptionPane.showMessageDialog(null, "No se han encontrado usuarios");
+        }
         return usuarios;
+    }
+    
+    public Usuarios consultarUsuarioId(Integer id){
+        Usuarios usuario = CUsuarios.findUsuarios(id);
+        if(usuario == null){
+         JOptionPane.showMessageDialog(null, "No se ha encontrado usuario");
+        }
+        return usuario;
     }
     
 

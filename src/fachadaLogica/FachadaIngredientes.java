@@ -50,5 +50,9 @@ public class FachadaIngredientes {
         } 
         return ingredientes;
     }
+    
+    public Ingredientes consultarIngredienteId(Integer id){
+        return CIngredientes.findIngredientes(id);
+    }
 
 }
