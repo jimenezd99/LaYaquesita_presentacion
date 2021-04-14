@@ -15,6 +15,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JToggleButton;
+import paneles.codigo.PanelOrden;
 import paneles.codigo.PnlProductosPrueba;
 //import java.util.ArrayList;
 /**
@@ -26,9 +27,8 @@ public class FmPrincipal extends javax.swing.JFrame {
     private String notasOrden;
     private ArrayList<Platillo> platillos;
     private PnlMenu menu;
-    private DetalleOrden ticket;
-    //private PnlProductos productos;
-     private PnlProductosPrueba productos;
+    private PanelOrden ticket;
+    private PnlProductosPrueba productos;
     private PnlPersonalizar personalizar;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
@@ -51,7 +51,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         this.setSize(width, height);
 
 
-        this.ticket = new DetalleOrden(this);
+        this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
         this.productos= new PnlProductosPrueba(this, new Point(ticket.getWidth(), menu.getHeight()));
         this.personalizar= new PnlPersonalizar(this);
@@ -87,7 +87,7 @@ public class FmPrincipal extends javax.swing.JFrame {
     }
      
      
-     public DetalleOrden getPanelOrden(){
+     public PanelOrden getPanelOrden(){
          return ticket;
      }
 
