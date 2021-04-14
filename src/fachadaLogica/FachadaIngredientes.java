@@ -54,5 +54,18 @@ public class FachadaIngredientes {
     public Ingredientes consultarIngredienteId(Integer id){
         return CIngredientes.findIngredientes(id);
     }
+    
+    
+    public boolean eliminarIngrediente(Integer idIngrediente) {
+        try {
+            CIngredientes.destroy(idIngrediente);
+            return true;
+        } catch (Exception x) {
+            System.out.println(x.getMessage());
+            return false;
+        }
+
+    }
+    
 
 }
