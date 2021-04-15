@@ -90,6 +90,13 @@ public class FmPrincipal extends javax.swing.JFrame {
      public PanelOrden getPanelOrden(){
          return ticket;
      }
+     
+     public PnlProductosPrueba getPanelProductos(){
+         return productos;
+     }
+     
+     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

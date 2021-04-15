@@ -5,6 +5,7 @@
  */
 package fachadaLogica;
 
+import Entidades.Orden;
 import Entidades.Platillo;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +32,25 @@ public class FachadaLogica implements IFachadaLogica {
     public List<Platillo> consultarPlatillos() {
         return fachadaPlatillo.consultarPlatillos();
     }
+
+    @Override
+    public float calcularOrden(ArrayList<Platillo> platillos) {
+        float total = 0F;
+
+        for (Platillo platillo : platillos) {
+            total += platillo.getCosto();
+        }
+
+        return total;
+    }
+
+
+    @Override
+    public Platillo getPlatilloById(int id) {
+        return fachadaPlatillo.consultarPlatilloID(id);
+    }
+
+    
+    
 
 }

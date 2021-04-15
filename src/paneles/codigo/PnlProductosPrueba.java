@@ -9,6 +9,7 @@ import Entidades.Platillo;
 import fachadaLogica.FachadaLogica;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,6 +74,8 @@ public class PnlProductosPrueba extends JPanel {
         }
         return null;
     }
+    
+  
 
     public void cargarBebidas() {
         ArrayList<Platillo> productos = getProductos("bebida");
@@ -127,6 +130,8 @@ public class PnlProductosPrueba extends JPanel {
         Color background = new Color(245, 133, 25);
         Color foreground = new Color(91, 52, 46);
         Dimension tamBoton = new Dimension(188, 88);
+        Font font = new java.awt.Font("Century Gothic", 1, 18);
+        producto.setFont(font);
         producto.setName(nombreProducto);
         producto.setBackground(background);
         producto.setForeground(foreground);
@@ -154,7 +159,6 @@ public class PnlProductosPrueba extends JPanel {
 
     }
 
-
     public void setActionBoton(JToggleButton boton) {
 
         ActionListener actionListener = new ActionListener() {
@@ -163,19 +167,21 @@ public class PnlProductosPrueba extends JPanel {
                 boolean selected = abstractButton.getModel().isSelected();
                 jPanelOrden.setVisible(false);
                 personalizar.setVisible(true);
-                personalizar.setIngredientes(getPlatillo(boton.getText()));
+                personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
                 boton.setSelected(false);
             }
         };
-        
-        
+
         boton.addActionListener(actionListener);
 
     }
-    
-    
+
     public javax.swing.JPanel getPanelOrden() {
         return jPanelOrden;
+    }
+    
+    public PnlPersonalizarPrueba getPnlPersonalizar(){
+        return personalizar;
     }
 
 }

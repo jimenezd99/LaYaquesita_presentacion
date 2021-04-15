@@ -10,6 +10,7 @@ import Entidades.Platillo;
 import fachadaLogica.FachadaLogica;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import vistas.FmPrincipal;
@@ -27,8 +29,9 @@ import vistas.FmPrincipal;
  */
 public class PnlPersonalizarPrueba extends JPanel {
 
-    private FmPrincipal fmPrincipal;
+    private FmPrincipal tomarOrden;
     private PnlProductosPrueba jPanelProductos;
+    private PanelOrden pnlOrden;
     private FachadaLogica fachadaLogica;
     private ArrayList<JToggleButton> botonesIngredientes;
     // private javax.swing.JPanel jPanelOrden;
@@ -46,11 +49,11 @@ public class PnlPersonalizarPrueba extends JPanel {
 
         // this.jPanelOrden = new javax.swing.JPanel();
         this.platillo = new Platillo();
-        this.fmPrincipal = fmPrincipal;
+        this.tomarOrden = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
         this.botonesIngredientes = new ArrayList();
         this.jPanelProductos = jPanelProductos;
-        this.sizePrincipal = new Dimension((this.fmPrincipal.getWidth() / 3) * 2, (this.fmPrincipal.getHeight() / 10) * 8);
+        this.sizePrincipal = new Dimension((this.tomarOrden.getWidth() / 3) * 2, (this.tomarOrden.getHeight() / 10) * 8);
         this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight() / 4) * 3 + 20);
         initPanel(location);
 
@@ -72,11 +75,11 @@ public class PnlPersonalizarPrueba extends JPanel {
 //        setBoton(CT, "CT");
 //        setBoton(btnCancelar, "Cancelar");
 //        setBoton(btnAgregar, "Agregar");
-        setActionBotonCancelar(btnCancelar);
-        setActionBotonAgregar(btnAgregar);
+        setActionBotonCancelarProd(btnCancelar);
+        setActionBotonAgregarProd(btnAgregar);
     }
 
-    public void setIngredientes(Platillo platillo) {
+    public void setIngredientesPlatillo(Platillo platillo) {
         this.platillo = platillo;
         //this.platillo.getIngredientesList().addAll(platillo.getIngredientesList());
         ArrayList<Ingredientes> ingredientesTemp = new ArrayList<>();
@@ -90,11 +93,16 @@ public class PnlPersonalizarPrueba extends JPanel {
         this.add(btnAgregar);
         this.add(btnCancelar);
     }
-    
-
 
     public void setBoton(JButton boton, String texto) {
         Dimension tamBoton = new Dimension(188, 88);
+        Font font = new java.awt.Font("Century Gothic", 1, 18);
+        Color background = new Color(240, 60, 31);
+        Color foreground = new Color(240, 211, 161);
+
+        boton.setBackground(background);
+        boton.setForeground(foreground);
+        boton.setFont(font);
         boton.setMaximumSize(tamBoton);
         boton.setMinimumSize(tamBoton);
         boton.setPreferredSize(tamBoton);
@@ -130,6 +138,8 @@ public class PnlPersonalizarPrueba extends JPanel {
         Color background = new Color(245, 133, 25);
         Color foreground = new Color(91, 52, 46);
         Dimension tamBoton = new Dimension(188, 88);
+        Font font = new java.awt.Font("Century Gothic", 1, 18);
+        producto.setFont(font);
         producto.setName(nombreProducto);
         producto.setBackground(background);
         producto.setForeground(foreground);
@@ -156,7 +166,7 @@ public class PnlPersonalizarPrueba extends JPanel {
 
     }
 
-    public void setActionBotonCancelar(JButton boton) {
+    public void setActionBotonCancelarProd(JButton boton) {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -172,22 +182,43 @@ public class PnlPersonalizarPrueba extends JPanel {
 
     }
 
-    public void setActionBotonAgregar(JButton boton) {
+    public void setActionBotonAgregarProd(JButton boton) {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
-                jPanelProductos.getPanelOrden().setVisible(true);
-                setIngredientes();
-                fmPrincipal.getPanelOrden().addPlatillo(platillo);
-                setVisible(false);
+                if (validarIngredientes() || botonesIngredientes.isEmpty()) {
+                    jPanelProductos.getPanelOrden().setVisible(true);
+                    setIngredientes();
+                   
+                    if(tomarOrden.getPanelOrden().getPlatillos().contains(platillo)){
+                        ArrayList<Platillo> platillosAux =tomarOrden.getPanelOrden().getPlatillos();
+                        int id = platillosAux.indexOf(platillo);
+                        platillosAux.set(id, platillo);
+                    }else{
+                         tomarOrden.getPanelOrden().addPlatillo(platillo);
+                    }
+                    setVisible(false);
+                }else{
+                     JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
+                }
 
             }
         };
 
         boton.addActionListener(actionListener);
+       
+    }
 
+    public boolean validarIngredientes() {
+        for (JToggleButton botonesIngrediente : botonesIngredientes) {
+            if (botonesIngrediente.isSelected()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void setIngredientes() {

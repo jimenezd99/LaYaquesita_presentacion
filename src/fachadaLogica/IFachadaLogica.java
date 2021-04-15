@@ -5,6 +5,7 @@
  */
 package fachadaLogica;
 
+import Entidades.Orden;
 import Entidades.Platillo;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,15 @@ import java.util.List;
  * @author Hot-Dogs La Yaquesita
  */
 public interface IFachadaLogica {
-    
-    
+
     public void guardarOrden(ArrayList<Platillo> platillos);
-    
-     public List<Platillo> consultarPlatillos();
-    
-    
-    
-    
+
+    public List<Platillo> consultarPlatillos();
+
+    public float calcularOrden(ArrayList<Platillo> platillos);
     
     
+    public Platillo getPlatilloById(int id);
+    
+
 }
