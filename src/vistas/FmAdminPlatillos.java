@@ -25,6 +25,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
     FachadaPlatillo platillos = new FachadaPlatillo();
     FachadaIngredientes ingredientes = new FachadaIngredientes();
+    FmAdminMenu adminMenu;
     List<Ingredientes> ingredientesActuales = new ArrayList(); 
     /**
      * Creates new form FmAdminPlatillos
@@ -174,7 +175,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         });
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, 70));
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -528,7 +529,9 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-     dispose();
+        adminMenu = new FmAdminMenu();
+        adminMenu.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cargarTablaPlatillos(){

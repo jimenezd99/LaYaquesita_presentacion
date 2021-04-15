@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class FmAdminUsuarios extends javax.swing.JFrame {
     
     DefaultTableModel modelo;
-    
+    FmAdminMenu adminMenu;
     FachadaUsuarios usuarios = new FachadaUsuarios();
     public FmAdminUsuarios() {
         initComponents();
@@ -119,9 +119,6 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 440, 340));
-        panelTabla.getAccessibleContext().setAccessibleName("Registro de usuarios");
-        panelTabla.getAccessibleContext().setAccessibleDescription("");
-
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         txtIdUsuario.setEditable(false);
@@ -167,7 +164,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         });
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -227,7 +224,9 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       dispose();
+        adminMenu = new FmAdminMenu();
+        adminMenu.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     
