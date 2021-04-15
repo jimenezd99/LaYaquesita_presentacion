@@ -281,16 +281,25 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     private void btnSiguienteActionPerformed(ActionEvent evt) {
-        FrmConfirmarOrden conf = new FrmConfirmarOrden(platillos, this);
+        FrmConfirmarOrden conf;
+        if(!platillos.isEmpty()){
+        conf = new FrmConfirmarOrden(platillos, this);
         conf.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se han agregado platillos");
+        }
     }
 
     private void btnEditarActionPerformed(ActionEvent evt) {
         // this.personalizar = new PnlPersonalizarPrueba(tomarOrden, tomarOrden.getPanelProductos().getLocation(), tomarOrden.getPanelProductos());
         // JOptionPane.showMessageDialog(this, "Esto abre el menú de personalizar para el elemento seleccionado c:");
+        if(platilloAux.getTipoProducto().equalsIgnoreCase("hotdog")){
         tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);
         tomarOrden.getPanelProductos().getPnlPersonalizar().setVisible(true);
         tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatillo(platilloAux);
+        }else{
+            JOptionPane.showMessageDialog(this, "No se puede editar este producto");
+        }
         cargarTabla(tblPlatillos);
 
     }

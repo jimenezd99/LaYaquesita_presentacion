@@ -191,24 +191,24 @@ public class PnlPersonalizarPrueba extends JPanel {
                 if (validarIngredientes() || botonesIngredientes.isEmpty()) {
                     jPanelProductos.getPanelOrden().setVisible(true);
                     setIngredientes();
-                   
-                    if(tomarOrden.getPanelOrden().getPlatillos().contains(platillo)){
-                        ArrayList<Platillo> platillosAux =tomarOrden.getPanelOrden().getPlatillos();
+
+                    if (tomarOrden.getPanelOrden().getPlatillos().contains(platillo)) {
+                        ArrayList<Platillo> platillosAux = tomarOrden.getPanelOrden().getPlatillos();
                         int id = platillosAux.indexOf(platillo);
                         platillosAux.set(id, platillo);
-                    }else{
-                         tomarOrden.getPanelOrden().addPlatillo(platillo);
+                    } else {
+                        tomarOrden.getPanelOrden().addPlatillo(platillo);
                     }
                     setVisible(false);
-                }else{
-                     JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
                 }
 
             }
         };
 
         boton.addActionListener(actionListener);
-       
+
     }
 
     public boolean validarIngredientes() {

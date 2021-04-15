@@ -62,6 +62,9 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(226, 207, 169));
 
+        btnConfirmar.setBackground(new java.awt.Color(245, 133, 25));
+        btnConfirmar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(91, 52, 46));
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +79,9 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel1.setText("Verifique que la orden sea correcta");
 
+        btnRegresar.setBackground(new java.awt.Color(245, 133, 25));
+        btnRegresar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(91, 52, 46));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +107,8 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
                 .addGap(115, 115, 115)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

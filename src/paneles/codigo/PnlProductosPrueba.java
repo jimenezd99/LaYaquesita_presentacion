@@ -108,7 +108,7 @@ public class PnlProductosPrueba extends JPanel {
             JToggleButton productoTemp = new JToggleButton();
 
             botonesProductos.add(productoTemp);
-            setBoton(productoTemp, producto.getNombre());
+            setBoton(productoTemp, producto.getNombre(), producto.getTipoProducto());
 
         }
         setPosicionBoton(botonesProductos);
@@ -126,7 +126,7 @@ public class PnlProductosPrueba extends JPanel {
         return platillosTemp;
     }
 
-    public void setBoton(JToggleButton producto, String nombreProducto) {
+    public void setBoton(JToggleButton producto, String nombreProducto, String tipoProducto) {
         Color background = new Color(245, 133, 25);
         Color foreground = new Color(91, 52, 46);
         Dimension tamBoton = new Dimension(188, 88);
@@ -139,7 +139,7 @@ public class PnlProductosPrueba extends JPanel {
         producto.setMaximumSize(tamBoton);
         producto.setMinimumSize(tamBoton);
         producto.setPreferredSize(tamBoton);
-        setActionBoton(producto);
+        setActionBoton(producto, tipoProducto);
 
     }
 
@@ -159,15 +159,20 @@ public class PnlProductosPrueba extends JPanel {
 
     }
 
-    public void setActionBoton(JToggleButton boton) {
+    public void setActionBoton(JToggleButton boton, String tipoPlatillo) {
 
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
+                if(tipoPlatillo.equalsIgnoreCase("hotdog")){
                 jPanelOrden.setVisible(false);
                 personalizar.setVisible(true);
                 personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
+                }else{
+                    Platillo platillo = getPlatillo(boton.getText());
+                     tomarOrden.getPanelOrden().addPlatillo(platillo);
+                }
                 boton.setSelected(false);
             }
         };
