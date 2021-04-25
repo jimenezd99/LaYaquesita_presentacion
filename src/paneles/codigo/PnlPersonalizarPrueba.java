@@ -17,10 +17,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractButton;
+import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import vistas.FmPrincipal;
 
 /**
@@ -70,13 +78,16 @@ public class PnlPersonalizarPrueba extends JPanel {
         this.setPreferredSize(minSize);
         btnCancelar = new JButton();
         btnAgregar = new JButton();
+        //   btnAgregar.setEnabled(false);
         CT = new JToggleButton();
         plain = new JToggleButton();
 //        setBoton(CT, "CT");
 //        setBoton(btnCancelar, "Cancelar");
 //        setBoton(btnAgregar, "Agregar");
+
         setActionBotonCancelarProd(btnCancelar);
         setActionBotonAgregarProd(btnAgregar);
+
     }
 
     public void setIngredientesPlatillo(Platillo platillo) {
@@ -85,13 +96,24 @@ public class PnlPersonalizarPrueba extends JPanel {
         ArrayList<Ingredientes> ingredientesTemp = new ArrayList<>();
         removeBotones();
         this.botonesIngredientes.add(CT);
+        CT.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnAgregar.setEnabled(true);
+            }
+        });
         this.botonesIngredientes.add(plain);
+        plain.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnAgregar.setEnabled(true);
+            }
+        });
         CT.setSelected(false);
         plain.setSelected(false);
         ingredientesTemp.addAll(this.platillo.getIngredientesList());
         crearBotones(ingredientesTemp);
         this.add(btnAgregar);
         this.add(btnCancelar);
+        btnAgregar.setEnabled(false);
     }
 
     public void setBoton(JButton boton, String texto) {
@@ -126,8 +148,13 @@ public class PnlPersonalizarPrueba extends JPanel {
     public void crearBotones(ArrayList<Ingredientes> ingredientes) {
         for (Ingredientes ingrediente : ingredientes) {
             JToggleButton ingredienteTemp = new JToggleButton();
-
+            ingredienteTemp.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                   btnAgregar.setEnabled(true);
+                }
+            });
             botonesIngredientes.add(ingredienteTemp);
+            
             PnlPersonalizarPrueba.this.setBoton(ingredienteTemp, ingrediente.getAbreviacion());
 
         }
@@ -188,10 +215,34 @@ public class PnlPersonalizarPrueba extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
+
                 if (validarIngredientes() || botonesIngredientes.isEmpty()) {
                     jPanelProductos.getPanelOrden().setVisible(true);
                     setIngredientes();
-
+                    
+                    SpinnerModel value = new SpinnerNumberModel(1, 1, 999, 1);
+                    JSpinner cantidad = new JSpinner(value);
+                 
+                    JTextArea notas = new JTextArea();
+                    notas.setPreferredSize(new Dimension(170, 70));
+                    
+                    JPanel myPanel = new JPanel();
+                    myPanel.setPreferredSize(new Dimension(170, 250));
+                    myPanel.add(new JLabel("Cantidad: \n"));
+                    myPanel.add(cantidad);
+                    myPanel.add(Box.createHorizontalStrut(30)); //Espacio
+                    myPanel.add(Box.createVerticalStrut(60));
+                    myPanel.add(new JLabel("Notas: \n"));
+                    myPanel.add(notas);
+                       
+                    int result = JOptionPane.showConfirmDialog(null, myPanel, "Por favor ingrese la cantidad y las notas especiales", JOptionPane.OK_CANCEL_OPTION);
+                    if (result == JOptionPane.OK_OPTION) {
+                        Ingredientes ingrediente = new Ingredientes();
+                        ingrediente.setNombre(notas.getText());
+                        platillo.getIngredientesList().add(ingrediente);
+                        
+                    
+                    
                     if (tomarOrden.getPanelOrden().getPlatillos().contains(platillo)) {
                         ArrayList<Platillo> platillosAux = tomarOrden.getPanelOrden().getPlatillos();
                         int id = platillosAux.indexOf(platillo);
@@ -200,7 +251,7 @@ public class PnlPersonalizarPrueba extends JPanel {
                         tomarOrden.getPanelOrden().addPlatillo(platillo);
                     }
                     setVisible(false);
-                } else {
+                }} else {
                     JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
                 }
 
@@ -222,6 +273,7 @@ public class PnlPersonalizarPrueba extends JPanel {
     }
 
     public void setIngredientes() {
+
         platillo.getIngredientesList().clear();
         for (JToggleButton botonesIngrediente : botonesIngredientes) {
             Ingredientes ingrediente = new Ingredientes();

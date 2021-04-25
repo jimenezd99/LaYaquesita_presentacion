@@ -9,6 +9,7 @@ import Entidades.Usuarios;
 import fachadaLogica.FachadaUsuarios;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,9 +54,12 @@ public class FmLogin extends javax.swing.JFrame {
         txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
         lblTitulo.setText("INGRESAR AL SISTEMA");
+        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 24, 370, 30));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 84, 210, -1));
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,74 +67,27 @@ public class FmLogin extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 244, -1, -1));
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 244, -1, -1));
 
         lblUsuario.setText("Usuario:");
+        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 64, -1, -1));
 
         lblContrasena.setText("Contraseña:");
+        getContentPane().add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 124, -1, -1));
 
         lblError.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 102, 102));
         lblError.setText("El usuario y/o contraseña ingresados son incorrectos.");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(lblUsuario))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(lblContrasena))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnSalir)
-                            .addGap(224, 224, 224)
-                            .addComponent(btnIngresar)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(lblUsuario)
-                    .addGap(4, 4, 4)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)
-                    .addComponent(lblContrasena)
-                    .addGap(44, 44, 44)
-                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnSalir)
-                        .addComponent(btnIngresar))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        getContentPane().add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 184, 380, 40));
+        getContentPane().add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 150, 210, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,6 +129,13 @@ public class FmLogin extends javax.swing.JFrame {
             lblError.setVisible(true);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        int i = JOptionPane.showConfirmDialog(this,"¿Está seguro que desea salir?","Advertencia!", 0);
+        if(i==0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -57,6 +57,7 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         txtPlatillos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
+        tarjeta = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +90,8 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
             }
         });
 
+        tarjeta.setText("Pago con tarjeta");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,9 +103,11 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 166, Short.MAX_VALUE)
+                        .addGap(0, 159, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(171, 171, 171))))
+                        .addGap(39, 39, 39)
+                        .addComponent(tarjeta)
+                        .addGap(27, 27, 27))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -113,9 +118,11 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,6 +165,7 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton tarjeta;
     private javax.swing.JTextArea txtPlatillos;
     // End of variables declaration//GEN-END:variables
 }

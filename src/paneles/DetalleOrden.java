@@ -62,6 +62,7 @@ public class DetalleOrden extends javax.swing.JPanel {
         this.fachadaLogica = new FachadaLogica();
 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,6 +74,7 @@ public class DetalleOrden extends javax.swing.JPanel {
     private void initComponents() {
 
         pnlCremita = new javax.swing.JPanel();
+        tarjeta = new javax.swing.JToggleButton();
         jlblOrden = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
         spTicket = new javax.swing.JScrollPane();
@@ -86,6 +88,10 @@ public class DetalleOrden extends javax.swing.JPanel {
         pnlCremita.setMaximumSize(tamPanel);
         pnlCremita.setMinimumSize(tamPanel);
         pnlCremita.setPreferredSize(tamPanel);
+
+        tarjeta.setBackground(new java.awt.Color(255, 51, 204));
+        tarjeta.setForeground(new java.awt.Color(255, 51, 51));
+        tarjeta.setText("Pago con tarjeta");
 
         jlblOrden.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jlblOrden.setText("Orden: 001");
@@ -129,16 +135,26 @@ public class DetalleOrden extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(spTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlCremitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCremitaLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(tarjeta)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         pnlCremitaLayout.setVerticalGroup(
             pnlCremitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCremitaLayout.createSequentialGroup()
                 .addComponent(jlblOrden)
                 .addGap(18, 18, 18)
-                .addComponent(spTicket, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(spTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
+            .addGroup(pnlCremitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCremitaLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(tarjeta)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -181,11 +197,13 @@ public class DetalleOrden extends javax.swing.JPanel {
        txtATicket.append(platillo.toString() + "\n");
 
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jlblOrden;
     private javax.swing.JPanel pnlCremita;
     private javax.swing.JScrollPane spTicket;
+    private javax.swing.JToggleButton tarjeta;
     private javax.swing.JTextArea txtATicket;
     // End of variables declaration//GEN-END:variables
 }
