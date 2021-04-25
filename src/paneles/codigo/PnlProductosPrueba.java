@@ -46,10 +46,20 @@ public class PnlProductosPrueba extends JPanel {
         this.add(personalizar);
         personalizar.setVisible(false);
         botonesProductos = new ArrayList();
-        this.platillos = fachadaLogica.consultarPlatillos();
+        this.platillos = getPlatillos();
         this.sizePrincipal = new Dimension((this.tomarOrden.getWidth() / 3) * 2, (this.tomarOrden.getHeight() / 10) * 8);
         this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight() / 4) * 3 + 20);
         initPanel(location);
+
+    }
+
+    public List getPlatillos() {
+        try {
+            return fachadaLogica.consultarPlatillos();
+        } catch(Exception e){
+            System.out.println("Error al conectar con la BD");
+        }
+        return null;
 
     }
 
@@ -66,16 +76,24 @@ public class PnlProductosPrueba extends JPanel {
     }
 
     public Platillo getPlatillo(String nombre) {
-        this.platillos = fachadaLogica.consultarPlatillos();
+        this.platillos = getPlatillos();
         for (Platillo platillo : platillos) {
             if (platillo.getNombre().equalsIgnoreCase(nombre)) {
-                return platillo;
+                return copiaPlatillo(platillo);
             }
         }
         return null;
     }
     
-  
+     public Platillo copiaPlatillo(Platillo platillo){
+        Platillo temp = new Platillo();
+        temp.setCosto(platillo.getCosto());
+        temp.setIdplatillo(platillo.getIdplatillo());
+        temp.setDescripcion(platillo.getDescripcion());
+        temp.setIngredientesList(platillo.getIngredientesList());
+        temp.setNombre(platillo.getNombre());
+        return temp;
+    }
 
     public void cargarBebidas() {
         ArrayList<Platillo> productos = getProductos("bebida");
@@ -165,13 +183,13 @@ public class PnlProductosPrueba extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
-                if(tipoPlatillo.equalsIgnoreCase("hotdog")){
-                jPanelOrden.setVisible(false);
-                personalizar.setVisible(true);
-                personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
-                }else{
+                if (tipoPlatillo.equalsIgnoreCase("hotdog")) {
+                    jPanelOrden.setVisible(false);
+                    personalizar.setVisible(true);
+                    personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
+                } else {
                     Platillo platillo = getPlatillo(boton.getText());
-                     tomarOrden.getPanelOrden().addPlatillo(platillo);
+                    tomarOrden.getPanelOrden().addPlatillo(platillo);
                 }
                 boton.setSelected(false);
             }
@@ -184,8 +202,8 @@ public class PnlProductosPrueba extends JPanel {
     public javax.swing.JPanel getPanelOrden() {
         return jPanelOrden;
     }
-    
-    public PnlPersonalizarPrueba getPnlPersonalizar(){
+
+    public PnlPersonalizarPrueba getPnlPersonalizar() {
         return personalizar;
     }
 
