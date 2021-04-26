@@ -48,7 +48,7 @@ public class PnlPersonalizarPrueba extends JPanel {
     public PnlPersonalizarPrueba(FmPrincipal fmPrincipal, Point location, PnlProductosPrueba jPanelProductos) {
 
         // this.jPanelOrden = new javax.swing.JPanel();
-        this.platillo = new Platillo();
+//        this.platillo = new Platillo();
         this.tomarOrden = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
         this.botonesIngredientes = new ArrayList();
@@ -93,6 +93,8 @@ public class PnlPersonalizarPrueba extends JPanel {
         this.add(btnAgregar);
         this.add(btnCancelar);
     }
+    
+   
 
     public void setBoton(JButton boton, String texto) {
         Dimension tamBoton = new Dimension(188, 88);
@@ -188,27 +190,36 @@ public class PnlPersonalizarPrueba extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
-                if (validarIngredientes() || botonesIngredientes.isEmpty()) {
-                    jPanelProductos.getPanelOrden().setVisible(true);
-                    setIngredientes();
 
-                    if (tomarOrden.getPanelOrden().getPlatillos().contains(platillo)) {
-                        ArrayList<Platillo> platillosAux = tomarOrden.getPanelOrden().getPlatillos();
-                        int id = platillosAux.indexOf(platillo);
-                        platillosAux.set(id, platillo);
-                    } else {
-                        tomarOrden.getPanelOrden().addPlatillo(platillo);
-                    }
-                    setVisible(false);
-                } else {
-                    JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
-                }
-
+                agregarProducto();
             }
         };
 
         boton.addActionListener(actionListener);
 
+    }
+
+    public void agregarProducto() {
+        if (validarIngredientes() || botonesIngredientes.isEmpty()) {
+            jPanelProductos.getPanelOrden().setVisible(true);
+            setIngredientes();
+
+            if (tomarOrden.getPanelOrden().getPlatillos().contains(platillo)) {
+                ArrayList<Platillo> platillosAux = tomarOrden.getPanelOrden().getPlatillos();
+                int id = platillosAux.indexOf(platillo);
+                platillosAux.set(id, platillo);
+            } else {
+                tomarOrden.getPanelOrden().addPlatillo(platillo);
+            }
+          platillo = new Platillo();
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ingredientes");
+        }
+    }
+    
+    public Platillo getPlatillo(){
+        return this.platillo;
     }
 
     public boolean validarIngredientes() {
@@ -235,6 +246,21 @@ public class PnlPersonalizarPrueba extends JPanel {
                 ingrediente.setNombre(botonesIngrediente.getText());
                 platillo.getIngredientesList().add(ingrediente);
             }
+        }
+    }
+
+    public Boolean confirmarSalida() {
+        int input = JOptionPane.showConfirmDialog(null, "¿Desea guardar el platillo antes de salir?");
+        switch (input) {
+            case 0:
+                agregarProducto();
+                return true;
+            case 1:
+                jPanelProductos.getPanelOrden().setVisible(true);
+                setVisible(false);
+                return true;
+            default:
+                return false;
         }
     }
 

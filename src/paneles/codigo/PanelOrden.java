@@ -42,6 +42,7 @@ public class PanelOrden extends javax.swing.JPanel {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JScrollPane spTicket1;
     private javax.swing.JTable tblPlatillos;
     private PnlPersonalizarPrueba personalizar;
@@ -60,6 +61,7 @@ public class PanelOrden extends javax.swing.JPanel {
         btnSiguiente = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         spTicket1 = new javax.swing.JScrollPane();
         tblPlatillos = new javax.swing.JTable();
         tamPrincipal = new Dimension(ancho, largo);
@@ -117,6 +119,10 @@ public class PanelOrden extends javax.swing.JPanel {
         btnEliminar.setFont(new java.awt.Font("Century Gothic", 1, 18));
         btnEliminar.setText("Eliminar");
 
+        btnCancelar.setBackground(new java.awt.Color(247, 157, 68));
+        btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18));
+        btnCancelar.setText("Cancelar");
+
         pnlCremita.setSize(tamPrincipal);
         pnlCremita.setPreferredSize(tamPanel);
         cargarTabla(tblPlatillos);
@@ -130,6 +136,10 @@ public class PanelOrden extends javax.swing.JPanel {
 
         pnlCremita.add(btnEliminar);
 
+        pnlCremita.add(btnCancelar);
+
+        btnCancelar.setEnabled(false);
+
         btnEditar.setEnabled(false);
 
         btnEliminar.setEnabled(false);
@@ -142,6 +152,7 @@ public class PanelOrden extends javax.swing.JPanel {
         addActionListenerSiguiente();
         addActionListenerEditar();
         addActionListenerEliminar();
+        addActionListenerCancelar();
 
     }
 
@@ -149,6 +160,15 @@ public class PanelOrden extends javax.swing.JPanel {
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
+            }
+        });
+
+    }
+
+    private void addActionListenerCancelar() {
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -255,6 +275,9 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     public void addPlatillo(Platillo platillo) {
+        if (platillos.isEmpty()) {
+            btnCancelar.setEnabled(true);
+        }
         platillos.add(platillo);
         cargarTabla(tblPlatillos);
     }
@@ -282,10 +305,10 @@ public class PanelOrden extends javax.swing.JPanel {
 
     private void btnSiguienteActionPerformed(ActionEvent evt) {
         FrmConfirmarOrden conf;
-        if(!platillos.isEmpty()){
-        conf = new FrmConfirmarOrden(platillos, this);
-        conf.setVisible(true);
-        }else{
+        if (!platillos.isEmpty()) {
+            conf = new FrmConfirmarOrden(platillos, this);
+            conf.setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(this, "No se han agregado platillos");
         }
     }
@@ -293,11 +316,11 @@ public class PanelOrden extends javax.swing.JPanel {
     private void btnEditarActionPerformed(ActionEvent evt) {
         // this.personalizar = new PnlPersonalizarPrueba(tomarOrden, tomarOrden.getPanelProductos().getLocation(), tomarOrden.getPanelProductos());
         // JOptionPane.showMessageDialog(this, "Esto abre el menú de personalizar para el elemento seleccionado c:");
-        if(platilloAux.getTipoProducto().equalsIgnoreCase("hotdog")){
-        tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);
-        tomarOrden.getPanelProductos().getPnlPersonalizar().setVisible(true);
-        tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatillo(platilloAux);
-        }else{
+        if (platilloAux.getTipoProducto().equalsIgnoreCase("hotdog")) {
+            tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);
+            tomarOrden.getPanelProductos().getPnlPersonalizar().setVisible(true);
+            tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatillo(platilloAux);
+        } else {
             JOptionPane.showMessageDialog(this, "No se puede editar este producto");
         }
         cargarTabla(tblPlatillos);
@@ -308,6 +331,16 @@ public class PanelOrden extends javax.swing.JPanel {
         //JOptionPane.showMessageDialog(this, "Esto elimina el elemento seleccionado");
         platillos.remove(platilloAux);
         cargarTabla(tblPlatillos);
+    }
+
+    private void btnCancelarActionPerformed(ActionEvent evt) {
+        //JOptionPane.showMessageDialog(this, "Esto elimina el elemento seleccionado");
+        int input = JOptionPane.showConfirmDialog(null, "¿Está seguro de querer cancelar la orden?");
+        if (input == 0) {
+            platillos.clear();
+            cargarTabla(tblPlatillos);
+            btnCancelar.setEnabled(false);
+        }
     }
 
 }
