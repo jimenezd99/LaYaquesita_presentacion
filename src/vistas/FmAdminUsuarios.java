@@ -96,11 +96,13 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 133, 25));
         jLabel1.setText("Administrar Usuarios");
         pnlCafecito.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         panelTabla.setBackground(new java.awt.Color(254, 244, 222));
-        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de usuarios"));
+        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelTabla.setForeground(new java.awt.Color(245, 133, 25));
         panelTabla.setToolTipText("");
 
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,24 +141,38 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         );
 
         pnlCafecito.add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 440, 340));
+
+        txtNombre.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         txtIdUsuario.setEditable(false);
+        txtIdUsuario.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 180, -1));
 
+        cbxPuesto.setBackground(new java.awt.Color(254, 244, 222));
         cbxPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CAJERO", "ADMINISTRADOR" }));
         pnlCafecito.add(cbxPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 180, -1));
+
+        txtContrasena.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 180, -1));
 
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(91, 52, 46));
         jLabel2.setText("ID ");
         pnlCafecito.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 50, 30));
 
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(91, 52, 46));
         jLabel3.setText("Nombre");
         pnlCafecito.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(91, 52, 46));
         jLabel4.setText("Contraseña");
         pnlCafecito.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(91, 52, 46));
         jLabel5.setText("Puesto");
         pnlCafecito.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
