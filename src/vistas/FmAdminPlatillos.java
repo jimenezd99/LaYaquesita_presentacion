@@ -12,6 +12,9 @@ import Entidades.Usuarios;
 import com.sun.glass.events.KeyEvent;
 import fachadaLogica.FachadaIngredientes;
 import fachadaLogica.FachadaPlatillo;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -32,29 +35,43 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
      */
     public FmAdminPlatillos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        tamPantalla();
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
+    }
+    
+    public final void tamPantalla(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
+        setResizable(false);
+        pack();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         panelTablaPlatillos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPlatillos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtIdPlatillo = new javax.swing.JTextField();
         txtNombrePlatillo = new javax.swing.JTextField();
-        cbxTipoProducto = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
+        cbxTipoProducto = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -69,11 +86,15 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         tablaIngredientesActuales = new javax.swing.JTable();
         btnAgregarActuales = new javax.swing.JButton();
         btnDescartarActuales = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrar platillos");
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelTablaPlatillos.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de platillos"));
         panelTablaPlatillos.setToolTipText("");
@@ -102,46 +123,43 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
             panelTablaPlatillosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaPlatillosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelTablaPlatillosLayout.setVerticalGroup(
             panelTablaPlatillosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaPlatillosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPlatillosLayout.createSequentialGroup()
+                .addGap(0, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(panelTablaPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 570, 270));
+        jPanel1.add(panelTablaPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 570, 270));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setText("ADMINISTRAR PLATILLOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         txtIdPlatillo.setEditable(false);
-        getContentPane().add(txtIdPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 171, -1));
-        getContentPane().add(txtNombrePlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 171, -1));
-
-        cbxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HOTDOG", "BEBIDA", "EXTRA" }));
-        getContentPane().add(cbxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 171, -1));
+        jPanel1.add(txtIdPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 171, -1));
+        jPanel1.add(txtNombrePlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 171, -1));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 313, 222));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 313, 222));
+
+        cbxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HOTDOG", "BEBIDA", "EXTRA" }));
+        jPanel1.add(cbxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 171, -1));
 
         jLabel2.setText("ID");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel3.setText("Tipo de platillo");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel4.setText("Nombre");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-
-        jLabel5.setText("Descripción");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +167,10 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, -1, 70));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, -1, 70));
+
+        jLabel5.setText("Descripción");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +178,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, 70));
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, 70));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +186,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, -1, 70));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, -1, 70));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +194,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, 70));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, 70));
 
         btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,17 +202,17 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, 70));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, 70));
 
         jLabel6.setText("Costo");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoKeyPressed(evt);
             }
         });
-        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 170, -1));
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 170, -1));
 
         panelIngredientesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingredientes disponibles"));
 
@@ -217,19 +238,19 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         panelIngredientesDisponibles.setLayout(panelIngredientesDisponiblesLayout);
         panelIngredientesDisponiblesLayout.setHorizontalGroup(
             panelIngredientesDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIngredientesDisponiblesLayout.createSequentialGroup()
+            .addGroup(panelIngredientesDisponiblesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelIngredientesDisponiblesLayout.setVerticalGroup(
             panelIngredientesDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredientesDisponiblesLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIngredientesDisponiblesLayout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(panelIngredientesDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 260, 320));
+        jPanel1.add(panelIngredientesDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 260, 320));
 
         panelIngredientesActuales.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingredientes actuales"));
 
@@ -259,11 +280,11 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
             panelIngredientesActualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelIngredientesActualesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelIngredientesActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 250, 310));
+        jPanel1.add(panelIngredientesActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 250, 310));
 
         btnAgregarActuales.setText("<~~~");
         btnAgregarActuales.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +292,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnAgregarActualesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
+        jPanel1.add(btnAgregarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
 
         btnDescartarActuales.setText("~~~>");
         btnDescartarActuales.addActionListener(new java.awt.event.ActionListener() {
@@ -279,13 +300,15 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnDescartarActualesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDescartarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, -1, -1));
-
-        jLabel7.setText("Agregar");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, -1));
+        jPanel1.add(btnDescartarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, -1, -1));
 
         jLabel8.setText("Descartar");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, -1, -1));
+
+        jLabel7.setText("Agregar");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -591,6 +614,14 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+
+        return retValue;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregarActuales;
@@ -608,6 +639,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

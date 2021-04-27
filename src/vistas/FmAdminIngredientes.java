@@ -8,6 +8,9 @@ package vistas;
 import Entidades.Ingredientes;
 import Entidades.Platillo;
 import fachadaLogica.FachadaIngredientes;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +30,18 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
      */
     public FmAdminIngredientes() {
         initComponents();
+        setLocationRelativeTo(null);
+        tamPantalla();
         cargarTabla();
+    }
+    
+    public final void tamPantalla(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
+        setResizable(false);
+        pack();
     }
 
     private DefaultTableModel ingredientesTableModel(List<Ingredientes> lstIngredientes) {
@@ -72,6 +86,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlCafecito = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -88,20 +103,34 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         txtAbreviacion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrar ingredientes");
+        setIconImage(getIconImage());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlCafecito.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         lblTitulo.setText("Administrar Ingredientes");
+        pnlCafecito.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         lblId.setText("ID ");
+        pnlCafecito.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 50, 30));
 
         txtId.setEditable(false);
+        pnlCafecito.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 90, 180, -1));
 
         lblNombre.setText("Nombre");
+        pnlCafecito.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        pnlCafecito.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 164, 180, -1));
 
         lblAbreviacion.setText("Abreviación");
+        pnlCafecito.add(lblAbreviacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
+        panelTabla.setBackground(new java.awt.Color(254, 244, 222));
         panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de ingredientes"));
         panelTabla.setToolTipText("");
+        panelTabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,126 +150,52 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaIngredientes);
 
-        javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
-        panelTabla.setLayout(panelTablaLayout);
-        panelTablaLayout.setHorizontalGroup(
-            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelTablaLayout.setVerticalGroup(
-            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        panelTabla.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 401, 293));
 
+        pnlCafecito.add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 90, 420, 320));
+
+        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
+        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
         btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 412, -1, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
+        btnEliminar.setForeground(new java.awt.Color(91, 52, 46));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 412, -1, -1));
 
+        btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
+        btnActualizar.setForeground(new java.awt.Color(91, 52, 46));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 412, -1, -1));
 
+        btnGuardar.setBackground(new java.awt.Color(245, 133, 25));
+        btnGuardar.setForeground(new java.awt.Color(91, 52, 46));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 412, -1, -1));
+        pnlCafecito.add(txtAbreviacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 253, 180, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(txtAbreviacion, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGuardar)))
-                .addContainerGap(499, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTitulo))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNombre))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblAbreviacion)))
-                            .addGap(10, 10, 10)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(140, 140, 140)
-                            .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
-                .addComponent(txtAbreviacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnCancelar))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitulo)
-                    .addGap(55, 55, 55)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(lblNombre)
-                            .addGap(66, 66, 66)
-                            .addComponent(lblAbreviacion))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(50, 50, 50)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(panelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 25, Short.MAX_VALUE)))
-        );
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -325,6 +280,15 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         });
     }
 
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+
+        return retValue;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
@@ -336,6 +300,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelTabla;
+    private javax.swing.JPanel pnlCafecito;
     private javax.swing.JTable tablaIngredientes;
     private javax.swing.JTextField txtAbreviacion;
     private javax.swing.JTextField txtId;
