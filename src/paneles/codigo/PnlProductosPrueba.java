@@ -79,21 +79,22 @@ public class PnlProductosPrueba extends JPanel {
         this.platillos = getPlatillos();
         for (Platillo platillo : platillos) {
             if (platillo.getNombre().equalsIgnoreCase(nombre)) {
-                return copiaPlatillo(platillo);
+                return new Platillo(platillo);
             }
         }
         return null;
     }
     
-     public Platillo copiaPlatillo(Platillo platillo){
-        Platillo temp = new Platillo();
-        temp.setCosto(platillo.getCosto());
-        temp.setIdplatillo(platillo.getIdplatillo());
-        temp.setDescripcion(platillo.getDescripcion());
-        temp.setIngredientesList(platillo.getIngredientesList());
-        temp.setNombre(platillo.getNombre());
-        return temp;
-    }
+//     public Platillo copiaPlatillo(Platillo platillo){
+//        Platillo temp = new Platillo();
+//        temp.setCosto(platillo.getCosto());
+//        temp.setIdplatillo(platillo.getIdplatillo());
+//        temp.setDescripcion(platillo.getDescripcion());
+//        temp.setIngredientesList(platillo.getIngredientesList());
+//        temp.setNombre(platillo.getNombre());
+//        temp.setTipoProducto(platillo.getTipoProducto());
+//        return temp;
+//    }
 
     public void cargarBebidas() {
         ArrayList<Platillo> productos = getProductos("bebida");

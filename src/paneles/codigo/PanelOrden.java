@@ -214,7 +214,7 @@ public class PanelOrden extends javax.swing.JPanel {
             tabla = new Object[lstPlatillos.size()][nombreCols.length];
             for (int i = 0; i < lstPlatillos.size(); i++) {
                 platillo = lstPlatillos.get(i);
-                tabla[i][0] = 1;
+                tabla[i][0] = platillo.getCantidad();
                 tabla[i][1] = platillo.getNombre();
                 tabla[i][2] = platillo.getDescripcion();
                 tabla[i][3] = platillo.getCosto();
@@ -242,7 +242,7 @@ public class PanelOrden extends javax.swing.JPanel {
             for (int i = 0; i < lstPlatillos.size(); i++) {
                 if (lstPlatillos.get(i).getTipoProducto().equalsIgnoreCase(tipo)) {
                     platillo = lstPlatillos.get(i);
-                    tabla[i][0] = 1;
+                    tabla[i][0] = platillo.getCantidad();
                     tabla[i][1] = platillo.getNombre();
                     tabla[i][2] = platillo.getDescripcion();
                     tabla[i][3] = platillo.getCosto();

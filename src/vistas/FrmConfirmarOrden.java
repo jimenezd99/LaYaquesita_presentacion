@@ -33,8 +33,23 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     private void mostrarPlatillos() {
         float total = 0;
         for (Platillo platillo : platillos) {
-            txtPlatillos.append(platillo.toString() + "\n");
-            total += platillo.getCosto();
+            if(platillo.getTipoProducto().equalsIgnoreCase("HOTDOG")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
+        }
+        for (Platillo platillo : platillos) {
+            if(platillo.getTipoProducto().equalsIgnoreCase("EXTRA")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
+            
+        }
+        for (Platillo platillo : platillos) {
+            if(platillo.getTipoProducto().equalsIgnoreCase("BEBIDA")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
         }
 
         txtPlatillos.append("-------------------------"
