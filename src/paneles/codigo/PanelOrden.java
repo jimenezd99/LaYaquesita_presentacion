@@ -329,7 +329,13 @@ public class PanelOrden extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(ActionEvent evt) {
         //JOptionPane.showMessageDialog(this, "Esto elimina el elemento seleccionado");
-        platillos.remove(platilloAux);
+        int resp = JOptionPane.showConfirmDialog(null, "Se eliminará el platillo "+platilloAux.toString());
+        
+        if(resp == 0){
+                    platillos.remove(platilloAux);
+            
+        }
+
         cargarTabla(tblPlatillos);
     }
 
