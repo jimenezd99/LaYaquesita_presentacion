@@ -297,6 +297,7 @@ public class PnlPersonalizar extends JPanel {
                 int id = platillosAux.indexOf(platillo);
                 setIngredientes();
                 platillosAux.set(id, platillo);
+                tomarOrden.getPanelOrden().cargarTablaEdit();
 
             } else {
                 setIngredientes();

@@ -158,6 +158,10 @@ public class PanelOrden extends javax.swing.JPanel {
         addActionListenerCancelar();
 
     }
+    
+    public javax.swing.JLabel getLabelTotal(){
+        return jlblTotal;
+    }
 
     private void addActionListenerSiguiente() {
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -296,12 +300,18 @@ public class PanelOrden extends javax.swing.JPanel {
             tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);
             tomarOrden.getPanelProductos().getPnlPersonalizar().setVisible(true);
             tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatilloEdit(platilloAux);
+           
         } else {
             JOptionPane.showMessageDialog(this, "No se puede editar este producto");
         }
         setEnabled(false);
         cargarTabla(tblPlatillos);
 
+    }
+    
+    
+    public void cargarTablaEdit(){
+         cargarTabla(tblPlatillos);
     }
 
     private void btnEliminarActionPerformed(ActionEvent evt) {
