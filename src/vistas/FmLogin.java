@@ -12,6 +12,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,10 +36,16 @@ public class FmLogin extends javax.swing.JFrame {
         usuarios = FUsuarios.consultarUsuarios();
         this.setLocationRelativeTo(null);
         tamPantalla();
-
+        setIconBotones();
         //
         //
         lblError.setVisible(false);
+    }
+    
+    
+    public final void setIconBotones() {
+        lblIcono.setIcon(setIcono("/images/icon.png", lblIcono));
+
     }
 
     public void tamPantalla() {
@@ -68,7 +78,7 @@ public class FmLogin extends javax.swing.JFrame {
         lblContrasena = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        lblIcono = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -88,8 +98,8 @@ public class FmLogin extends javax.swing.JFrame {
         lblTitulo.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(245, 133, 25));
         lblTitulo.setText("INGRESAR AL SISTEMA");
-        pnlCremita.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 30));
-        pnlCremita.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 210, -1));
+        pnlCremita.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 340, 30));
+        pnlCremita.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 210, -1));
 
         btnIngresar.setBackground(new java.awt.Color(245, 133, 25));
         btnIngresar.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -116,21 +126,19 @@ public class FmLogin extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(91, 52, 46));
         lblUsuario.setText("Usuario:");
-        pnlCremita.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        pnlCremita.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
         lblContrasena.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         lblContrasena.setForeground(new java.awt.Color(91, 52, 46));
         lblContrasena.setText("Contraseña:");
-        pnlCremita.add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        pnlCremita.add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         lblError.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 102, 102));
         lblError.setText("El usuario y/o contraseña ingresados son incorrectos.");
-        pnlCremita.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 360, 30));
-        pnlCremita.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 210, -1));
-
-        jLabel1.setText("jLabel1");
-        pnlCremita.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        pnlCremita.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, 30));
+        pnlCremita.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 210, -1));
+        pnlCremita.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 60, 50));
 
         pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 310));
 
@@ -149,12 +157,12 @@ public class FmLogin extends javax.swing.JFrame {
                         && txtContrasena.getText().equalsIgnoreCase(usuario.getContraseña())) {
 
                     if (usuario.getPuesto().equalsIgnoreCase("CAJERO")) {
-                        principal = new FmPrincipal();
+                        principal = new FmPrincipal(usuario);
                         principal.setVisible(true);
                         this.dispose();
                         break;
                     } else {
-                        adminMenu = new FmAdminMenu();
+                        adminMenu = new FmAdminMenu(usuario);
                         adminMenu.setVisible(true);
                         this.dispose();
                         break;
@@ -224,13 +232,21 @@ public class FmLogin extends javax.swing.JFrame {
         return retValue;
     }
 
+    public Icon setIcono(String url, JLabel labelIcon) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = labelIcon.getWidth();
+        int largo = labelIcon.getHeight();
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnlCafecito;
