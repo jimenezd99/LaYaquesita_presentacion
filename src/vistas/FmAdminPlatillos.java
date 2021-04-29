@@ -17,6 +17,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,6 +40,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         tamPantalla();
+        setIconBotones();
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
@@ -52,12 +56,25 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         setResizable(false);
         pack();
     }
+    public final void setIconBotones() {
+        btnAgregarActuales.setIcon(setIcono("/images/izquierda.png", btnAgregarActuales));
+        btnAgregarActuales.setText("");
+        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
+        btnDescartarActuales.setText("");
+        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
+        btnCancelar.setText("");
+//        btnTomarOrden.setIcon(setIcono("/images/orden.png", btnTomarOrden));
+//        btnCerrarSesion.setIcon(setIcono("/images/flecha_izquierda.png", btnCerrarSesion));
+//        btnAdminUsuarios.setIcon(setIcono("/images/usuario.png", btnAdminUsuarios));
+
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlCafecito = new javax.swing.JPanel();
         panelTablaPlatillos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPlatillos = new javax.swing.JTable();
@@ -75,7 +92,6 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
         panelIngredientesDisponibles = new javax.swing.JPanel();
@@ -88,17 +104,22 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         btnDescartarActuales = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar platillos");
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlCafecito.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelTablaPlatillos.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de platillos"));
+        panelTablaPlatillos.setBackground(new java.awt.Color(254, 244, 222));
+        panelTablaPlatillos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de platillos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelTablaPlatillos.setForeground(new java.awt.Color(245, 133, 25));
         panelTablaPlatillos.setToolTipText("");
 
+        tablaPlatillos.setBackground(new java.awt.Color(254, 244, 222));
         tablaPlatillos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -121,101 +142,113 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         panelTablaPlatillos.setLayout(panelTablaPlatillosLayout);
         panelTablaPlatillosLayout.setHorizontalGroup(
             panelTablaPlatillosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTablaPlatillosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
         );
         panelTablaPlatillosLayout.setVerticalGroup(
             panelTablaPlatillosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPlatillosLayout.createSequentialGroup()
-                .addGap(0, 9, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelTablaPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 570, 270));
+        pnlCafecito.add(panelTablaPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 570, 270));
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 133, 25));
         jLabel1.setText("ADMINISTRAR PLATILLOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        pnlCafecito.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         txtIdPlatillo.setEditable(false);
-        jPanel1.add(txtIdPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 171, -1));
-        jPanel1.add(txtNombrePlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 171, -1));
+        txtIdPlatillo.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCafecito.add(txtIdPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 171, -1));
 
+        txtNombrePlatillo.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCafecito.add(txtNombrePlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 171, -1));
+
+        txtDescripcion.setBackground(new java.awt.Color(254, 244, 222));
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 313, 222));
+        pnlCafecito.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 313, 222));
 
+        cbxTipoProducto.setBackground(new java.awt.Color(254, 244, 222));
+        cbxTipoProducto.setForeground(new java.awt.Color(91, 52, 46));
         cbxTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HOTDOG", "BEBIDA", "EXTRA" }));
-        jPanel1.add(cbxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 171, -1));
+        pnlCafecito.add(cbxTipoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 171, -1));
 
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(91, 52, 46));
         jLabel2.setText("ID");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        pnlCafecito.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(91, 52, 46));
         jLabel3.setText("Tipo de platillo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        pnlCafecito.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(91, 52, 46));
         jLabel4.setText("Nombre");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        pnlCafecito.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
+        btnGuardar.setBackground(new java.awt.Color(245, 133, 25));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, -1, 70));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 610, -1, 70));
 
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(91, 52, 46));
         jLabel5.setText("Descripción");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+        pnlCafecito.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
+        btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, -1, 70));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 610, -1, 70));
 
+        btnLimpiar.setBackground(new java.awt.Color(245, 133, 25));
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, -1, 70));
+        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 610, -1, 70));
 
+        btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, 70));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, -1, 70));
 
-        btnCancelar.setText("Regresar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 610, -1, 70));
-
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(91, 52, 46));
         jLabel6.setText("Costo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        pnlCafecito.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
+        txtCosto.setBackground(new java.awt.Color(254, 244, 222));
         txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoKeyPressed(evt);
             }
         });
-        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 170, -1));
+        pnlCafecito.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 170, -1));
 
-        panelIngredientesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingredientes disponibles"));
+        panelIngredientesDisponibles.setBackground(new java.awt.Color(254, 244, 222));
+        panelIngredientesDisponibles.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes disponibles", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelIngredientesDisponibles.setForeground(new java.awt.Color(245, 133, 25));
 
+        tablaIngredientesDisponibles.setBackground(new java.awt.Color(254, 244, 222));
         tablaIngredientesDisponibles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -238,22 +271,20 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         panelIngredientesDisponibles.setLayout(panelIngredientesDisponiblesLayout);
         panelIngredientesDisponiblesLayout.setHorizontalGroup(
             panelIngredientesDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredientesDisponiblesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
         panelIngredientesDisponiblesLayout.setVerticalGroup(
             panelIngredientesDisponiblesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIngredientesDisponiblesLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelIngredientesDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 260, 320));
+        pnlCafecito.add(panelIngredientesDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 260, 320));
 
-        panelIngredientesActuales.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingredientes actuales"));
+        panelIngredientesActuales.setBackground(new java.awt.Color(254, 244, 222));
+        panelIngredientesActuales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredientes actuales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelIngredientesActuales.setForeground(new java.awt.Color(245, 133, 25));
 
+        tablaIngredientesActuales.setBackground(new java.awt.Color(254, 244, 222));
         tablaIngredientesActuales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -271,44 +302,51 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         panelIngredientesActuales.setLayout(panelIngredientesActualesLayout);
         panelIngredientesActualesLayout.setHorizontalGroup(
             panelIngredientesActualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredientesActualesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
         );
         panelIngredientesActualesLayout.setVerticalGroup(
             panelIngredientesActualesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelIngredientesActualesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelIngredientesActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 250, 310));
+        pnlCafecito.add(panelIngredientesActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 250, 310));
 
-        btnAgregarActuales.setText("<~~~");
+        btnAgregarActuales.setBackground(new java.awt.Color(245, 133, 25));
         btnAgregarActuales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActualesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, -1, -1));
+        pnlCafecito.add(btnAgregarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, -1, -1));
 
-        btnDescartarActuales.setText("~~~>");
+        btnDescartarActuales.setBackground(new java.awt.Color(245, 133, 25));
         btnDescartarActuales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDescartarActualesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDescartarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, -1, -1));
+        pnlCafecito.add(btnDescartarActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(91, 52, 46));
         jLabel8.setText("Descartar");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 270, -1, -1));
+        pnlCafecito.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(91, 52, 46));
         jLabel7.setText("Agregar");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, -1, -1));
+        pnlCafecito.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 50, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 690));
+        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
+        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -614,14 +652,23 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         });
     }
 
-    @Override
+     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
 
         return retValue;
     }
-    
+
+    public Icon setIcono(String url, JButton boton) {
+
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = (int) (boton.getWidth());
+        int largo = (int) (boton.getHeight());
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregarActuales;
@@ -639,7 +686,6 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -647,6 +693,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     private javax.swing.JPanel panelIngredientesActuales;
     private javax.swing.JPanel panelIngredientesDisponibles;
     private javax.swing.JPanel panelTablaPlatillos;
+    private javax.swing.JPanel pnlCafecito;
     private javax.swing.JTable tablaIngredientesActuales;
     private javax.swing.JTable tablaIngredientesDisponibles;
     private javax.swing.JTable tablaPlatillos;
