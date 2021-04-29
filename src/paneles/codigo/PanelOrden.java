@@ -45,7 +45,6 @@ public class PanelOrden extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JScrollPane spTicket1;
     private javax.swing.JTable tblPlatillos;
-    private PnlPersonalizarPrueba personalizar;
 
     private Platillo platilloAux;
 
@@ -105,6 +104,8 @@ public class PanelOrden extends javax.swing.JPanel {
         pnlCremita.setPreferredSize(tamPanel);
 
         jlblOrden.setFont(new java.awt.Font("Century Gothic", 1, 18));
+        jlblTotal.setFont(new java.awt.Font("Century Gothic", 1, 18));
+        jlblTotal.setText("Total:");
         setLastOrdenId();
 
         btnSiguiente.setBackground(new java.awt.Color(247, 157, 68));
@@ -137,6 +138,8 @@ public class PanelOrden extends javax.swing.JPanel {
         pnlCremita.add(btnEliminar);
 
         pnlCremita.add(btnCancelar);
+
+        pnlCremita.add(jlblTotal);
 
         btnCancelar.setEnabled(false);
 
@@ -191,6 +194,7 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     private void addMouseListenerPlatillos() {
+
         tblPlatillos.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -216,7 +220,7 @@ public class PanelOrden extends javax.swing.JPanel {
                 platillo = lstPlatillos.get(i);
                 tabla[i][0] = platillo.getCantidad();
                 tabla[i][1] = platillo.getNombre();
-                tabla[i][2] = platillo.getDescripcion();
+                tabla[i][2] = platillo.ingredientesListToString();
                 tabla[i][3] = platillo.getCosto();
 
             }
@@ -227,40 +231,7 @@ public class PanelOrden extends javax.swing.JPanel {
         return null;
     }
 
-    private DefaultTableModel platillosTableModelTipo(List<Platillo> lstPlatillos, String tipo) {
-        Object tabla[][];
-        Platillo platillo = new Platillo();
-        String[] nombreCols = {"Cantidad", "Nombre", "Ingredientes", "Precio Unitario"};
-        if (lstPlatillos != null) {
-            modelo = new DefaultTableModel() {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
-            tabla = new Object[lstPlatillos.size()][nombreCols.length];
-            for (int i = 0; i < lstPlatillos.size(); i++) {
-                if (lstPlatillos.get(i).getTipoProducto().equalsIgnoreCase(tipo)) {
-                    platillo = lstPlatillos.get(i);
-                    tabla[i][0] = platillo.getCantidad();
-                    tabla[i][1] = platillo.getNombre();
-                    tabla[i][2] = platillo.getDescripcion();
-                    tabla[i][3] = platillo.getCosto();
-                }
-
-            }
-
-            modelo.setDataVector(tabla, nombreCols);
-            return modelo;
-        }
-        return null;
-    }
-
     private void cargarTabla(JTable tabla) {
-        tabla.setModel(platillosTableModel(platillos));
-    }
-
-    private void cargarTablaTipo(JTable tabla, String tipo) {
         tabla.setModel(platillosTableModel(platillos));
     }
 
@@ -280,6 +251,7 @@ public class PanelOrden extends javax.swing.JPanel {
         }
         platillos.add(platillo);
         cargarTabla(tblPlatillos);
+        calcularOrden();
     }
 
     public int getLastOrdenId() {
@@ -293,14 +265,20 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     private void tblPlatillosMouseClicked(java.awt.event.MouseEvent evt) {
-        btnEditar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-        setPlatilloAux(tblPlatillos.getValueAt(tblPlatillos.getSelectedRow(), 1).toString());
+        if (tblPlatillos.getSelectedRow() >= 0) {
+            setEnabled(true);
+            setPlatilloAux(tblPlatillos.getValueAt(tblPlatillos.getSelectedRow(), 1).toString());
+        }
 
     }
 
     private void setPlatilloAux(String nombre) {
-        this.platilloAux = tomarOrden.getPanelProductos().getPlatillo(nombre);
+
+        for (Platillo platillo : platillos) {
+            if (platillo.getNombre().equalsIgnoreCase(nombre)) {
+                this.platilloAux = platillo;
+            }
+        }
     }
 
     private void btnSiguienteActionPerformed(ActionEvent evt) {
@@ -314,39 +292,56 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     private void btnEditarActionPerformed(ActionEvent evt) {
-        // this.personalizar = new PnlPersonalizarPrueba(tomarOrden, tomarOrden.getPanelProductos().getLocation(), tomarOrden.getPanelProductos());
-        // JOptionPane.showMessageDialog(this, "Esto abre el menú de personalizar para el elemento seleccionado c:");
         if (platilloAux.getTipoProducto().equalsIgnoreCase("hotdog")) {
             tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);
             tomarOrden.getPanelProductos().getPnlPersonalizar().setVisible(true);
-            tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatillo(platilloAux);
+            tomarOrden.getPanelProductos().getPnlPersonalizar().setIngredientesPlatilloEdit(platilloAux);
         } else {
             JOptionPane.showMessageDialog(this, "No se puede editar este producto");
         }
+        setEnabled(false);
         cargarTabla(tblPlatillos);
 
     }
 
     private void btnEliminarActionPerformed(ActionEvent evt) {
-        //JOptionPane.showMessageDialog(this, "Esto elimina el elemento seleccionado");
-        int resp = JOptionPane.showConfirmDialog(null, "Se eliminará el platillo "+platilloAux.toString());
-        
-        if(resp == 0){
-                    platillos.remove(platilloAux);
-            
+
+        int resp = JOptionPane.showConfirmDialog(null, "Se eliminará el platillo " + platilloAux);
+
+        if (resp == 0) {
+            platillos.remove(platilloAux);
+            calcularOrden();
+
         }
+        setEnabled(false);
 
         cargarTabla(tblPlatillos);
     }
 
+    public void setEnabled(boolean estado) {
+        btnEditar.setEnabled(estado);
+        btnEliminar.setEnabled(estado);
+    }
+
     private void btnCancelarActionPerformed(ActionEvent evt) {
-        //JOptionPane.showMessageDialog(this, "Esto elimina el elemento seleccionado");
+
         int input = JOptionPane.showConfirmDialog(null, "¿Está seguro de querer cancelar la orden?");
         if (input == 0) {
             platillos.clear();
             cargarTabla(tblPlatillos);
             btnCancelar.setEnabled(false);
+            jlblTotal.setText("Total:");
         }
+    }
+
+    private void calcularOrden() {
+        float total = 0;
+
+        for (Platillo platillo : platillos) {
+            total += platillo.getCosto();
+        }
+
+        jlblTotal.setText("Total: $" + total);
     }
 
 }
