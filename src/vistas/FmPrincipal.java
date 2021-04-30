@@ -6,17 +6,15 @@
 package vistas;
 
 import Entidades.Platillo;
-import paneles.DetalleOrden;
+import Entidades.Usuarios;
 import paneles.PnlMenu;
-import paneles.PnlPersonalizar;
-import paneles.PnlProductos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JToggleButton;
 import paneles.codigo.PanelOrden;
-import paneles.codigo.PnlProductosPrueba;
+import paneles.codigo.PnlProductos;
 //import java.util.ArrayList;
 /**
  *
@@ -27,30 +25,43 @@ public class FmPrincipal extends javax.swing.JFrame {
     private String notasOrden;
     private ArrayList<Platillo> platillos;
     private PnlMenu menu;
+    private Usuarios usuarioActual;
     private PanelOrden ticket;
-    private PnlProductosPrueba productos;
-    private PnlPersonalizar personalizar;
+    private PnlProductos productos;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
 
     /**
      * Creates new form NewJFrame
      */
-    public FmPrincipal() {
+    public FmPrincipal(Usuarios usuarioActual) {
 
         initComponents();
         this.setTitle("Tomar orden");
         notasOrden = "";
         platillos = new ArrayList<>();
-
+        this.usuarioActual=usuarioActual;
         tamPantalla();
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos= new PnlProductosPrueba(this, new Point(ticket.getWidth(), menu.getHeight()));
-        this.personalizar= new PnlPersonalizar(this);
+        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
         initPantalla();
         setPanelProductos();
         
+    }
+
+    private FmPrincipal() {
+        initComponents();
+        this.setTitle("Tomar orden");
+        notasOrden = "";
+        platillos = new ArrayList<>();
+//        this.usuarioActual=new F;
+        tamPantalla();
+        this.ticket = new PanelOrden(this);
+        this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
+        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        initPantalla();
+        setPanelProductos();
     }
 
     public final void tamPantalla(){
@@ -94,7 +105,7 @@ public class FmPrincipal extends javax.swing.JFrame {
          return ticket;
      }
      
-     public PnlProductosPrueba getPanelProductos(){
+     public PnlProductos getPanelProductos(){
          return productos;
      }
      
@@ -167,6 +178,9 @@ public class FmPrincipal extends javax.swing.JFrame {
                 new FmPrincipal().setVisible(true);
             }
         });
+    }
+    public Usuarios getUsuarioActual() {
+        return usuarioActual;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
