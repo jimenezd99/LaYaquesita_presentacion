@@ -6,19 +6,15 @@
 package vistas;
 
 import Entidades.Platillo;
-import paneles.DetalleOrden;
 import paneles.PnlMenu;
-import paneles.PnlPersonalizar;
-import paneles.PnlProductos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JToggleButton;
 import paneles.codigo.PanelOrden;
-import paneles.codigo.PnlProductosPrueba;
+import paneles.codigo.PnlProductos;
 //import java.util.ArrayList;
-
 /**
  *
  * @author Jbran
@@ -29,8 +25,7 @@ public class FmPrincipal extends javax.swing.JFrame {
     private ArrayList<Platillo> platillos;
     private PnlMenu menu;
     private PanelOrden ticket;
-    private PnlProductosPrueba productos;
-    private PnlPersonalizar personalizar;
+    private PnlProductos productos;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
 
@@ -53,8 +48,7 @@ public class FmPrincipal extends javax.swing.JFrame {
 
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos = new PnlProductosPrueba(this, new Point(ticket.getWidth(), menu.getHeight()));
-        this.personalizar = new PnlPersonalizar(this);
+        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
         initPantalla();
         setPanelProductos();
 
@@ -105,7 +99,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         return ticket;
     }
 
-    public PnlProductosPrueba getPanelProductos() {
+    public PnlProductos getPanelProductos() {
         return productos;
     }
 

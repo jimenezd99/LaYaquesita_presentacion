@@ -23,11 +23,11 @@ import java.util.List;
  */
 public class TomarOrden {
 
-    String notasOrden;
-    OrdenJpaController COrden;
-    UsuariosJpaController CUsuarios;
-    PlatilloJpaController cPlatillo;
-    ArrayList<Platillo> platillos;
+    private String notasOrden;
+    private OrdenJpaController COrden;
+    private UsuariosJpaController CUsuarios;
+    private PlatilloJpaController cPlatillo;
+    private ArrayList<Platillo> platillos;
 
     public TomarOrden(ArrayList<Platillo> platillos) {
         COrden = new OrdenJpaController();

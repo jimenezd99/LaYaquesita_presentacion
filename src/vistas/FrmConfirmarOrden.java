@@ -160,6 +160,7 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Orden guardada", "Confirmación", JOptionPane.PLAIN_MESSAGE);
             panelOrden.clearPlatillos();
             panelOrden.setLastOrdenId();
+            panelOrden.getLabelTotal().setText("Total: ");
         } catch (Exception e) {
              JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos", "Advertencia", JOptionPane.PLAIN_MESSAGE);
         }
