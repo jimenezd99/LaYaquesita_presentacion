@@ -24,7 +24,7 @@ import vistas.FmPrincipal;
  *
  * @author Zannie
  */
-public class PnlProductosPrueba extends JPanel {
+public class PnlProductos extends JPanel {
 
     private FmPrincipal tomarOrden;
     private FachadaLogica fachadaLogica;
@@ -33,16 +33,16 @@ public class PnlProductosPrueba extends JPanel {
     private javax.swing.JPanel jPanelOrden;
     private Dimension sizePrincipal;
     private Dimension minSize;
-    private PnlPersonalizarPrueba personalizar;
+    private PnlPersonalizar personalizar;
     private final Color cafecito = new java.awt.Color(226, 207, 169);
     private final Color cremita = new java.awt.Color(254, 244, 222);
 
-    public PnlProductosPrueba(FmPrincipal fmPrincipal, Point location) {
+    public PnlProductos(FmPrincipal fmPrincipal, Point location) {
 
         this.jPanelOrden = new javax.swing.JPanel();
         this.tomarOrden = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
-        this.personalizar = new PnlPersonalizarPrueba(tomarOrden, location, this);
+        this.personalizar = new PnlPersonalizar(tomarOrden, location, this);
         this.add(personalizar);
         personalizar.setVisible(false);
         botonesProductos = new ArrayList();
@@ -185,7 +185,7 @@ public class PnlProductosPrueba extends JPanel {
         return jPanelOrden;
     }
     
-    public PnlPersonalizarPrueba getPnlPersonalizar(){
+    public PnlPersonalizar getPnlPersonalizar(){
         return personalizar;
     }
 

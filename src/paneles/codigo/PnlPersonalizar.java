@@ -27,10 +27,10 @@ import vistas.FmPrincipal;
  *
  * @author Zannie
  */
-public class PnlPersonalizarPrueba extends JPanel {
+public class PnlPersonalizar extends JPanel {
 
     private FmPrincipal tomarOrden;
-    private PnlProductosPrueba jPanelProductos;
+    private PnlProductos jPanelProductos;
     private PanelOrden pnlOrden;
     private FachadaLogica fachadaLogica;
     private ArrayList<JToggleButton> botonesIngredientes;
@@ -45,7 +45,7 @@ public class PnlPersonalizarPrueba extends JPanel {
     private JToggleButton plain;
     private Platillo platillo;
 
-    public PnlPersonalizarPrueba(FmPrincipal fmPrincipal, Point location, PnlProductosPrueba jPanelProductos) {
+    public PnlPersonalizar(FmPrincipal fmPrincipal, Point location, PnlProductos jPanelProductos) {
 
         // this.jPanelOrden = new javax.swing.JPanel();
         this.platillo = new Platillo();
@@ -128,7 +128,7 @@ public class PnlPersonalizarPrueba extends JPanel {
             JToggleButton ingredienteTemp = new JToggleButton();
 
             botonesIngredientes.add(ingredienteTemp);
-            PnlPersonalizarPrueba.this.setBoton(ingredienteTemp, ingrediente.getAbreviacion());
+            PnlPersonalizar.this.setBoton(ingredienteTemp, ingrediente.getAbreviacion());
 
         }
         setPosicionBoton(botonesIngredientes);

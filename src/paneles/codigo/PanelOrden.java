@@ -44,7 +44,7 @@ public class PanelOrden extends javax.swing.JPanel {
     private javax.swing.JButton btnEditar;
     private javax.swing.JScrollPane spTicket1;
     private javax.swing.JTable tblPlatillos;
-    private PnlPersonalizarPrueba personalizar;
+    private PnlPersonalizar personalizar;
 
     private Platillo platilloAux;
 
@@ -291,7 +291,7 @@ public class PanelOrden extends javax.swing.JPanel {
     }
 
     private void btnEditarActionPerformed(ActionEvent evt) {
-        // this.personalizar = new PnlPersonalizarPrueba(tomarOrden, tomarOrden.getPanelProductos().getLocation(), tomarOrden.getPanelProductos());
+        // this.personalizar = new PnlPersonalizar(tomarOrden, tomarOrden.getPanelProductos().getLocation(), tomarOrden.getPanelProductos());
         // JOptionPane.showMessageDialog(this, "Esto abre el menú de personalizar para el elemento seleccionado c:");
         if(platilloAux.getTipoProducto().equalsIgnoreCase("hotdog")){
         tomarOrden.getPanelProductos().getPanelOrden().setVisible(false);

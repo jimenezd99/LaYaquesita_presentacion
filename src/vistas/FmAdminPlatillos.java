@@ -32,11 +32,24 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     FachadaPlatillo platillos = new FachadaPlatillo();
     FachadaIngredientes ingredientes = new FachadaIngredientes();
     FmAdminMenu adminMenu;
-    List<Ingredientes> ingredientesActuales = new ArrayList(); 
+    Usuarios usuarioActual;
+    List<Ingredientes> ingredientesActuales = new ArrayList();
+
     /**
      * Creates new form FmAdminPlatillos
      */
-    public FmAdminPlatillos() {
+    public FmAdminPlatillos(Usuarios usuarioActual) {
+        initComponents();
+        this.usuarioActual = usuarioActual;
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+        setIconBotones();
+        cargarTablaPlatillos();
+        cargarTablaIngredientesActuales();
+        cargarTablaIngredientesDisponibles();
+    }
+
+    private FmAdminPlatillos() {
         initComponents();
         this.setLocationRelativeTo(null);
         tamPantalla();
@@ -45,10 +58,9 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
     }
-    
-    public final void tamPantalla(){
+
+    public final void tamPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        
 
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
@@ -56,11 +68,13 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         setResizable(false);
         pack();
     }
+
     public final void setIconBotones() {
         btnAgregarActuales.setIcon(setIcono("/images/izquierda.png", btnAgregarActuales));
         btnAgregarActuales.setText("");
         btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
         btnDescartarActuales.setText("");
+        btnCancelar.setSize(28, 28);
         btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
         btnCancelar.setText("");
 //        btnTomarOrden.setIcon(setIcono("/images/orden.png", btnTomarOrden));
@@ -68,7 +82,6 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 //        btnAdminUsuarios.setIcon(setIcono("/images/usuario.png", btnAdminUsuarios));
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -337,7 +350,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         jLabel7.setText("Agregar");
         pnlCafecito.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 50, -1));
 
-        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
+        btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,17 +364,16 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    private DefaultTableModel ingredientesTableModel(List<Ingredientes> lstIngredientes){
+    private DefaultTableModel ingredientesTableModel(List<Ingredientes> lstIngredientes) {
         Object tabla[][];
         String[] nombreCols = {"ID", "Nombre", "Abreviación"}; // ¿Ya estamos usando Abreviación?
-        if(lstIngredientes != null){
-            DefaultTableModel modelo = new DefaultTableModel(){
+        if (lstIngredientes != null) {
+            DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
-                public boolean isCellEditable(int row, int column){
+                public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-                
+
             };
             tabla = new Object[lstIngredientes.size()][nombreCols.length];
             for (int i = 0; i < lstIngredientes.size(); i++) {
@@ -369,22 +381,21 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 tabla[i][0] = ingrediente.getIdingredientes();
                 tabla[i][1] = ingrediente.getNombre();
                 tabla[i][2] = ingrediente.getAbreviacion(); //Again, ¿Usamos abreviación?
-                
+
             }
             modelo.setDataVector(tabla, nombreCols);
             return modelo;
         }
         return null;
     }
-    
-    
-    private DefaultTableModel platillosTableModel(List<Platillo> lstplatillos){
+
+    private DefaultTableModel platillosTableModel(List<Platillo> lstplatillos) {
         Object tabla[][];
-        String[] nombreCols = {"ID", "TipoProducto", "Nombre","Costo" , "Descripción"};
-        if(lstplatillos != null){
-            DefaultTableModel modelo = new DefaultTableModel(){
+        String[] nombreCols = {"ID", "TipoProducto", "Nombre", "Costo", "Descripción"};
+        if (lstplatillos != null) {
+            DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
-                public boolean isCellEditable(int row, int column){
+                public boolean isCellEditable(int row, int column) {
                     return false;
                 }
             };
@@ -396,7 +407,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 tabla[i][2] = platillo.getNombre();
                 tabla[i][3] = platillo.getCosto();
                 tabla[i][4] = platillo.getDescripcion();
-                
+
             }
             modelo.setDataVector(tabla, nombreCols);
             return modelo;
@@ -408,7 +419,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         ingredientesActuales.clear();
         txtIdPlatillo.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 0).toString());
-        switch(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 1).toString()){
+        switch (tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 1).toString()) {
             case "HOTDOG":
                 cbxTipoProducto.setSelectedIndex(0);
                 break;
@@ -417,86 +428,78 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 break;
             case "EXTRA":
                 cbxTipoProducto.setSelectedIndex(2);
-                break;                
+                break;
         }
-        txtNombrePlatillo.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(),2 ).toString());
+        txtNombrePlatillo.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 2).toString());
         txtCosto.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 3).toString());
-        txtDescripcion.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 4).toString());  
-        
-        
-        
+        txtDescripcion.setText(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 4).toString());
+
         // ¿Cómo funcionan los IngredientesList aquí? PlatilloHasIngredientes?
-        
         int id = Integer.parseInt(tablaPlatillos.getValueAt(tablaPlatillos.getSelectedRow(), 0).toString());
         Platillo aux = platillos.consultarPlatilloID(id);
         ingredientesActuales.addAll(aux.getIngredientesList());
-        
+
         cargarTablaIngredientesActuales();
     }//GEN-LAST:event_tablaPlatillosMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         Platillo platillo = new Platillo();
-        switch(cbxTipoProducto.getSelectedIndex()){
+        switch (cbxTipoProducto.getSelectedIndex()) {
             case 0:
-                if(!ingredientesActuales.isEmpty()){
-                     platillo.setNombre(txtNombrePlatillo.getText());
-                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                     platillo.setDescripcion(txtDescripcion.getText());
-                     platillo.setIngredientesList(ingredientesActuales);
-                     platillo.setTipoProducto("HOTDOG");
-                     platillos.registrarPlatillo(platillo);
+                if (!ingredientesActuales.isEmpty()) {
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setIngredientesList(ingredientesActuales);
+                    platillo.setTipoProducto("HOTDOG");
+                    platillos.registrarPlatillo(platillo);
                     JOptionPane.showMessageDialog(null, "Se ha agregado el platillo.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
                 }
                 break;
-                
+
             case 1:
-                    platillo.setNombre(txtNombrePlatillo.getText());
-                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                    platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setTipoProducto("BEBIDA");
-                    platillo.setIngredientesList(new ArrayList());
-                    platillos.registrarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
-            break;
-            
+                platillo.setNombre(txtNombrePlatillo.getText());
+                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                platillo.setDescripcion(txtDescripcion.getText());
+                platillo.setTipoProducto("BEBIDA");
+                platillo.setIngredientesList(new ArrayList());
+                platillos.registrarPlatillo(platillo);
+                JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+                break;
+
             case 2:
-                    platillo.setNombre(txtNombrePlatillo.getText());
-                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                    platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setTipoProducto("EXTRA");
-                    platillo.setIngredientesList(new ArrayList());
-                    platillos.registrarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
-                    break;
+                platillo.setNombre(txtNombrePlatillo.getText());
+                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                platillo.setDescripcion(txtDescripcion.getText());
+                platillo.setTipoProducto("EXTRA");
+                platillo.setIngredientesList(new ArrayList());
+                platillos.registrarPlatillo(platillo);
+                JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+                break;
         }
-    
+
         cargarTablaPlatillos();
         limpiar();
-        
-        
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtCostoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyPressed
-        
+
         char c = evt.getKeyChar();
-        if(!Character.isDigit(c) && c != '.' && c != KeyEvent.VK_BACKSPACE){ 
+        if (!Character.isDigit(c) && c != '.' && c != KeyEvent.VK_BACKSPACE) {
             txtCosto.setEditable(false);
         } else {
             txtCosto.setEditable(true);
         }
 
-
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostoKeyPressed
 
     private void tablaIngredientesDisponiblesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaIngredientesDisponiblesMouseClicked
-        
-        
-
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaIngredientesDisponiblesMouseClicked
@@ -506,11 +509,11 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 Integer.parseInt(tablaIngredientesDisponibles.getValueAt(
                         tablaIngredientesDisponibles.getSelectedRow(), 0)
                         .toString()));
-        
-        if(!ingredientesActuales.contains(ingrediente)){
+
+        if (!ingredientesActuales.contains(ingrediente)) {
             ingredientesActuales.add(ingrediente);
         }
-        
+
         cargarTablaIngredientesActuales();
     }//GEN-LAST:event_btnAgregarActualesActionPerformed
 
@@ -519,67 +522,64 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 Integer.parseInt(tablaIngredientesDisponibles.getValueAt(
                         tablaIngredientesDisponibles.getSelectedRow(), 0)
                         .toString()));
-        
-        
-        
-        if(ingredientesActuales.contains(ingrediente)){
+
+        if (ingredientesActuales.contains(ingrediente)) {
             ingredientesActuales.remove(ingrediente);
         }
-       cargarTablaIngredientesActuales();
+        cargarTablaIngredientesActuales();
     }//GEN-LAST:event_btnDescartarActualesActionPerformed
 
-    
     //Tengo dudas en este actualizar
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         Platillo platillo = new Platillo();
-        switch(cbxTipoProducto.getSelectedIndex()){
+        switch (cbxTipoProducto.getSelectedIndex()) {
             case 0:
-                if(!ingredientesActuales.isEmpty()){
-                     platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
+                if (!ingredientesActuales.isEmpty()) {
+                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
                     platillo.setNombre(txtNombrePlatillo.getText());
-                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                     platillo.setDescripcion(txtDescripcion.getText());
-                     platillo.setIngredientesList(ingredientesActuales);
-                     platillo.setTipoProducto("HOTDOG");
-                     platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-                     platillos.editarPlatillo(platillo);
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setIngredientesList(ingredientesActuales);
+                    platillo.setTipoProducto("HOTDOG");
+                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                    platillos.editarPlatillo(platillo);
                     JOptionPane.showMessageDialog(null, "Se ha actualizado el platillo.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
                 }
                 break;
-                
+
             case 1:
-                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
-                    platillo.setNombre(txtNombrePlatillo.getText());
-                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                    platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setTipoProducto("BEBIDA");
-                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-                    platillo.setIngredientesList(new ArrayList());
-                    platillos.editarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha actualizado la bebida.");
-            break;
-                case 2:
-                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText())); 
-                    platillo.setNombre(txtNombrePlatillo.getText());
-                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                    platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setTipoProducto("EXTRA");
-                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-                    platillo.setIngredientesList(new ArrayList());
-                    platillos.registrarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha actualizado el extra.");
-                    platillos.editarPlatillo(platillo);
-                    break;        
+                platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+                platillo.setNombre(txtNombrePlatillo.getText());
+                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                platillo.setDescripcion(txtDescripcion.getText());
+                platillo.setTipoProducto("BEBIDA");
+                platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                platillo.setIngredientesList(new ArrayList());
+                platillos.editarPlatillo(platillo);
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la bebida.");
+                break;
+            case 2:
+                platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+                platillo.setNombre(txtNombrePlatillo.getText());
+                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                platillo.setDescripcion(txtDescripcion.getText());
+                platillo.setTipoProducto("EXTRA");
+                platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                platillo.setIngredientesList(new ArrayList());
+                platillos.registrarPlatillo(platillo);
+                JOptionPane.showMessageDialog(null, "Se ha actualizado el extra.");
+                platillos.editarPlatillo(platillo);
+                break;
         }
         limpiar();
         cargarTablaPlatillos();
-        
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       
+
         platillos.eliminarPlatillo(Integer.parseInt(txtIdPlatillo.getText()));
         cargarTablaPlatillos();
         limpiar();
@@ -590,24 +590,24 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        adminMenu = new FmAdminMenu();
-        adminMenu.setVisible(true);
+//        adminMenu = new FmAdminMenu(usuarioActual);
+//        adminMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void cargarTablaPlatillos(){
+    private void cargarTablaPlatillos() {
         tablaPlatillos.setModel(platillosTableModel(platillos.consultarPlatillos()));
     }
-    
-    private void cargarTablaIngredientesDisponibles(){
+
+    private void cargarTablaIngredientesDisponibles() {
         tablaIngredientesDisponibles.setModel(ingredientesTableModel(ingredientes.consultarIngredientes()));
     }
-    
-    private void cargarTablaIngredientesActuales(){
+
+    private void cargarTablaIngredientesActuales() {
         tablaIngredientesActuales.setModel(ingredientesTableModel(ingredientesActuales));
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         txtCosto.setText("");
         txtDescripcion.setText("");
         txtIdPlatillo.setText("");
@@ -615,8 +615,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         ingredientesActuales.clear();
         cargarTablaIngredientesActuales();
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -652,7 +651,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         });
     }
 
-     @Override
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
