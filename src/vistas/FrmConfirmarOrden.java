@@ -23,30 +23,45 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     private List<Platillo> platillos;
     private FachadaLogica fachadaLogica;
     private PanelOrden panelOrden;
-    
+
     public FrmConfirmarOrden(List<Platillo> platillos, PanelOrden panelOrden) {
         initComponents();
-        this.platillos= platillos;
+        this.platillos = platillos;
         fachadaLogica = new FachadaLogica();
         this.panelOrden = panelOrden;
         mostrarPlatillos();
     }
 
-    private void mostrarPlatillos(){
+    private void mostrarPlatillos() {
         float total = 0;
         this.setLocationRelativeTo(null);
         setResizable(false);
         pack();
         for (Platillo platillo : platillos) {
-            txtPlatillos.append(platillo.toString() + "\n");
-            total+=platillo.getCosto();
+            if(platillo.getTipoProducto().equalsIgnoreCase("HOTDOG")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
         }
-        
+        for (Platillo platillo : platillos) {
+            if(platillo.getTipoProducto().equalsIgnoreCase("EXTRA")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
+            
+        }
+        for (Platillo platillo : platillos) {
+            if(platillo.getTipoProducto().equalsIgnoreCase("BEBIDA")){
+                txtPlatillos.append(platillo.toString() + "\n");
+                total += platillo.getCosto();
+            }
+        }
+
         txtPlatillos.append("-------------------------"
-                + "\nTotal              $"+total);
-        
+                + "\nTotal              $" + total);
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,11 +127,18 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+
+        try {
             fachadaLogica.guardarOrden((ArrayList<Platillo>) platillos);
             JOptionPane.showMessageDialog(this, "Orden guardada", "Confirmación", JOptionPane.PLAIN_MESSAGE);
             panelOrden.clearPlatillos();
             panelOrden.setLastOrdenId();
-            this.dispose();
+            panelOrden.getLabelTotal().setText("Total: ");
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos", "Advertencia", JOptionPane.PLAIN_MESSAGE);
+        }
+
+        this.dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -127,7 +149,6 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
-
         return retValue;
     }
 

@@ -23,11 +23,11 @@ import java.util.List;
  */
 public class TomarOrden {
 
-    String notasOrden;
-    OrdenJpaController COrden;
-    UsuariosJpaController CUsuarios;
-    PlatilloJpaController cPlatillo;
-    ArrayList<Platillo> platillos;
+    private String notasOrden;
+    private OrdenJpaController COrden;
+    private UsuariosJpaController CUsuarios;
+    private PlatilloJpaController cPlatillo;
+    private ArrayList<Platillo> platillos;
 
     public TomarOrden(ArrayList<Platillo> platillos) {
         COrden = new OrdenJpaController();
@@ -60,7 +60,6 @@ public class TomarOrden {
 
     public void guardarOrdenHasPlatillos2(Orden orden, OrdenHasPlatillo ordenHasPlatillos, List<OrdenHasPlatillo> ordHasList) {
         OrdenHasPlatilloJpaController cOrdenHasPlatillo = new OrdenHasPlatilloJpaController();
-        ordenHasPlatillos.setCantidad(1);
         ordenHasPlatillos.setOrden(orden);
         orden.setOrdenHasPlatilloList(ordHasList);
 
@@ -83,6 +82,8 @@ public class TomarOrden {
                 if (platillo.getNombre().equalsIgnoreCase(platillosBD.get(i).getNombre())) {
                     OrdenHasPlatillo ordenHasPlatillos = new OrdenHasPlatillo();
                     ordenHasPlatillos.setPlatillo(platillosBD.get(i));
+                    ordenHasPlatillos.setCantidad(platillo.getCantidad());
+                    //ordenHasPlatillos.getPlatillo().setCantidad(platillo.getCantidad());
                     platillos2.add(ordenHasPlatillos);
                     ordenHasPlatillos.setPrecio(platillo.getCosto());
                     ordenHasPlatillos.setNotas(platillo.toString());

@@ -6,17 +6,14 @@
 package vistas;
 
 import Entidades.Platillo;
-import paneles.DetalleOrden;
 import paneles.PnlMenu;
-import paneles.PnlPersonalizar;
-import paneles.PnlProductos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JToggleButton;
 import paneles.codigo.PanelOrden;
-import paneles.codigo.PnlProductosPrueba;
+import paneles.codigo.PnlProductos;
 //import java.util.ArrayList;
 /**
  *
@@ -28,8 +25,7 @@ public class FmPrincipal extends javax.swing.JFrame {
     private ArrayList<Platillo> platillos;
     private PnlMenu menu;
     private PanelOrden ticket;
-    private PnlProductosPrueba productos;
-    private PnlPersonalizar personalizar;
+    private PnlProductos productos;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
 
@@ -42,21 +38,18 @@ public class FmPrincipal extends javax.swing.JFrame {
         this.setTitle("Tomar orden");
         notasOrden = "";
         platillos = new ArrayList<>();
-
         tamPantalla();
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos= new PnlProductosPrueba(this, new Point(ticket.getWidth(), menu.getHeight()));
-        this.personalizar= new PnlPersonalizar(this);
+        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
         initPantalla();
         setPanelProductos();
-        
+
     }
 
     public final void tamPantalla(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
        
-
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
         this.setSize(width, height);
@@ -70,12 +63,22 @@ public class FmPrincipal extends javax.swing.JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
     }
-    
-    
-     public void setPanelProductos(){
-         JToggleButton menu = this.menu.getSelected();
-        
-        switch (menu.getText()){
+
+    public void setPanelProductos() {
+        JToggleButton menu = this.menu.getSelected();
+
+        if (productos.getPnlPersonalizar().isVisible()) {
+            if (validarCambiarPantalla()) {
+                setTipoProducto(menu);
+            }
+        } else {
+            setTipoProducto(menu);
+        }
+
+    }
+
+    public void setTipoProducto(JToggleButton menu) {
+        switch (menu.getText()) {
             case "HotDogs":
                 productos.cargarHotdogs();
                 break;
@@ -86,20 +89,25 @@ public class FmPrincipal extends javax.swing.JFrame {
                 productos.cargarExtras();
                 break;
         }
-                
+
     }
-     
-     
-     public PanelOrden getPanelOrden(){
-         return ticket;
-     }
-     
-     public PnlProductosPrueba getPanelProductos(){
-         return productos;
-     }
-     
-     
-    
+
+    public Boolean validarCambiarPantalla() {
+        return productos.getPnlPersonalizar().confirmarSalida();
+
+    }
+
+    public PanelOrden getPanelOrden() {
+        return ticket;
+    }
+
+    public PnlProductos getPanelProductos() {
+        return productos;
+    }
+
+    public PnlMenu getPanelMenu() {
+        return this.menu;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,7 +151,7 @@ public class FmPrincipal extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;

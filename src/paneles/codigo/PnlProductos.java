@@ -24,7 +24,7 @@ import vistas.FmPrincipal;
  *
  * @author Zannie
  */
-public class PnlProductosPrueba extends JPanel {
+public class PnlProductos extends JPanel {
 
     private FmPrincipal tomarOrden;
     private FachadaLogica fachadaLogica;
@@ -33,23 +33,33 @@ public class PnlProductosPrueba extends JPanel {
     private javax.swing.JPanel jPanelOrden;
     private Dimension sizePrincipal;
     private Dimension minSize;
-    private PnlPersonalizarPrueba personalizar;
+    private PnlPersonalizar personalizar;
     private final Color cafecito = new java.awt.Color(226, 207, 169);
     private final Color cremita = new java.awt.Color(254, 244, 222);
 
-    public PnlProductosPrueba(FmPrincipal fmPrincipal, Point location) {
+    public PnlProductos(FmPrincipal fmPrincipal, Point location) {
 
         this.jPanelOrden = new javax.swing.JPanel();
         this.tomarOrden = fmPrincipal;
         this.fachadaLogica = new FachadaLogica();
-        this.personalizar = new PnlPersonalizarPrueba(tomarOrden, location, this);
+        this.personalizar = new PnlPersonalizar(tomarOrden, location, this);
         this.add(personalizar);
         personalizar.setVisible(false);
         botonesProductos = new ArrayList();
-        this.platillos = fachadaLogica.consultarPlatillos();
+        this.platillos = getPlatillos();
         this.sizePrincipal = new Dimension((this.tomarOrden.getWidth() / 3) * 2, (this.tomarOrden.getHeight() / 10) * 8);
         this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight() / 4) * 3 + 20);
         initPanel(location);
+
+    }
+
+    public List getPlatillos() {
+        try {
+            return fachadaLogica.consultarPlatillos();
+        } catch(Exception e){
+            System.out.println("Error al conectar con la BD");
+        }
+        return null;
 
     }
 
@@ -66,16 +76,15 @@ public class PnlProductosPrueba extends JPanel {
     }
 
     public Platillo getPlatillo(String nombre) {
-        this.platillos = fachadaLogica.consultarPlatillos();
+        this.platillos = getPlatillos();
         for (Platillo platillo : platillos) {
             if (platillo.getNombre().equalsIgnoreCase(nombre)) {
-                return platillo;
+               return platillo;
             }
         }
         return null;
     }
     
-  
 
     public void cargarBebidas() {
         ArrayList<Platillo> productos = getProductos("bebida");
@@ -165,13 +174,12 @@ public class PnlProductosPrueba extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
                 boolean selected = abstractButton.getModel().isSelected();
-                if(tipoPlatillo.equalsIgnoreCase("hotdog")){
-                jPanelOrden.setVisible(false);
-                personalizar.setVisible(true);
-                personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
-                }else{
-                    Platillo platillo = getPlatillo(boton.getText());
-                     tomarOrden.getPanelOrden().addPlatillo(platillo);
+                if (tipoPlatillo.equalsIgnoreCase("hotdog")) {
+                    jPanelOrden.setVisible(false);
+                    personalizar.setVisible(true);
+                    personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
+                } else {
+                    tomarOrden.getPanelOrden().addPlatillo(getPlatillo(boton.getText()));
                 }
                 boton.setSelected(false);
             }
@@ -184,8 +192,8 @@ public class PnlProductosPrueba extends JPanel {
     public javax.swing.JPanel getPanelOrden() {
         return jPanelOrden;
     }
-    
-    public PnlPersonalizarPrueba getPnlPersonalizar(){
+
+    public PnlPersonalizar getPnlPersonalizar() {
         return personalizar;
     }
 
