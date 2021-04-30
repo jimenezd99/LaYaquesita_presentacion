@@ -33,11 +33,23 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     FachadaIngredientes ingredientes = new FachadaIngredientes();
     FmAdminMenu adminMenu;
     List<Ingredientes> ingredientesActuales = new ArrayList(); 
+    Usuarios usuarioActual;
     /**
      * Creates new form FmAdminPlatillos
      */
     public FmAdminPlatillos() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+        setIconBotones();
+        cargarTablaPlatillos();
+        cargarTablaIngredientesActuales();
+        cargarTablaIngredientesDisponibles();
+    }
+    
+     public FmAdminPlatillos(Usuarios usuarioActual) {
+        initComponents();
+        this.usuarioActual = usuarioActual;
         this.setLocationRelativeTo(null);
         tamPantalla();
         setIconBotones();

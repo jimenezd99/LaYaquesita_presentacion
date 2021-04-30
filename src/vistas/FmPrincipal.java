@@ -6,6 +6,7 @@
 package vistas;
 
 import Entidades.Platillo;
+import Entidades.Usuarios;
 import paneles.PnlMenu;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -15,6 +16,7 @@ import javax.swing.JToggleButton;
 import paneles.codigo.PanelOrden;
 import paneles.codigo.PnlProductos;
 //import java.util.ArrayList;
+
 /**
  *
  * @author Jbran
@@ -28,6 +30,7 @@ public class FmPrincipal extends javax.swing.JFrame {
     private PnlProductos productos;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
+    private Usuarios usuarioActual;
 
     /**
      * Creates new form NewJFrame
@@ -47,15 +50,32 @@ public class FmPrincipal extends javax.swing.JFrame {
 
     }
 
-    public final void tamPantalla(){
+    public FmPrincipal(Usuarios usuarioActual) {
+
+        initComponents();
+        this.setTitle("Tomar orden");
+        notasOrden = "";
+        platillos = new ArrayList<>();
+        this.usuarioActual = usuarioActual;
+        tamPantalla();
+        this.ticket = new PanelOrden(this);
+        this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
+        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        initPantalla();
+        setPanelProductos();
+
+    }
+
+    public final void tamPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-       
+
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
         this.setSize(width, height);
         setResizable(false);
         pack();
     }
+
     public void initPantalla() {
         this.add(menu);
         this.add(ticket);

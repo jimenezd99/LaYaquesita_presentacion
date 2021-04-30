@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import Entidades.Usuarios;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -23,6 +24,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     FmAdminUsuarios usuarios;
     FmAdminIngredientes ingredientes;
     FmLogin login;
+    Usuarios usuarioActual;
 
     public FmAdminMenu() {
         initComponents();
@@ -34,6 +36,20 @@ public class FmAdminMenu extends javax.swing.JFrame {
         principal = new FmPrincipal();
         usuarios = new FmAdminUsuarios();
         ingredientes = new FmAdminIngredientes();
+        login = new FmLogin();
+    }
+    
+  public FmAdminMenu(Usuarios usuario) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+//        localizarBtn();
+        setIconBotones();
+        platillos = new FmAdminPlatillos(usuarioActual);
+        usuarioActual = usuario;
+        principal = new FmPrincipal(usuarioActual);
+        usuarios = new FmAdminUsuarios(usuarioActual);
+        ingredientes = new FmAdminIngredientes(usuarioActual);
         login = new FmLogin();
     }
 
@@ -55,7 +71,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         btnAdminIngredientes.setIcon(setIcono("/images/ingrediente.png", btnAdminIngredientes));
         btnAdminPlatillo.setIcon(setIcono("/images/icon.png", btnAdminPlatillo));
         btnTomarOrden.setIcon(setIcono("/images/orden.png", btnTomarOrden));
-        btnCerrarSesion.setIcon(setIcono("/images/flecha_izquierda.png", btnCerrarSesion));
+        btnCerrarSesion.setIcon(setIcono("/images/salir.png", btnCerrarSesion));
         btnAdminUsuarios.setIcon(setIcono("/images/usuario.png", btnAdminUsuarios));
 
     }

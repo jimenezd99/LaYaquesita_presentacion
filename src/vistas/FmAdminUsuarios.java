@@ -11,6 +11,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,10 +21,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Jbran
  */
 public class FmAdminUsuarios extends javax.swing.JFrame {
-    
+
     DefaultTableModel modelo;
     FmAdminMenu adminMenu;
     FachadaUsuarios usuarios = new FachadaUsuarios();
+    Usuarios usuarioActual;
+
+    public FmAdminUsuarios(Usuarios usuarioActual) {
+        initComponents();
+        this.usuarioActual = usuarioActual;
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+        setIconBotones();
+        cargarTabla();
+    }
+
     public FmAdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,22 +43,41 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         cargarTabla();
     }
 
-    public void tamPantalla(){
+    public final void setIconBotones() {
+        btnCancelar.setSize(28, 28);
+        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
+        btnCancelar.setText("");
+//        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
+//        btnDescartarActuales.setText("");
+
+    }
+
+    public Icon setIcono(String url, JButton boton) {
+
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = (boton.getWidth());
+        int largo = (boton.getHeight());
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
+    }
+
+    public void tamPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
-        this.setSize(width, height); 
+        this.setSize(width, height);
         pack();
     }
 
-    private DefaultTableModel usuariosTableModel(List<Usuarios> lstUsuarios){
+    private DefaultTableModel usuariosTableModel(List<Usuarios> lstUsuarios) {
         Object tabla[][];
         String[] nombreCols = {"ID", "Nombre", "Puesto"};
-        if(lstUsuarios != null){
-            DefaultTableModel modelo = new DefaultTableModel(){
+        if (lstUsuarios != null) {
+            DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
-                public boolean isCellEditable(int row, int column){
+                public boolean isCellEditable(int row, int column) {
                     return false;
                 }
             };
@@ -60,11 +93,11 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    private void cargarTabla(){
+
+    private void cargarTabla() {
         tablaUsuarios.setModel(usuariosTableModel(usuarios.consultarUsuarios()));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -222,51 +255,49 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
-        
-        
+
         txtIdUsuario.setText(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0).toString());
         txtNombre.setText(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
-        txtContrasena.setText(usuarios.consultarUsuarioId(Integer.parseInt(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(),0).toString())).getContraseña());
-        
-        if(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 2).toString().equalsIgnoreCase("CAJERO")){
+        txtContrasena.setText(usuarios.consultarUsuarioId(Integer.parseInt(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 0).toString())).getContraseña());
+
+        if (tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 2).toString().equalsIgnoreCase("CAJERO")) {
             cbxPuesto.setSelectedIndex(0);
         } else {
             cbxPuesto.setSelectedIndex(1);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
+
         Usuarios usuario = new Usuarios();
         usuario.setNombre(txtNombre.getText());
         usuario.setContraseña(txtContrasena.getText());
         usuario.setPuesto(cbxPuesto.getSelectedItem().toString());
-        
+
         usuarios.registrarUsuario(usuario);
         cargarTabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        usuarios.eliminarUsuario(Integer.parseInt(txtIdUsuario.getText())); 
+        usuarios.eliminarUsuario(Integer.parseInt(txtIdUsuario.getText()));
         cargarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       
+
         Usuarios usuario = new Usuarios();
         usuario.setIdusuario(Integer.parseInt(txtIdUsuario.getText()));
         usuario.setNombre(txtNombre.getText());
         usuario.setContraseña(txtContrasena.getText());
         usuario.setPuesto(cbxPuesto.getSelectedItem().toString());
         usuario.setOrdenList(usuarios.consultarUsuarioId(Integer.parseInt(txtIdUsuario.getText())).getOrdenList());
-        
+
         usuarios.editarUsuario(usuario);
         cargarTabla();
-        
-        
+
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -282,7 +313,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
 
         return retValue;
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

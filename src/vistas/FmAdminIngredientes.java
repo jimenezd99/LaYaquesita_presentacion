@@ -7,12 +7,16 @@ package vistas;
 
 import Entidades.Ingredientes;
 import Entidades.Platillo;
+import Entidades.Usuarios;
 import fachadaLogica.FachadaIngredientes;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,14 +29,42 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     DefaultTableModel modelo;
     FachadaIngredientes ingredientes = new FachadaIngredientes();
 
+    Usuarios usuarioActual;
+
     /**
      * Creates new form FmAdminIngredientes
      */
+    public FmAdminIngredientes(Usuarios usuarioActual) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.usuarioActual = usuarioActual;
+        tamPantalla();
+        setIconBotones();
+        cargarTabla();
+    }
+    
     public FmAdminIngredientes() {
         initComponents();
         setLocationRelativeTo(null);
         tamPantalla();
         cargarTabla();
+    }
+    
+     public final void setIconBotones() {
+        btnCancelar.setSize(28, 28);
+        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
+        btnCancelar.setText("");
+
+    }
+
+    public Icon setIcono(String url, JButton boton) {
+
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = (boton.getWidth());
+        int largo = (boton.getHeight());
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
     }
     
     public final void tamPantalla(){
