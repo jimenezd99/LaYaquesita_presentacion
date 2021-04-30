@@ -138,7 +138,7 @@ public class FmLogin extends javax.swing.JFrame {
         lblError.setText("El usuario y/o contraseña ingresados son incorrectos.");
         pnlCremita.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, 30));
         pnlCremita.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 210, -1));
-        pnlCremita.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 60, 50));
+        pnlCremita.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 60, 50));
 
         pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 310));
 

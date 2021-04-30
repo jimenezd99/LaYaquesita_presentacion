@@ -36,10 +36,11 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         cargarTabla();
     }
 
-    public FmAdminUsuarios() {
+    private FmAdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
         tamPantalla();
+        setIconBotones();
         cargarTabla();
     }
 
@@ -50,16 +51,6 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
 //        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
 //        btnDescartarActuales.setText("");
 
-    }
-
-    public Icon setIcono(String url, JButton boton) {
-
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = (boton.getWidth());
-        int largo = (boton.getHeight());
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
-
-        return icono;
     }
 
     public void tamPantalla() {
@@ -239,17 +230,17 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         });
         pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
 
-        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
+        btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
-        btnCancelar.setText("Regresar");
+        btnCancelar.setFocusable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 480));
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -301,8 +292,8 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        adminMenu = new FmAdminMenu();
-        adminMenu.setVisible(true);
+//        adminMenu = new FmAdminMenu(usuarioActual);
+//        adminMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -344,6 +335,16 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
                 new FmAdminUsuarios().setVisible(true);
             }
         });
+    }
+
+    public Icon setIcono(String url, JButton boton) {
+
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = (boton.getWidth());
+        int largo = (boton.getHeight());
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

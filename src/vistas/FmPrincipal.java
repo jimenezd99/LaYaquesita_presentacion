@@ -16,7 +16,6 @@ import javax.swing.JToggleButton;
 import paneles.codigo.PanelOrden;
 import paneles.codigo.PnlProductos;
 //import java.util.ArrayList;
-
 /**
  *
  * @author Jbran
@@ -26,48 +25,48 @@ public class FmPrincipal extends javax.swing.JFrame {
     private String notasOrden;
     private ArrayList<Platillo> platillos;
     private PnlMenu menu;
+    private Usuarios usuarioActual;
     private PanelOrden ticket;
     private PnlProductos productos;
     private Toolkit tk = Toolkit.getDefaultToolkit();
     private Dimension tam = tk.getScreenSize();
-    private Usuarios usuarioActual;
 
     /**
      * Creates new form NewJFrame
      */
-    public FmPrincipal() {
-
-        initComponents();
-        this.setTitle("Tomar orden");
-        notasOrden = "";
-        platillos = new ArrayList<>();
-        tamPantalla();
-        this.ticket = new PanelOrden(this);
-        this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
-        initPantalla();
-        setPanelProductos();
-
-    }
-
     public FmPrincipal(Usuarios usuarioActual) {
 
         initComponents();
         this.setTitle("Tomar orden");
         notasOrden = "";
         platillos = new ArrayList<>();
-        this.usuarioActual = usuarioActual;
+        this.usuarioActual=usuarioActual;
         tamPantalla();
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
-        this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
         initPantalla();
         setPanelProductos();
-
+        
     }
 
-    public final void tamPantalla() {
+    private FmPrincipal() {
+        initComponents();
+        this.setTitle("Tomar orden");
+        notasOrden = "";
+        platillos = new ArrayList<>();
+//        this.usuarioActual=new F;
+        tamPantalla();
+        this.ticket = new PanelOrden(this);
+        this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
+        this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
+        initPantalla();
+        setPanelProductos();
+    }
+
+    public final void tamPantalla(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+       
 
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
@@ -75,7 +74,6 @@ public class FmPrincipal extends javax.swing.JFrame {
         setResizable(false);
         pack();
     }
-
     public void initPantalla() {
         this.add(menu);
         this.add(ticket);
@@ -83,22 +81,12 @@ public class FmPrincipal extends javax.swing.JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
     }
-
-    public void setPanelProductos() {
-        JToggleButton menu = this.menu.getSelected();
-
-        if (productos.getPnlPersonalizar().isVisible()) {
-            if (validarCambiarPantalla()) {
-                setTipoProducto(menu);
-            }
-        } else {
-            setTipoProducto(menu);
-        }
-
-    }
-
-    public void setTipoProducto(JToggleButton menu) {
-        switch (menu.getText()) {
+    
+    
+     public void setPanelProductos(){
+         JToggleButton menu = this.menu.getSelected();
+        
+        switch (menu.getText()){
             case "HotDogs":
                 productos.cargarHotdogs();
                 break;
@@ -109,25 +97,20 @@ public class FmPrincipal extends javax.swing.JFrame {
                 productos.cargarExtras();
                 break;
         }
-
+                
     }
-
-    public Boolean validarCambiarPantalla() {
-        return productos.getPnlPersonalizar().confirmarSalida();
-
-    }
-
-    public PanelOrden getPanelOrden() {
-        return ticket;
-    }
-
-    public PnlProductos getPanelProductos() {
-        return productos;
-    }
-
-    public PnlMenu getPanelMenu() {
-        return this.menu;
-    }
+     
+     
+     public PanelOrden getPanelOrden(){
+         return ticket;
+     }
+     
+     public PnlProductos getPanelProductos(){
+         return productos;
+     }
+     
+     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,7 +154,7 @@ public class FmPrincipal extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -195,6 +178,9 @@ public class FmPrincipal extends javax.swing.JFrame {
                 new FmPrincipal().setVisible(true);
             }
         });
+    }
+    public Usuarios getUsuarioActual() {
+        return usuarioActual;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

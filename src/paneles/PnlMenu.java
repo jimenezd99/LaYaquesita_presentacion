@@ -5,9 +5,14 @@
  */
 package paneles;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JToggleButton;
+import vistas.FmLogin;
 import vistas.FmPrincipal;
 
 /**
@@ -18,7 +23,6 @@ public class PnlMenu extends javax.swing.JPanel {
 
     private FmPrincipal tomarOrden;
     private ArrayList<JToggleButton> botonesMenu;
- 
 
     /**
      * Creates new form PnlMenu
@@ -26,17 +30,16 @@ public class PnlMenu extends javax.swing.JPanel {
     public PnlMenu(FmPrincipal fmPrincipal, Point location) {
         initComponents();
         tomarOrden = fmPrincipal;
-       
+
         //setLayout(new GroupLayout(this));
         this.setSize(1360, 216);
         this.setLocation(location);
         botonesMenu = new ArrayList();
         llenarBotonesMenu();
         tbtnHotdogs.setSelected(true);
+        setIconBotones();
 
     }
-
- 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +51,7 @@ public class PnlMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         jpMenu = new javax.swing.JPanel();
+        btnCancelar = new javax.swing.JButton();
         tbtnExtras = new javax.swing.JToggleButton();
         tbtnBebidas = new javax.swing.JToggleButton();
         tbtnHotdogs = new javax.swing.JToggleButton();
@@ -55,12 +59,20 @@ public class PnlMenu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(226, 207, 169));
         setAlignmentX(1.0F);
-        setMinimumSize(null);
         setPreferredSize(new java.awt.Dimension(1360, 200));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpMenu.setBackground(new java.awt.Color(254, 244, 222));
         jpMenu.setPreferredSize(new java.awt.Dimension(1340, 200));
+
+        btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
+        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setFocusable(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         tbtnExtras.setBackground(new java.awt.Color(198, 60, 31));
         tbtnExtras.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -106,22 +118,26 @@ public class PnlMenu extends javax.swing.JPanel {
         jpMenuLayout.setHorizontalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpMenuLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(tbtnHotdogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(tbtnBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(tbtnExtras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jsMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpMenuLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(tbtnHotdogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
+                                .addComponent(tbtnBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(tbtnExtras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jsMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnCancelar))
                 .addContainerGap())
         );
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbtnHotdogs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbtnBebidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,6 +149,25 @@ public class PnlMenu extends javax.swing.JPanel {
 
         add(jpMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 190));
     }// </editor-fold>//GEN-END:initComponents
+
+    public final void setIconBotones() {
+        btnCancelar.setSize(28, 28);
+        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
+        btnCancelar.setText("");
+//        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
+//        btnDescartarActuales.setText("");
+
+    }
+
+    public Icon setIcono(String url, JButton boton) {
+
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = (int) (boton.getWidth());
+        int largo = (int) (boton.getHeight());
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
+    }
 
     private void tbtnHotdogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtnHotdogsActionPerformed
         tbtnHotdogs.setSelected(true);
@@ -156,6 +191,15 @@ public class PnlMenu extends javax.swing.JPanel {
         tomarOrden.setPanelProductos();
     }//GEN-LAST:event_tbtnExtrasActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+        if (this.tomarOrden.getUsuarioActual().getPuesto().equalsIgnoreCase("cajero")) {
+            FmLogin login = new FmLogin();
+            login.setVisible(true);
+        }
+        tomarOrden.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     public void llenarBotonesMenu() {
         botonesMenu.add(tbtnHotdogs);
         botonesMenu.add(tbtnExtras);
@@ -172,6 +216,7 @@ public class PnlMenu extends javax.swing.JPanel {
         return null;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jpMenu;
     private javax.swing.JSeparator jsMenu;
     private javax.swing.JToggleButton tbtnBebidas;

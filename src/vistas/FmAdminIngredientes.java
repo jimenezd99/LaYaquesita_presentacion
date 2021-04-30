@@ -28,7 +28,6 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     FmAdminMenu adminMenu;
     DefaultTableModel modelo;
     FachadaIngredientes ingredientes = new FachadaIngredientes();
-
     Usuarios usuarioActual;
 
     /**
@@ -42,15 +41,25 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         setIconBotones();
         cargarTabla();
     }
-    
-    public FmAdminIngredientes() {
+
+    private FmAdminIngredientes() {
         initComponents();
         setLocationRelativeTo(null);
         tamPantalla();
+        setIconBotones();
         cargarTabla();
     }
-    
-     public final void setIconBotones() {
+
+    public final void tamPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
+        setResizable(false);
+        pack();
+    }
+
+    public final void setIconBotones() {
         btnCancelar.setSize(28, 28);
         btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
         btnCancelar.setText("");
@@ -65,15 +74,6 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;
-    }
-    
-    public final void tamPantalla(){
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        this.setSize(width, height);
-        setResizable(false);
-        pack();
     }
 
     private DefaultTableModel ingredientesTableModel(List<Ingredientes> lstIngredientes) {
@@ -128,11 +128,11 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         panelTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngredientes = new javax.swing.JTable();
-        btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txtAbreviacion = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrar ingredientes");
@@ -143,24 +143,35 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(245, 133, 25));
         lblTitulo.setText("Administrar Ingredientes");
         pnlCafecito.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
+        lblId.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        lblId.setForeground(new java.awt.Color(91, 52, 46));
         lblId.setText("ID ");
         pnlCafecito.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 50, 30));
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 90, 180, -1));
 
+        lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(91, 52, 46));
         lblNombre.setText("Nombre");
         pnlCafecito.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        txtNombre.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 164, 180, -1));
 
+        lblAbreviacion.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        lblAbreviacion.setForeground(new java.awt.Color(91, 52, 46));
         lblAbreviacion.setText("Abreviación");
         pnlCafecito.add(lblAbreviacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         panelTabla.setBackground(new java.awt.Color(254, 244, 222));
-        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de ingredientes"));
+        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de ingredientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelTabla.setForeground(new java.awt.Color(245, 133, 25));
         panelTabla.setToolTipText("");
         panelTabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -185,16 +196,6 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         panelTabla.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 401, 293));
 
         pnlCafecito.add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(411, 90, 420, 320));
-
-        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
-        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
-        btnCancelar.setText("Regresar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 412, -1, -1));
 
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setForeground(new java.awt.Color(91, 52, 46));
@@ -225,7 +226,19 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
             }
         });
         pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 412, -1, -1));
+
+        txtAbreviacion.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtAbreviacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 253, 180, -1));
+
+        btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
+        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setFocusable(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 450));
 
@@ -239,12 +252,6 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         txtAbreviacion.setText(tablaIngredientes.getValueAt(tablaIngredientes.getSelectedRow(), 2).toString());
 
     }//GEN-LAST:event_tablaIngredientesMouseClicked
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        adminMenu = new FmAdminMenu();
-        adminMenu.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         ingredientes.eliminarIngrediente(Integer.parseInt(txtId.getText()));
@@ -276,6 +283,12 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         cargarTabla();
         limpiarCampos();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+//        adminMenu = new FmAdminMenu(usuarioActual);
+//        adminMenu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,7 +325,6 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         });
     }
 
-    
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
@@ -320,7 +332,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
 
         return retValue;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;

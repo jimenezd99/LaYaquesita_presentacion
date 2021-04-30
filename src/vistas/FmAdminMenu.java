@@ -7,6 +7,7 @@ package vistas;
 
 import Entidades.Usuarios;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.Icon;
@@ -22,24 +23,13 @@ public class FmAdminMenu extends javax.swing.JFrame {
     FmAdminPlatillos platillos;
     FmPrincipal principal;
     FmAdminUsuarios usuarios;
+    Usuarios usuarioActual;
     FmAdminIngredientes ingredientes;
     FmLogin login;
-    Usuarios usuarioActual;
+    private Dimension sizePrincipal;
+    private Dimension minSize;
 
-    public FmAdminMenu() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        tamPantalla();
-//        localizarBtn();
-        setIconBotones();
-        platillos = new FmAdminPlatillos();
-        principal = new FmPrincipal();
-        usuarios = new FmAdminUsuarios();
-        ingredientes = new FmAdminIngredientes();
-        login = new FmLogin();
-    }
-    
-  public FmAdminMenu(Usuarios usuario) {
+    public FmAdminMenu(Usuarios usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
         tamPantalla();
@@ -53,27 +43,47 @@ public class FmAdminMenu extends javax.swing.JFrame {
         login = new FmLogin();
     }
 
-    public  final void tamPantalla() {
+    private FmAdminMenu() {
+         initComponents();
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+//        localizarBtn();
+        setIconBotones();
+        platillos = new FmAdminPlatillos(usuarioActual);
+        principal = new FmPrincipal(usuarioActual);
+        usuarios = new FmAdminUsuarios(usuarioActual);
+        ingredientes = new FmAdminIngredientes(usuarioActual);
+        login = new FmLogin();
+    }
+
+    public final void tamPantalla() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        
 
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
         this.setSize(width, height);
-        
-        this.pnlCafecito.setSize(getSize());
-        this.pnlCafecito.setPreferredSize(getSize());
-        this.pnlCremita.setSize((this.pnlCafecito.getWidth()/10)*8, (this.pnlCafecito.getHeight()/10)*8);
+        this.sizePrincipal = screenSize;
+        this.minSize = new Dimension((int) this.sizePrincipal.getWidth() - 20, (int) (this.sizePrincipal.getHeight() / 4) * 3 + 20);
+//        this.pnlCafecito.setSize(sizePrincipal);
+//        this.pnlCafecito.setPreferredSize(sizePrincipal);
+//        this.pnlCremita.setSize(sizePrincipal);
+//        this.pnlCremita.setPreferredSize(sizePrincipal);
+//        this.pnlCremita();//0-eltamaño del frame
+        this.pnlCremita.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
+//        setResizable(false);
         pack();
     }
 
     public final void setIconBotones() {
         btnAdminIngredientes.setIcon(setIcono("/images/ingrediente.png", btnAdminIngredientes));
+        btnAdminIngredientes.setText("<html><p>Administrar ingredientes</p></html>");
         btnAdminPlatillo.setIcon(setIcono("/images/icon.png", btnAdminPlatillo));
+        btnAdminPlatillo.setText("<html><p>Administrar platillos</p></html>");
         btnTomarOrden.setIcon(setIcono("/images/orden.png", btnTomarOrden));
+        btnTomarOrden.setText("<html><p>Tomar orden</p></html>");
         btnCerrarSesion.setIcon(setIcono("/images/salir.png", btnCerrarSesion));
         btnAdminUsuarios.setIcon(setIcono("/images/usuario.png", btnAdminUsuarios));
-
+        btnAdminUsuarios.setText("<html><p>Administrar usuarios</p></html>");
     }
 
     public void localizarBtn() {
@@ -111,6 +121,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         pnlCremita.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblMenuAdministrador.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        lblMenuAdministrador.setForeground(new java.awt.Color(245, 133, 25));
         lblMenuAdministrador.setText("Menú de administrador");
         pnlCremita.add(lblMenuAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 22, -1, -1));
 
@@ -166,7 +177,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         });
         pnlCremita.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
 
-        pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 610, 490));
+        pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 610, 490));
 
         getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 510));
 
@@ -195,7 +206,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         login.setVisible(true);
-//        dispose();
+        dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     /**
