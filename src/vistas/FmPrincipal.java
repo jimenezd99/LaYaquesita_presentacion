@@ -38,14 +38,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         this.setTitle("Tomar orden");
         notasOrden = "";
         platillos = new ArrayList<>();
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        pack();
-
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        this.setSize(width, height);
-
+        tamPantalla();
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
         this.productos = new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));
@@ -54,6 +47,15 @@ public class FmPrincipal extends javax.swing.JFrame {
 
     }
 
+    public final void tamPantalla(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+       
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
+        setResizable(false);
+        pack();
+    }
     public void initPantalla() {
         this.add(menu);
         this.add(ticket);

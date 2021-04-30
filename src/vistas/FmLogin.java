@@ -7,8 +7,15 @@ package vistas;
 
 import Entidades.Usuarios;
 import fachadaLogica.FachadaUsuarios;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,8 +23,7 @@ import java.util.List;
  */
 public class FmLogin extends javax.swing.JFrame {
 
-    
-     FachadaUsuarios FUsuarios = new FachadaUsuarios();
+    FachadaUsuarios FUsuarios = new FachadaUsuarios();
     List<Usuarios> usuarios = new ArrayList<Usuarios>();
     FmPrincipal principal;
     FmAdminMenu adminMenu;
@@ -28,10 +34,28 @@ public class FmLogin extends javax.swing.JFrame {
     public FmLogin() {
         initComponents();
         usuarios = FUsuarios.consultarUsuarios();
-       
+        this.setLocationRelativeTo(null);
+        tamPantalla();
+        setIconBotones();
         //
         //
         lblError.setVisible(false);
+    }
+    
+    
+    public final void setIconBotones() {
+        lblIcono.setIcon(setIcono("/images/icon.png", lblIcono));
+
+    }
+
+    public void tamPantalla() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height);
+        setResizable(false);
+        pack();
     }
 
     /**
@@ -43,6 +67,9 @@ public class FmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
+        pnlCafecito = new javax.swing.JPanel();
+        pnlCremita = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
@@ -51,86 +78,71 @@ public class FmLogin extends javax.swing.JFrame {
         lblContrasena = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
         txtContrasena = new javax.swing.JPasswordField();
+        lblIcono = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setBackground(new java.awt.Color(226, 207, 169));
+        setIconImage(getIconImage());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlCafecito.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlCremita.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCremita.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo.setBackground(new java.awt.Color(240, 211, 161));
         lblTitulo.setFont(new java.awt.Font("Arial Black", 3, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(245, 133, 25));
         lblTitulo.setText("INGRESAR AL SISTEMA");
+        pnlCremita.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 340, 30));
+        pnlCremita.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 210, -1));
 
+        btnIngresar.setBackground(new java.awt.Color(245, 133, 25));
+        btnIngresar.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnIngresar.setForeground(new java.awt.Color(91, 52, 46));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
             }
         });
+        pnlCremita.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
 
+        btnSalir.setBackground(new java.awt.Color(245, 133, 25));
+        btnSalir.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(91, 52, 46));
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        pnlCremita.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
+        lblUsuario.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        lblUsuario.setForeground(new java.awt.Color(91, 52, 46));
         lblUsuario.setText("Usuario:");
+        pnlCremita.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
+        lblContrasena.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        lblContrasena.setForeground(new java.awt.Color(91, 52, 46));
         lblContrasena.setText("Contraseña:");
+        pnlCremita.add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         lblError.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 102, 102));
         lblError.setText("El usuario y/o contraseña ingresados son incorrectos.");
+        pnlCremita.add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 360, 30));
+        pnlCremita.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 210, -1));
+        pnlCremita.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 60, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(lblUsuario))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(lblContrasena))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnSalir)
-                            .addGap(224, 224, 224)
-                            .addComponent(btnIngresar)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
-                .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(lblUsuario)
-                    .addGap(4, 4, 4)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)
-                    .addComponent(lblContrasena)
-                    .addGap(44, 44, 44)
-                    .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnSalir)
-                        .addComponent(btnIngresar))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 310));
+
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,12 +157,12 @@ public class FmLogin extends javax.swing.JFrame {
                         && txtContrasena.getText().equalsIgnoreCase(usuario.getContraseña())) {
 
                     if (usuario.getPuesto().equalsIgnoreCase("CAJERO")) {
-                        principal = new FmPrincipal();
+                        principal = new FmPrincipal(usuario);
                         principal.setVisible(true);
                         this.dispose();
                         break;
                     } else {
-                        adminMenu = new FmAdminMenu();
+                        adminMenu = new FmAdminMenu(usuario);
                         adminMenu.setVisible(true);
                         this.dispose();
                         break;
@@ -172,6 +184,10 @@ public class FmLogin extends javax.swing.JFrame {
             lblError.setVisible(true);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,13 +224,33 @@ public class FmLogin extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+
+        return retValue;
+    }
+
+    public Icon setIcono(String url, JLabel labelIcon) {
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        int ancho = labelIcon.getWidth();
+        int largo = labelIcon.getHeight();
+        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
+
+        return icono;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblError;
+    private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JPanel pnlCafecito;
+    private javax.swing.JPanel pnlCremita;
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

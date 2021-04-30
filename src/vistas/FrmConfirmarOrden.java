@@ -7,6 +7,8 @@ package vistas;
 
 import Entidades.Platillo;
 import fachadaLogica.FachadaLogica;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -32,6 +34,9 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
 
     private void mostrarPlatillos() {
         float total = 0;
+        this.setLocationRelativeTo(null);
+        setResizable(false);
+        pack();
         for (Platillo platillo : platillos) {
             if(platillo.getTipoProducto().equalsIgnoreCase("HOTDOG")){
                 txtPlatillos.append(platillo.toString() + "\n");
@@ -66,7 +71,7 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlCafecito = new javax.swing.JPanel();
         btnConfirmar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPlatillos = new javax.swing.JTextArea();
@@ -74,8 +79,12 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Confirmar orden");
+        setIconImage(getIconImage());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnConfirmar.setBackground(new java.awt.Color(245, 133, 25));
         btnConfirmar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -86,13 +95,20 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
                 btnConfirmarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 132, 60));
 
+        txtPlatillos.setEditable(false);
         txtPlatillos.setColumns(20);
         txtPlatillos.setRows(5);
+        txtPlatillos.setFocusable(false);
         jScrollPane1.setViewportView(txtPlatillos);
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        pnlCafecito.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 590, 220));
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 133, 25));
         jLabel1.setText("Verifique que la orden sea correcta");
+        pnlCafecito.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 510, -1));
 
         btnRegresar.setBackground(new java.awt.Color(245, 133, 25));
         btnRegresar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -103,52 +119,9 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
+        pnlCafecito.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 128, 60));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 166, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(171, 171, 171))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,13 +145,19 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+@Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+        return retValue;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlCafecito;
     private javax.swing.JTextArea txtPlatillos;
     // End of variables declaration//GEN-END:variables
 }

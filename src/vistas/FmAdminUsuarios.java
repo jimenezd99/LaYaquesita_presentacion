@@ -7,6 +7,9 @@ package vistas;
 
 import Entidades.Usuarios;
 import fachadaLogica.FachadaUsuarios;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +24,19 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     FachadaUsuarios usuarios = new FachadaUsuarios();
     public FmAdminUsuarios() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        tamPantalla();
         cargarTabla();
     }
 
+    public void tamPantalla(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        this.setSize(width, height); 
+        pack();
+    }
 
     private DefaultTableModel usuariosTableModel(List<Usuarios> lstUsuarios){
         Object tabla[][];
@@ -56,14 +69,15 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlCafecito = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panelTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
         txtIdUsuario = new javax.swing.JTextField();
-        txtContrasena = new javax.swing.JPasswordField();
         cbxPuesto = new javax.swing.JComboBox<>();
+        txtContrasena = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -74,13 +88,21 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrar usuarios");
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jLabel1.setText("Administrar Usuarios");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+        pnlCafecito.setBackground(new java.awt.Color(226, 207, 169));
+        pnlCafecito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de usuarios"));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 133, 25));
+        jLabel1.setText("Administrar Usuarios");
+        pnlCafecito.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
+
+        panelTabla.setBackground(new java.awt.Color(254, 244, 222));
+        panelTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
+        panelTabla.setForeground(new java.awt.Color(245, 133, 25));
         panelTabla.setToolTipText("");
 
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,59 +140,83 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 440, 340));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
+        pnlCafecito.add(panelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 440, 340));
+
+        txtNombre.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCafecito.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, -1));
 
         txtIdUsuario.setEditable(false);
-        getContentPane().add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 180, -1));
-        getContentPane().add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 180, -1));
+        txtIdUsuario.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCafecito.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 180, -1));
 
+        cbxPuesto.setBackground(new java.awt.Color(254, 244, 222));
         cbxPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CAJERO", "ADMINISTRADOR" }));
-        getContentPane().add(cbxPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 180, -1));
+        pnlCafecito.add(cbxPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 180, -1));
 
+        txtContrasena.setBackground(new java.awt.Color(254, 244, 222));
+        pnlCafecito.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 180, -1));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(91, 52, 46));
         jLabel2.setText("ID ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 50, 30));
+        pnlCafecito.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 50, 30));
 
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(91, 52, 46));
         jLabel3.setText("Nombre");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        pnlCafecito.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(91, 52, 46));
         jLabel4.setText("Contraseña");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        pnlCafecito.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(91, 52, 46));
         jLabel5.setText("Puesto");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
+        pnlCafecito.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
+        btnGuardar.setBackground(new java.awt.Color(245, 133, 25));
+        btnGuardar.setForeground(new java.awt.Color(91, 52, 46));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
 
+        btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
+        btnActualizar.setForeground(new java.awt.Color(91, 52, 46));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
+        btnEliminar.setForeground(new java.awt.Color(91, 52, 46));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
 
+        btnCancelar.setBackground(new java.awt.Color(245, 133, 25));
+        btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
         btnCancelar.setText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+
+        getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -229,7 +275,13 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+
+        return retValue;
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -276,6 +328,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelTabla;
+    private javax.swing.JPanel pnlCafecito;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtIdUsuario;
