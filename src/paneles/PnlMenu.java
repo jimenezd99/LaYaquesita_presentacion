@@ -67,6 +67,7 @@ public class PnlMenu extends javax.swing.JPanel {
 
         btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setToolTipText("Regresar");
         btnCancelar.setFocusable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +153,7 @@ public class PnlMenu extends javax.swing.JPanel {
 
     public final void setIconBotones() {
         btnCancelar.setSize(28, 28);
-        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
+        btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
         btnCancelar.setText("");
 //        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
 //        btnDescartarActuales.setText("");

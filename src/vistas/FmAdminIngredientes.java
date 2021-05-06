@@ -59,18 +59,31 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         pack();
     }
 
+    
     public final void setIconBotones() {
-        btnCancelar.setSize(28, 28);
-        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
-        btnCancelar.setText("");
-
+        this.limpiarBoton(btnCancelar);
+        this.limpiarBoton(btnEliminar);
+        this.limpiarBoton(btnGuardar);
+        this.limpiarBoton(btnActualizar);
+        btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
+        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
+        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
+        btnEliminar.setIcon(setIcono("/images/limpiar.png", btnEliminar));
+        btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
+    }
+    public void limpiarBoton(JButton boton){
+        boton.setText("");
+        boton.setSize(76, 32);
+        boton.setPreferredSize(boton.getSize());
+        boton.setMaximumSize(boton.getSize());
+        boton.setMinimumSize(boton.getSize());
     }
 
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = (boton.getWidth());
-        int largo = (boton.getHeight());
+        int ancho = (int) (boton.getWidth()/2.5);
+        int largo = (boton.getHeight()/2);
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;
@@ -134,7 +147,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         txtAbreviacion = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrar ingredientes");
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,6 +167,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
 
         txtId.setEditable(false);
         txtId.setBackground(new java.awt.Color(254, 244, 222));
+        txtId.setFocusable(false);
         pnlCafecito.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 90, 180, -1));
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -200,38 +214,42 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setForeground(new java.awt.Color(91, 52, 46));
         btnEliminar.setText("Eliminar");
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 412, -1, -1));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
 
         btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
         btnActualizar.setForeground(new java.awt.Color(91, 52, 46));
         btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 412, -1, -1));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
         btnGuardar.setBackground(new java.awt.Color(245, 133, 25));
         btnGuardar.setForeground(new java.awt.Color(91, 52, 46));
         btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 412, -1, -1));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, -1, -1));
 
         txtAbreviacion.setBackground(new java.awt.Color(254, 244, 222));
         pnlCafecito.add(txtAbreviacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 253, 180, -1));
 
         btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setToolTipText("Regresar");
         btnCancelar.setFocusable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

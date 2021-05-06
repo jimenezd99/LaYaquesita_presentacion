@@ -45,12 +45,21 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     }
 
     public final void setIconBotones() {
-        btnCancelar.setSize(28, 28);
-        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
-        btnCancelar.setText("");
-//        btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
-//        btnDescartarActuales.setText("");
-
+        this.limpiarBoton(btnCancelar);
+        this.limpiarBoton(btnEliminar);
+        this.limpiarBoton(btnGuardar);
+        this.limpiarBoton(btnActualizar);
+        btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
+        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
+        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
+        btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
+    }
+    public void limpiarBoton(JButton boton){
+        boton.setText("");
+        boton.setSize(76, 32);
+        boton.setPreferredSize(boton.getSize());
+        boton.setMaximumSize(boton.getSize());
+        boton.setMinimumSize(boton.getSize());
     }
 
     public void tamPantalla() {
@@ -111,7 +120,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrar usuarios");
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,6 +180,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
 
         txtIdUsuario.setEditable(false);
         txtIdUsuario.setBackground(new java.awt.Color(254, 244, 222));
+        txtIdUsuario.setFocusable(false);
         pnlCafecito.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 180, -1));
 
         cbxPuesto.setBackground(new java.awt.Color(254, 244, 222));
@@ -208,7 +218,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
 
         btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
         btnActualizar.setForeground(new java.awt.Color(91, 52, 46));
@@ -218,7 +228,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, -1, -1));
 
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setForeground(new java.awt.Color(91, 52, 46));
@@ -228,10 +238,12 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setText("Regresar");
+        btnCancelar.setToolTipText("Regresar");
         btnCancelar.setFocusable(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,8 +352,8 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = (boton.getWidth());
-        int largo = (boton.getHeight());
+        int ancho = (int)(boton.getWidth()/2.5);
+        int largo = (boton.getHeight()/2);
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;

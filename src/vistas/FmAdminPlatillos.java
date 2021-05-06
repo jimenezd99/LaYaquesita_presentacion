@@ -70,17 +70,27 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     }
 
     public final void setIconBotones() {
+        this.limpiarBoton(btnCancelar);
+        this.limpiarBoton(btnAgregarActuales);
+        this.limpiarBoton(btnDescartarActuales);
+        this.limpiarBoton(btnEliminar);
+        this.limpiarBoton(btnGuardar);
+        this.limpiarBoton(btnLimpiar);
+        this.limpiarBoton(btnActualizar);
         btnAgregarActuales.setIcon(setIcono("/images/izquierda.png", btnAgregarActuales));
-        btnAgregarActuales.setText("");
         btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
-        btnDescartarActuales.setText("");
-        btnCancelar.setSize(28, 28);
-        btnCancelar.setIcon(setIcono("/images/izquierda.png", btnCancelar));
-        btnCancelar.setText("");
-//        btnTomarOrden.setIcon(setIcono("/images/orden.png", btnTomarOrden));
-//        btnCerrarSesion.setIcon(setIcono("/images/flecha_izquierda.png", btnCerrarSesion));
-//        btnAdminUsuarios.setIcon(setIcono("/images/usuario.png", btnAdminUsuarios));
-
+        btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
+        btnLimpiar.setIcon(setIcono("/images/limpiar.png", btnLimpiar));
+        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
+        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
+        btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
+    }
+    public void limpiarBoton(JButton boton){
+        boton.setText("");
+        boton.setSize(76, 32);
+        boton.setPreferredSize(boton.getSize());
+        boton.setMaximumSize(boton.getSize());
+        boton.setMinimumSize(boton.getSize());
     }
 
     @SuppressWarnings("unchecked")
@@ -119,7 +129,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrar platillos");
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,6 +181,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         txtIdPlatillo.setEditable(false);
         txtIdPlatillo.setBackground(new java.awt.Color(254, 244, 222));
+        txtIdPlatillo.setFocusable(false);
         pnlCafecito.add(txtIdPlatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 171, -1));
 
         txtNombrePlatillo.setBackground(new java.awt.Color(254, 244, 222));
@@ -205,12 +216,13 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         btnGuardar.setBackground(new java.awt.Color(245, 133, 25));
         btnGuardar.setText("Guardar");
+        btnGuardar.setToolTipText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 610, -1, 70));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 80, 50));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(91, 52, 46));
@@ -219,30 +231,33 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         btnActualizar.setBackground(new java.awt.Color(245, 133, 25));
         btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 610, -1, 70));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, 70, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(245, 133, 25));
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setToolTipText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 610, -1, 70));
+        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 630, 70, 50));
 
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setText("Eliminar");
+        btnEliminar.setToolTipText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 610, -1, 70));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, 70, 50));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(91, 52, 46));
@@ -352,6 +367,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
+        btnCancelar.setToolTipText("Regresar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -662,8 +678,8 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = (int) (boton.getWidth());
-        int largo = (int) (boton.getHeight());
+        int ancho = (int) (boton.getWidth()/2.5);
+        int largo = (int) (boton.getHeight()/2);
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;

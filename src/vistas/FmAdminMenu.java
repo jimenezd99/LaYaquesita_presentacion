@@ -35,8 +35,8 @@ public class FmAdminMenu extends javax.swing.JFrame {
         tamPantalla();
 //        localizarBtn();
         setIconBotones();
-        platillos = new FmAdminPlatillos(usuarioActual);
         usuarioActual = usuario;
+        platillos = new FmAdminPlatillos(usuarioActual);
         principal = new FmPrincipal(usuarioActual);
         usuarios = new FmAdminUsuarios(usuarioActual);
         ingredientes = new FmAdminIngredientes(usuarioActual);
@@ -109,7 +109,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         btnAdminUsuarios = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menú Administrador");
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -170,6 +170,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         pnlCremita.add(btnAdminUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 250, 190));
 
         btnCerrarSesion.setBackground(new java.awt.Color(91, 52, 46));
+        btnCerrarSesion.setToolTipText("Cerrar Sesión");
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
@@ -255,8 +256,8 @@ public class FmAdminMenu extends javax.swing.JFrame {
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = boton.getWidth() / 3;
-        int largo = boton.getHeight() / 3;
+        int ancho = (int) (boton.getWidth() / 2.5);
+        int largo = (int) (boton.getHeight() / 2.5);
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;

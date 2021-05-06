@@ -93,6 +93,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="2e" green="34" red="5b" type="rgb"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Regresar"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
