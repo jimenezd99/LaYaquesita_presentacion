@@ -108,6 +108,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         btnAdminIngredientes = new javax.swing.JButton();
         btnAdminUsuarios = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menú Administrador");
@@ -177,6 +178,9 @@ public class FmAdminMenu extends javax.swing.JFrame {
             }
         });
         pnlCremita.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
+
+        btnConsultas.setText("Consultas");
+        pnlCremita.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 50));
 
         pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 610, 490));
 
@@ -268,6 +272,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAdminPlatillo;
     private javax.swing.JButton btnAdminUsuarios;
     private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnTomarOrden;
     private javax.swing.JLabel lblMenuAdministrador;
     private javax.swing.JPanel pnlCafecito;
