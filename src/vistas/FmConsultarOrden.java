@@ -5,12 +5,22 @@
  */
 package vistas;
 
+import Entidades.Orden;
+import fachadaLogica.FachadaDetalleOrden;
+import fachadaLogica.FachadaOrden;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jbran
  */
 public class FmConsultarOrden extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
+    FachadaDetalleOrden CDetalles = new FachadaDetalleOrden();
+    FachadaOrden COrden = new FachadaOrden();
+    
     public FmConsultarOrden() {
         initComponents();
     }
@@ -26,8 +36,11 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaOrdenes = new javax.swing.JTable();
         btnConsultarOrden = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDetalles = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -46,7 +59,7 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar orden"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -57,19 +70,81 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaOrdenes);
 
         jPanel1.add(jScrollPane1);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 520, 470));
 
         btnConsultarOrden.setText("Consultar");
+        btnConsultarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarOrdenActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnConsultarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de orden"));
+
+        tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaDetalles);
+
+        jPanel2.add(jScrollPane2);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 530, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOrdenActionPerformed
 
+        List<Orden> ordenes = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
+        cargarTabla(ordenes);
+
+    }//GEN-LAST:event_btnConsultarOrdenActionPerformed
+
+    private DefaultTableModel ordenesTableModel(List<Orden> lstOrdenes) {
+        Object tabla[][];
+        String[] nombreCols = {"ID", "Fecha", "Total", "Usuario"};
+        if (lstOrdenes != null) {
+            DefaultTableModel modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            tabla = new Object[lstOrdenes.size()][nombreCols.length];
+            for (int i = 0; i < lstOrdenes.size(); i++) {
+                Orden orden = lstOrdenes.get(i);
+                tabla[i][0] = orden.getFecha();
+                tabla[i][1] = orden.getTotal();
+                tabla[i][2] = orden.getUsuarios();
+            }
+            modelo.setDataVector(tabla, nombreCols);
+            return modelo;
+        }
+        return null;
+    }
+    
+   // private DefaultTableModel detallesOrdenTableModel(OrdenHasPlatillo)
+
+    private void cargarTabla(List<Orden> ordenes) {
+        tablaOrdenes.setModel(ordenesTableModel(ordenes));
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
 
         try {
@@ -106,7 +181,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaDetalles;
+    private javax.swing.JTable tablaOrdenes;
     // End of variables declaration//GEN-END:variables
 }
