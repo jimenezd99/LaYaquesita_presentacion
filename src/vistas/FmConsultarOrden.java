@@ -6,6 +6,7 @@
 package vistas;
 
 import Entidades.Orden;
+import Entidades.OrdenHasPlatillo;
 import fachadaLogica.FachadaDetalleOrden;
 import fachadaLogica.FachadaOrden;
 import java.util.List;
@@ -70,6 +71,11 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
             }
         ));
+        tablaOrdenes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaOrdenesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaOrdenes);
 
         jPanel1.add(jScrollPane1);
@@ -109,9 +115,19 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private void btnConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOrdenActionPerformed
 
         List<Orden> ordenes = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
-        cargarTabla(ordenes);
+        cargarTablaOrdenes(ordenes);
 
     }//GEN-LAST:event_btnConsultarOrdenActionPerformed
+
+    private void tablaOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOrdenesMouseClicked
+        
+        Orden aux = (Orden) (tablaOrdenes.getValueAt(tablaOrdenes.getSelectedRow(), 0));
+        
+       List<OrdenHasPlatillo> ohs = CDetalles.consultarDetalleOrden(aux);
+        cargarTablaDetalleOrdenes(ohs);
+        
+        
+    }//GEN-LAST:event_tablaOrdenesMouseClicked
 
     private DefaultTableModel ordenesTableModel(List<Orden> lstOrdenes) {
         Object tabla[][];
@@ -126,9 +142,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
             tabla = new Object[lstOrdenes.size()][nombreCols.length];
             for (int i = 0; i < lstOrdenes.size(); i++) {
                 Orden orden = lstOrdenes.get(i);
-                tabla[i][0] = orden.getFecha();
-                tabla[i][1] = orden.getTotal();
-                tabla[i][2] = orden.getUsuarios();
+                tabla[i][0] = orden;
+                tabla[i][1] = orden.getFecha();
+                tabla[i][2] = orden.getTotal();
+                tabla[i][3] = orden.getUsuarios();
             }
             modelo.setDataVector(tabla, nombreCols);
             return modelo;
@@ -136,12 +153,39 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         return null;
     }
     
-   // private DefaultTableModel detallesOrdenTableModel(OrdenHasPlatillo)
+    private DefaultTableModel detallesOrdenTableModel(List<OrdenHasPlatillo> lstOrdenes){
+        Object tabla[][];
+        String[] nombreCols = {"ID OHS","ID Orden", "ID Platillo", "Cantidad", "Notas", "Precio", };
+        if (lstOrdenes != null) {
+            DefaultTableModel modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            tabla = new Object[lstOrdenes.size()][nombreCols.length];
+            for (int i = 0; i < lstOrdenes.size(); i++) {
+                OrdenHasPlatillo ordenHasPlatillo = lstOrdenes.get(i);
+                tabla[i][0] = ordenHasPlatillo;
+                tabla[i][1] = ordenHasPlatillo.getOrden().getIdorden();
+                tabla[i][2] = ordenHasPlatillo.getPlatillo().getIdplatillo();
+                tabla[i][3] = ordenHasPlatillo.getCantidad();
+                tabla[i][4] = ordenHasPlatillo.getNotas();
+                tabla[i][5] = ordenHasPlatillo.getPrecio();
+            }
+            modelo.setDataVector(tabla, nombreCols);
+            return modelo;
+        }
+        return null;
+    }
 
-    private void cargarTabla(List<Orden> ordenes) {
+    private void cargarTablaOrdenes(List<Orden> ordenes) {
         tablaOrdenes.setModel(ordenesTableModel(ordenes));
     }
     
+    private void cargarTablaDetalleOrdenes(List<OrdenHasPlatillo> ordenes){
+        tablaDetalles.setModel(detallesOrdenTableModel(ordenes));
+    }
     
     
     

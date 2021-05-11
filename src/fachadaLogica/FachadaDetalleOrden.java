@@ -24,13 +24,13 @@ public class FachadaDetalleOrden {
         COrdenHasPlatillo = new OrdenHasPlatilloJpaController();
     }
 
-    public List<Orden> consultarDetalleOrden(Orden orden) {
+    public List<OrdenHasPlatillo> consultarDetalleOrden(Orden orden) {
         List<OrdenHasPlatillo> ordenes = COrdenHasPlatillo.findOrdenHasPlatilloEntities();
-        List<Orden> detalles = new ArrayList<>();
+        List<OrdenHasPlatillo> detalles = new ArrayList<>();
 
         for (OrdenHasPlatillo aux : ordenes) {
             if (Objects.equals(orden.getIdorden(), aux.getOrden().getIdorden())) { //Lo mismo que hacer == pero netbeans me lo recomendó
-                detalles.add(aux.getOrden());
+                detalles.add(aux);
 
             }
 
