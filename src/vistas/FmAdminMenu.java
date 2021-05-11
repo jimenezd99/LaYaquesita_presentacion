@@ -190,6 +190,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTomarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTomarOrdenActionPerformed
+        principal = new FmPrincipal(usuarioActual);
         principal.setVisible(true);
 //        dispose();
     }//GEN-LAST:event_btnTomarOrdenActionPerformed
