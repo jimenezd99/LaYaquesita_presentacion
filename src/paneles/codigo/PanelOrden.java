@@ -348,7 +348,7 @@ public class PanelOrden extends javax.swing.JPanel {
         float total = 0;
 
         for (Platillo platillo : platillos) {
-            total += platillo.getCosto();
+            total += platillo.getCosto()*platillo.getCantidad();
         }
 
         jlblTotal.setText("Total: $" + total);

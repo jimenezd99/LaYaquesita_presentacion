@@ -9,7 +9,7 @@ import Entidades.Ingredientes;
 import Entidades.OrdenHasPlatillo;
 import Entidades.Platillo;
 import Entidades.Usuarios;
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
 import fachadaLogica.FachadaIngredientes;
 import fachadaLogica.FachadaPlatillo;
 import java.awt.Dimension;
@@ -506,7 +506,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     private void txtCostoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyPressed
 
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c) && c != '.' && c != KeyEvent.VK_BACKSPACE) {
+        if (!Character.isDigit(c) && c != '.' && c != KeyEvent.VK_BACK_SPACE) {
             txtCosto.setEditable(false);
         } else {
             txtCosto.setEditable(true);

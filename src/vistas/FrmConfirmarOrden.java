@@ -39,7 +39,7 @@ public class FrmConfirmarOrden extends javax.swing.JFrame {
         pack();
         for (Platillo platillo : platillos) {
             txtPlatillos.append(platillo.toString() + "\n");
-            total+=platillo.getCosto();
+            total+=platillo.getCosto()*platillo.getCantidad();
         }
         
         txtPlatillos.append("-------------------------"

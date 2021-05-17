@@ -28,6 +28,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     FmLogin login;
     private Dimension sizePrincipal;
     private Dimension minSize;
+    FmConsultarOrden consultar;
 
     public FmAdminMenu(Usuarios usuario) {
         initComponents();
@@ -41,6 +42,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         usuarios = new FmAdminUsuarios(usuarioActual);
         ingredientes = new FmAdminIngredientes(usuarioActual);
         login = new FmLogin();
+        consultar=new FmConsultarOrden();
     }
 
     private FmAdminMenu() {
@@ -54,6 +56,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
         usuarios = new FmAdminUsuarios(usuarioActual);
         ingredientes = new FmAdminIngredientes(usuarioActual);
         login = new FmLogin();
+        consultar=new FmConsultarOrden();
     }
 
     public final void tamPantalla() {
@@ -180,6 +183,11 @@ public class FmAdminMenu extends javax.swing.JFrame {
         pnlCremita.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
 
         btnConsultas.setText("Consultas");
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
         pnlCremita.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 50));
 
         pnlCafecito.add(pnlCremita, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 610, 490));
@@ -214,6 +222,11 @@ public class FmAdminMenu extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        consultar.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnConsultasActionPerformed
 
     /**
      * @param args the command line arguments
