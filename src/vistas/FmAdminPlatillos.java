@@ -85,7 +85,8 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
         btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
     }
-    public void limpiarBoton(JButton boton){
+
+    public void limpiarBoton(JButton boton) {
         boton.setText("");
         boton.setSize(76, 32);
         boton.setPreferredSize(boton.getSize());
@@ -417,12 +418,14 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
             };
             tabla = new Object[lstplatillos.size()][nombreCols.length];
             for (int i = 0; i < lstplatillos.size(); i++) {
-                Platillo platillo = lstplatillos.get(i);
-                tabla[i][0] = platillo.getIdplatillo();
-                tabla[i][1] = platillo.getTipoProducto();
-                tabla[i][2] = platillo.getNombre();
-                tabla[i][3] = platillo.getCosto();
-                tabla[i][4] = platillo.getDescripcion();
+             
+                    Platillo platillo = lstplatillos.get(i);
+                    tabla[i][0] = platillo.getIdplatillo();
+                    tabla[i][1] = platillo.getTipoProducto();
+                    tabla[i][2] = platillo.getNombre();
+                    tabla[i][3] = platillo.getCosto();
+                    tabla[i][4] = platillo.getDescripcion();
+                
 
             }
             modelo.setDataVector(tabla, nombreCols);
@@ -595,8 +598,16 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-        platillos.eliminarPlatillo(Integer.parseInt(txtIdPlatillo.getText()));
+        Platillo platillo = new Platillo();
+        platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+        platillo.setNombre(txtNombrePlatillo.getText());
+        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+        platillo.setDescripcion("No disponible");
+        String tipoProducto = (String) cbxTipoProducto.getSelectedItem();
+        platillo.setTipoProducto(tipoProducto.toUpperCase());
+        platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+        platillo.setIngredientesList(ingredientesActuales);
+        platillos.editarPlatillo(platillo);
         cargarTablaPlatillos();
         limpiar();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -612,7 +623,26 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cargarTablaPlatillos() {
-        tablaPlatillos.setModel(platillosTableModel(platillos.consultarPlatillos()));
+        tablaPlatillos.setModel(platillosTableModel(getPlatillos()));
+    }
+    
+     public List getPlatillos() {
+        ArrayList<Platillo> platillosTemp = new ArrayList<>();
+        ArrayList<Platillo> platillosTempBD = new ArrayList<>();
+        try {
+            platillosTempBD.addAll(platillos.consultarPlatillos());
+            
+            for (Platillo platillo : platillosTempBD) {
+                if(!platillo.getDescripcion().equalsIgnoreCase("No disponible")){
+                    platillosTemp.add(platillo);
+                }
+            }
+            return platillosTemp;
+        } catch(Exception e){
+            System.out.println("Error al conectar con la BD");
+        }
+        return null;
+
     }
 
     private void cargarTablaIngredientesDisponibles() {
@@ -678,8 +708,8 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        int ancho = (int) (boton.getWidth()/2.5);
-        int largo = (int) (boton.getHeight()/2);
+        int ancho = (int) (boton.getWidth() / 2.5);
+        int largo = (int) (boton.getHeight() / 2);
         ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, largo, Image.SCALE_DEFAULT));
 
         return icono;

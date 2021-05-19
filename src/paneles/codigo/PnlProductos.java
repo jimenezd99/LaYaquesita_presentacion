@@ -54,8 +54,17 @@ public class PnlProductos extends JPanel {
     }
 
     public List getPlatillos() {
+        ArrayList<Platillo> platillosTemp = new ArrayList<>();
+        ArrayList<Platillo> platillosTempBD = new ArrayList<>();
         try {
-            return fachadaLogica.consultarPlatillos();
+            platillosTempBD.addAll(fachadaLogica.consultarPlatillos());
+            
+            for (Platillo platillo : platillosTempBD) {
+                if(!platillo.getDescripcion().equalsIgnoreCase("No disponible")){
+                    platillosTemp.add(platillo);
+                }
+            }
+            return platillosTemp;
         } catch(Exception e){
             System.out.println("Error al conectar con la BD");
         }
