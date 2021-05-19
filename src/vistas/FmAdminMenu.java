@@ -266,7 +266,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+                getImage(ClassLoader.getSystemResource("images/icon.png"));
 
         return retValue;
     }
