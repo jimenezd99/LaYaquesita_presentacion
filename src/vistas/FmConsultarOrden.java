@@ -159,7 +159,7 @@ public class FmConsultarOrden extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 40));
-        getContentPane().add(jLblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 550, 150, 20));
+        getContentPane().add(jLblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 550, 150, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

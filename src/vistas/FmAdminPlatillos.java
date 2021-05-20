@@ -53,7 +53,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         tamPantalla();
-        setIconBotones();
+        //setIconBotones();
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
@@ -223,7 +223,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 80, 50));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 630, 80, 50));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(91, 52, 46));
@@ -238,7 +238,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, 70, 50));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 630, 80, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(245, 133, 25));
         btnLimpiar.setText("Limpiar");
@@ -248,7 +248,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 630, 70, 50));
+        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, 70, 50));
 
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setText("Eliminar");
@@ -258,7 +258,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, 70, 50));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 630, 70, 50));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(91, 52, 46));
