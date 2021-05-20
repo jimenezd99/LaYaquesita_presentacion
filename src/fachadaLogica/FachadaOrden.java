@@ -10,6 +10,8 @@ import Entidades.Orden;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +54,9 @@ public class FachadaOrden {
                 if (!ord.getFecha().before(fechaInicio) && !ord.getFecha().after(fechaFinal)) {
                     ordenesPeriodo.add(ord);
                 }
+            }
+            if(ordenesPeriodo.isEmpty()){
+                JOptionPane.showMessageDialog(new JFrame(),"No se encontraron registros!", "Aviso", 0);
             }
         }
         return ordenesPeriodo;

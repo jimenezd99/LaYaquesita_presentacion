@@ -154,7 +154,7 @@ public class FmLogin extends javax.swing.JFrame {
 
             for (Usuarios usuario : usuarios) {
                 if (txtUsuario.getText().equalsIgnoreCase(usuario.getNombre())
-                        && txtContrasena.getText().equalsIgnoreCase(usuario.getContraseña())) {
+                        && txtContrasena.getText().equals(usuario.getContraseña())) {
 
                     if (usuario.getPuesto().equalsIgnoreCase("CAJERO")) {
                         principal = new FmPrincipal(usuario);

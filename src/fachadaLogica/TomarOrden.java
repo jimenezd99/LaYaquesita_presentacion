@@ -107,7 +107,7 @@ public class TomarOrden {
         float total = 0F;
 
         for (Platillo platillo : platillos) {
-            total += platillo.getCosto();
+            total += platillo.getCosto() * platillo.getCantidad();
         }
 
         return total;

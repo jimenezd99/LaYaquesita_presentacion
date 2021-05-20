@@ -225,7 +225,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         consultar.setVisible(true);
-        dispose();
+        //dispose();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     /**
