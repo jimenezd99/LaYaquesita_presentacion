@@ -54,6 +54,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         tamPantalla();
         //setIconBotones();
+        btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
@@ -223,7 +224,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 630, 80, 50));
+        pnlCafecito.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 630, 100, 50));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(91, 52, 46));
@@ -238,7 +239,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 630, 80, 50));
+        pnlCafecito.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 630, 100, 50));
 
         btnLimpiar.setBackground(new java.awt.Color(245, 133, 25));
         btnLimpiar.setText("Limpiar");
@@ -248,7 +249,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, 70, 50));
+        pnlCafecito.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, 90, 50));
 
         btnEliminar.setBackground(new java.awt.Color(245, 133, 25));
         btnEliminar.setText("Eliminar");
@@ -258,7 +259,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 630, 70, 50));
+        pnlCafecito.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 630, 80, 50));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(91, 52, 46));
@@ -374,7 +375,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        pnlCafecito.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 90, 40));
 
         getContentPane().add(pnlCafecito, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 700));
 
