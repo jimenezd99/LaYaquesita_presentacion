@@ -43,7 +43,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         this.usuarioActual = usuarioActual;
         this.setLocationRelativeTo(null);
         tamPantalla();
-        setIconBotones();
+        //setIconBotones();
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
