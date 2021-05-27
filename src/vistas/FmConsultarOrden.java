@@ -18,6 +18,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
+import reportes.GenerarReporte;
 
 /**
  *
@@ -29,10 +30,13 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     FachadaDetalleOrden CDetalles = new FachadaDetalleOrden();
     FachadaOrden COrden = new FachadaOrden();
     List<Orden> ordenes;
-    
+    List<Orden> ordenes1;
+    Date fechaInicio;
+    Date fechaFin;
     public FmConsultarOrden() {
         initComponents();
         setIconBotones();
+        btnGenerarReporte.setEnabled(false);
         jLblTotal.setFont(new java.awt.Font("Century Gothic", 1, 18));
         jLblTotal.setText("Total:");
     }
@@ -56,8 +60,9 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnAyer = new javax.swing.JButton();
         btnSemana = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnMes = new javax.swing.JButton();
         jLblTotal = new javax.swing.JLabel();
+        btnGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -152,24 +157,37 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         });
         getContentPane().add(btnSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, 40));
 
-        jButton3.setText("Este Mes");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnMes.setText("Este Mes");
+        btnMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnMesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 40));
+        getContentPane().add(btnMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 40));
         getContentPane().add(jLblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 550, 150, 20));
+
+        btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, -1, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOrdenActionPerformed
 
-        List<Orden> ordenes = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
-        cargarTablaOrdenes(ordenes);
-        this.ordenes = ordenes;
+        ordenes1 = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
+        cargarTablaOrdenes(ordenes1);
+        this.ordenes = ordenes1;
+        fechaInicio = JdtFechaInicio.getDate();
+        fechaFin = JdtFechaFin.getDate();
         calcularVentas();
+        if(!ordenes1.isEmpty()){
+            btnGenerarReporte.setEnabled(true);
+        }
     }//GEN-LAST:event_btnConsultarOrdenActionPerformed
 
     private void tablaOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOrdenesMouseClicked
@@ -194,9 +212,14 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         Date fechaHoy = new Date(hoy);
         
         
-        List<Orden> ordenes = COrden.consultarOrdenesPeriodo(fechaAyer, fechaHoy);
-        cargarTablaOrdenes(ordenes);
-        this.ordenes = ordenes;
+        ordenes1 = COrden.consultarOrdenesPeriodo(fechaAyer, fechaHoy);
+        cargarTablaOrdenes(ordenes1);
+        this.ordenes = ordenes1;
+        fechaInicio = fechaAyer;
+        fechaFin = fechaHoy;
+        if(!ordenes1.isEmpty()){
+            btnGenerarReporte.setEnabled(true);
+        }
         calcularVentas();
     }//GEN-LAST:event_btnAyerActionPerformed
 
@@ -205,22 +228,38 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         long semanaA = System.currentTimeMillis();
         Date fechaSemanaP = new Date(semanaA - semanaP);
         Date fechaSemanaA = new Date(semanaA);
-        List<Orden> ordenes = COrden.consultarOrdenesPeriodo(fechaSemanaP, fechaSemanaA);
-        cargarTablaOrdenes(ordenes);
-        this.ordenes = ordenes;
+        ordenes1 = COrden.consultarOrdenesPeriodo(fechaSemanaP, fechaSemanaA);
+        cargarTablaOrdenes(ordenes1);
+        this.ordenes = ordenes1;
+        fechaInicio = fechaSemanaP;
+        fechaFin = fechaSemanaA;
         calcularVentas();
+        if(!ordenes1.isEmpty()){
+            btnGenerarReporte.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_btnSemanaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesActionPerformed
         Date fTemp = new Date(System.currentTimeMillis());
         Date mesInicio = new Date(fTemp.getYear(), fTemp.getMonth(), 1);
         Date mesFin = new Date(fTemp.getYear(), fTemp.getMonth(), verificarDia(fTemp));
-        List<Orden> ordenes = COrden.consultarOrdenesPeriodo(mesInicio, mesFin);
-        cargarTablaOrdenes(ordenes);
-        this.ordenes = ordenes;
+        ordenes1 = COrden.consultarOrdenesPeriodo(mesInicio, mesFin);
+        cargarTablaOrdenes(ordenes1);
+        this.ordenes = ordenes1;
+        fechaInicio = mesInicio;
+        fechaFin = mesFin;
         calcularVentas();
+        if(!ordenes1.isEmpty()){
+            btnGenerarReporte.setEnabled(true);
+        }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnMesActionPerformed
+
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        GenerarReporte generarReporte = new GenerarReporte();
+        generarReporte.reporte(fechaInicio, fechaFin, ordenes1);
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     private void calcularVentas() {
         float total = 0;
@@ -367,8 +406,9 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private javax.swing.JButton btnAyer;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultarOrden;
+    private javax.swing.JButton btnGenerarReporte;
+    private javax.swing.JButton btnMes;
     private javax.swing.JButton btnSemana;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
