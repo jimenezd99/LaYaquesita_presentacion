@@ -86,6 +86,7 @@ public class GenerarReporte {
             celdaTitulo.setCellValue("Reporte de Ventas");
 
             sheet.addMergedRegion(new CellRangeAddress(1, 2, 1, 3));
+            
             String[] cabecera = new String[]{"Fecha", "Cantidad", "Platillo", "Precio", "Usuario"};
 
             CellStyle headerStyle = book.createCellStyle();
