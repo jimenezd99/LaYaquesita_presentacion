@@ -62,14 +62,14 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     
     public final void setIconBotones() {
         this.limpiarBoton(btnCancelar);
-        this.limpiarBoton(btnEliminar);
-        this.limpiarBoton(btnGuardar);
-        this.limpiarBoton(btnActualizar);
+//        this.limpiarBoton(btnEliminar);
+//        this.limpiarBoton(btnGuardar);
+//        this.limpiarBoton(btnActualizar);
         btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
-        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
-        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
-        btnEliminar.setIcon(setIcono("/images/limpiar.png", btnEliminar));
-        btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
+//        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
+//        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
+//        btnEliminar.setIcon(setIcono("/images/limpiar.png", btnEliminar));
+//        btnEliminar.setIcon(setIcono("/images/eliminar.png", btnEliminar));
     }
     public void limpiarBoton(JButton boton){
         boton.setText("");

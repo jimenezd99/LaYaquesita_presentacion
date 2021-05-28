@@ -11,6 +11,7 @@ import Entidades.Platillo;
 import fachadaLogica.FachadaDetalleOrden;
 import fachadaLogica.FachadaOrden;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,47 +42,58 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         btnGenerarReporte.setEnabled(false);
         jLblTotal.setFont(new java.awt.Font("Century Gothic", 1, 18));
         jLblTotal.setText("Total:");
+        setLocationRelativeTo(null);
+        pack();
+        this.setResizable(false);
     }
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("images/icon.png"));
+
+        return retValue;
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        JdtFechaInicio = new com.toedter.calendar.JDateChooser();
-        JdtFechaFin = new com.toedter.calendar.JDateChooser();
+        jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        JdtFechaInicio = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOrdenes = new javax.swing.JTable();
-        btnConsultarOrden = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetalles = new javax.swing.JTable();
-        btnCancelar = new javax.swing.JButton();
         btnAyer = new javax.swing.JButton();
+        JdtFechaFin = new com.toedter.calendar.JDateChooser();
         btnSemana = new javax.swing.JButton();
-        btnMes = new javax.swing.JButton();
-        jLblTotal = new javax.swing.JLabel();
         btnGenerarReporte = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLblTotal = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnMes = new javax.swing.JButton();
+        btnConsultarOrden = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar reporte de ventas");
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jLabel1.setText("CONSULTAR ORDENES");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
-        getContentPane().add(JdtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 250, -1));
-        getContentPane().add(JdtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 250, -1));
+        jPanel3.setBackground(new java.awt.Color(226, 207, 169));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setForeground(new java.awt.Color(91, 52, 46));
         jLabel2.setText("Fecha de inicio");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        jPanel3.add(JdtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 250, -1));
 
-        jLabel3.setText("Fecha de fin");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar orden"));
+        jPanel1.setBackground(new java.awt.Color(254, 244, 222));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Consultar orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
 
         tablaOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,17 +115,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 520, 470));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 500, 470));
 
-        btnConsultarOrden.setText("Consultar");
-        btnConsultarOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarOrdenActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnConsultarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 40));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de orden"));
+        jPanel2.setBackground(new java.awt.Color(254, 244, 222));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle de orden", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(245, 133, 25))); // NOI18N
 
         tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,7 +135,38 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane2);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, 530, 460));
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 490, 460));
+
+        btnAyer.setBackground(new java.awt.Color(245, 133, 25));
+        btnAyer.setForeground(new java.awt.Color(91, 52, 46));
+        btnAyer.setText("Ayer");
+        btnAyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyerActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAyer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, 40));
+        jPanel3.add(JdtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 250, -1));
+
+        btnSemana.setBackground(new java.awt.Color(245, 133, 25));
+        btnSemana.setForeground(new java.awt.Color(91, 52, 46));
+        btnSemana.setText("Esta Semana");
+        btnSemana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSemanaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, 40));
+
+        btnGenerarReporte.setBackground(new java.awt.Color(245, 133, 25));
+        btnGenerarReporte.setForeground(new java.awt.Color(91, 52, 46));
+        btnGenerarReporte.setText("Generar Reporte");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, -1, 50));
 
         btnCancelar.setBackground(new java.awt.Color(254, 244, 222));
         btnCancelar.setForeground(new java.awt.Color(91, 52, 46));
@@ -141,40 +177,39 @@ public class FmConsultarOrden extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 40));
+        jPanel3.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 40));
 
-        btnAyer.setText("Ayer");
-        btnAyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyerActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAyer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, 40));
+        jLabel3.setForeground(new java.awt.Color(91, 52, 46));
+        jLabel3.setText("Fecha de fin");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+        jPanel3.add(jLblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 550, 150, 20));
 
-        btnSemana.setText("Esta Semana");
-        btnSemana.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSemanaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, -1, 40));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(245, 133, 25));
+        jLabel1.setText("CONSULTAR ORDENES");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, -1, -1));
 
+        btnMes.setBackground(new java.awt.Color(245, 133, 25));
+        btnMes.setForeground(new java.awt.Color(91, 52, 46));
         btnMes.setText("Este Mes");
         btnMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 40));
-        getContentPane().add(jLblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 550, 150, 20));
+        jPanel3.add(btnMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, 40));
 
-        btnGenerarReporte.setText("Generar Reporte");
-        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultarOrden.setBackground(new java.awt.Color(245, 133, 25));
+        btnConsultarOrden.setForeground(new java.awt.Color(91, 52, 46));
+        btnConsultarOrden.setText("Consultar");
+        btnConsultarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarReporteActionPerformed(evt);
+                btnConsultarOrdenActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, -1, 50));
+        jPanel3.add(btnConsultarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 40));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1440, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -422,6 +457,7 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLblTotal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaDetalles;

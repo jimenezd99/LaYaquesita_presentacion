@@ -44,7 +44,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         this.usuarioActual = usuarioActual;
         this.setLocationRelativeTo(null);
         //tamPantalla();
-        //setIconBotones();
+        setIconBotones();
         cargarTablaPlatillos();
         cargarTablaIngredientesActuales();
         cargarTablaIngredientesDisponibles();
@@ -75,17 +75,17 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         this.limpiarBoton(btnCancelar);
         this.limpiarBoton(btnAgregarActuales);
         this.limpiarBoton(btnDescartarActuales);
-        this.limpiarBoton(btnDeshabilitar);
-        this.limpiarBoton(btnGuardar);
-        this.limpiarBoton(btnLimpiar);
-        this.limpiarBoton(btnActualizar);
+//        this.limpiarBoton(btnDeshabilitar);
+//        this.limpiarBoton(btnGuardar);
+//        this.limpiarBoton(btnLimpiar);
+//        this.limpiarBoton(btnActualizar);
         btnAgregarActuales.setIcon(setIcono("/images/izquierda.png", btnAgregarActuales));
         btnDescartarActuales.setIcon(setIcono("/images/derecha.png", btnAgregarActuales));
         btnCancelar.setIcon(setIcono("/images/arrowleft.png", btnCancelar));
-        btnLimpiar.setIcon(setIcono("/images/limpiar.png", btnLimpiar));
-        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
-        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
-        btnDeshabilitar.setIcon(setIcono("/images/eliminar.png", btnDeshabilitar));
+//        btnLimpiar.setIcon(setIcono("/images/limpiar.png", btnLimpiar));
+//        btnGuardar.setIcon(setIcono("/images/guardar.png", btnGuardar));
+//        btnActualizar.setIcon(setIcono("/images/actualizar.png", btnActualizar));
+//        btnDeshabilitar.setIcon(setIcono("/images/eliminar.png", btnDeshabilitar));
     }
 
     public void limpiarBoton(JButton boton) {

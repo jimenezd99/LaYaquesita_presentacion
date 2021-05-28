@@ -182,6 +182,8 @@ public class FmAdminMenu extends javax.swing.JFrame {
         });
         pnlCremita.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 50, 50));
 
+        btnConsultas.setBackground(new java.awt.Color(245, 133, 25));
+        btnConsultas.setForeground(new java.awt.Color(91, 52, 46));
         btnConsultas.setText("Consultas");
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
