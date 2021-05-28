@@ -557,46 +557,52 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     //Tengo dudas en este actualizar
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         Platillo platillo = new Platillo();
-        switch (cbxTipoProducto.getSelectedIndex()) {
-            case 0:
-                if (!ingredientesActuales.isEmpty()) {
+        if (txtNombrePlatillo.getText() == null || txtDescripcion.getText() == null || txtCosto.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
+        } else {
+
+            switch (cbxTipoProducto.getSelectedIndex()) {
+                case 0:
+                    if (!ingredientesActuales.isEmpty()) {
+                        platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+                        platillo.setNombre(txtNombrePlatillo.getText());
+                        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                        platillo.setDescripcion(txtDescripcion.getText());
+                        platillo.setIngredientesList(ingredientesActuales);
+                        platillo.setTipoProducto("HOTDOG");
+                        platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                        platillos.editarPlatillo(platillo);
+                        JOptionPane.showMessageDialog(null, "Se ha actualizado el platillo.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
+                    }
+                    break;
+
+                case 1:
                     platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
                     platillo.setNombre(txtNombrePlatillo.getText());
                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
                     platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setIngredientesList(ingredientesActuales);
-                    platillo.setTipoProducto("HOTDOG");
+                    platillo.setTipoProducto("BEBIDA");
                     platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                    platillo.setIngredientesList(new ArrayList());
                     platillos.editarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha actualizado el platillo.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
-                }
-                break;
+                    JOptionPane.showMessageDialog(null, "Se ha actualizado la bebida.");
+                    break;
+                case 2:
+                    platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("EXTRA");
+                    platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha actualizado el extra.");
+                    platillos.editarPlatillo(platillo);
+                    break;
+            }
 
-            case 1:
-                platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
-                platillo.setNombre(txtNombrePlatillo.getText());
-                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                platillo.setDescripcion(txtDescripcion.getText());
-                platillo.setTipoProducto("BEBIDA");
-                platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-                platillo.setIngredientesList(new ArrayList());
-                platillos.editarPlatillo(platillo);
-                JOptionPane.showMessageDialog(null, "Se ha actualizado la bebida.");
-                break;
-            case 2:
-                platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
-                platillo.setNombre(txtNombrePlatillo.getText());
-                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                platillo.setDescripcion(txtDescripcion.getText());
-                platillo.setTipoProducto("EXTRA");
-                platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-                platillo.setIngredientesList(new ArrayList());
-                platillos.registrarPlatillo(platillo);
-                JOptionPane.showMessageDialog(null, "Se ha actualizado el extra.");
-                platillos.editarPlatillo(platillo);
-                break;
         }
         limpiar();
         cargarTablaPlatillos();
@@ -605,17 +611,22 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Platillo platillo = new Platillo();
-        platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
-        platillo.setNombre(txtNombrePlatillo.getText());
-        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-        platillo.setDescripcion("No disponible");
-        String tipoProducto = (String) cbxTipoProducto.getSelectedItem();
-        platillo.setTipoProducto(tipoProducto.toUpperCase());
-        platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
-        platillo.setIngredientesList(ingredientesActuales);
-        platillos.editarPlatillo(platillo);
-        cargarTablaPlatillos();
-        limpiar();
+
+        if (txtNombrePlatillo.getText() == null || txtDescripcion.getText() == null || txtCosto.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
+        } else {
+            platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));
+            platillo.setNombre(txtNombrePlatillo.getText());
+            platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+            platillo.setDescripcion("No disponible");
+            String tipoProducto = (String) cbxTipoProducto.getSelectedItem();
+            platillo.setTipoProducto(tipoProducto.toUpperCase());
+            platillo.setOrdenHasPlatilloList(new ArrayList<OrdenHasPlatillo>()); //Esto es hardcode (?) 13/04/2021
+            platillo.setIngredientesList(ingredientesActuales);
+            platillos.editarPlatillo(platillo);
+            cargarTablaPlatillos();
+            limpiar();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
