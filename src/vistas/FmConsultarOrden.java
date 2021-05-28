@@ -34,6 +34,7 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     List<Orden> ordenes1;
     Date fechaInicio;
     Date fechaFin;
+
     public FmConsultarOrden() {
         initComponents();
         setIconBotones();
@@ -181,9 +182,9 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private void btnConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOrdenActionPerformed
 
         if (JdtFechaInicio.getDate() == null || JdtFechaFin.getDate() == null) {
-            
+
             JOptionPane.showMessageDialog(null, "Seleccione ambas fechas. ");
-            
+
         } else {
 
             ordenes1 = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
@@ -199,17 +200,17 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarOrdenActionPerformed
 
     private void tablaOrdenesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOrdenesMouseClicked
-        
+
         Orden aux = (Orden) (tablaOrdenes.getValueAt(tablaOrdenes.getSelectedRow(), 0));
-        
-       List<OrdenHasPlatillo> ohs = CDetalles.consultarDetalleOrden(aux);
+
+        List<OrdenHasPlatillo> ohs = CDetalles.consultarDetalleOrden(aux);
         cargarTablaDetalleOrdenes(ohs);
-        
-        
+
+
     }//GEN-LAST:event_tablaOrdenesMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -218,14 +219,13 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         long hoy = System.currentTimeMillis();
         Date fechaAyer = new Date(hoy - ayer);
         Date fechaHoy = new Date(hoy);
-        
-        
+
         ordenes1 = COrden.consultarOrdenesPeriodo(fechaAyer, fechaHoy);
         cargarTablaOrdenes(ordenes1);
         this.ordenes = ordenes1;
         fechaInicio = fechaAyer;
         fechaFin = fechaHoy;
-        if(!ordenes1.isEmpty()){
+        if (!ordenes1.isEmpty()) {
             btnGenerarReporte.setEnabled(true);
         }
         calcularVentas();
@@ -242,10 +242,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         fechaInicio = fechaSemanaP;
         fechaFin = fechaSemanaA;
         calcularVentas();
-        if(!ordenes1.isEmpty()){
+        if (!ordenes1.isEmpty()) {
             btnGenerarReporte.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_btnSemanaActionPerformed
 
     private void btnMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesActionPerformed
@@ -258,10 +258,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         fechaInicio = mesInicio;
         fechaFin = mesFin;
         calcularVentas();
-        if(!ordenes1.isEmpty()){
+        if (!ordenes1.isEmpty()) {
             btnGenerarReporte.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_btnMesActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
@@ -277,9 +277,9 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         }
         jLblTotal.setText("Total: $" + total);
     }
-    
-    private int verificarDia(Date fecha){
-        switch(fecha.getMonth()){
+
+    private int verificarDia(Date fecha) {
+        switch (fecha.getMonth()) {
             case 0:
                 return 31;
             case 1:
@@ -307,9 +307,11 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         }
         return 0;
     }
+
     public final void setIconBotones() {
         btnCancelar.setIcon(setIcono("/images/salir.png", btnCancelar));
     }
+
     public Icon setIcono(String url, JButton boton) {
 
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
@@ -319,7 +321,7 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
         return icono;
     }
-    
+
     private DefaultTableModel ordenesTableModel(List<Orden> lstOrdenes) {
         Object tabla[][];
         String[] nombreCols = {"ID", "Fecha", "Total", "Usuario"};
@@ -343,10 +345,10 @@ public class FmConsultarOrden extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    private DefaultTableModel detallesOrdenTableModel(List<OrdenHasPlatillo> lstOrdenes){
+
+    private DefaultTableModel detallesOrdenTableModel(List<OrdenHasPlatillo> lstOrdenes) {
         Object tabla[][];
-        String[] nombreCols = {"ID OHS","ID Orden", "ID Platillo", "Cantidad", "Notas", "Precio", };
+        String[] nombreCols = {"ID OHS", "ID Orden", "ID Platillo", "Cantidad", "Notas", "Precio",};
         if (lstOrdenes != null) {
             DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
@@ -373,13 +375,11 @@ public class FmConsultarOrden extends javax.swing.JFrame {
     private void cargarTablaOrdenes(List<Orden> ordenes) {
         tablaOrdenes.setModel(ordenesTableModel(ordenes));
     }
-    
-    private void cargarTablaDetalleOrdenes(List<OrdenHasPlatillo> ordenes){
+
+    private void cargarTablaDetalleOrdenes(List<OrdenHasPlatillo> ordenes) {
         tablaDetalles.setModel(detallesOrdenTableModel(ordenes));
     }
-    
-    
-    
+
     public static void main(String args[]) {
 
         try {
@@ -399,7 +399,6 @@ public class FmConsultarOrden extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FmConsultarOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

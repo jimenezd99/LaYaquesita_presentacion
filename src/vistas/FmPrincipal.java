@@ -41,7 +41,7 @@ public class FmPrincipal extends javax.swing.JFrame {
         notasOrden = "";
         platillos = new ArrayList<>();
         this.usuarioActual=usuarioActual;
-        tamPantalla();
+        //tamPantalla();
         this.ticket = new PanelOrden(this);
         this.menu = new PnlMenu(this, new Point(ticket.getWidth(), 0));
         this.productos= new PnlProductos(this, new Point(ticket.getWidth(), menu.getHeight()));

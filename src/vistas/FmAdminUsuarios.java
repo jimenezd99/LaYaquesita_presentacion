@@ -31,7 +31,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
         initComponents();
         this.usuarioActual = usuarioActual;
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         cargarTabla();
     }
@@ -39,7 +39,7 @@ public class FmAdminUsuarios extends javax.swing.JFrame {
     private FmAdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         cargarTabla();
     }

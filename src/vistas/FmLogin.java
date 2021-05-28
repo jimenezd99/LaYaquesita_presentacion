@@ -35,7 +35,7 @@ public class FmLogin extends javax.swing.JFrame {
         initComponents();
         usuarios = FUsuarios.consultarUsuarios();
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         //
         //

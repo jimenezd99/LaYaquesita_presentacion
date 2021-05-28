@@ -37,7 +37,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.usuarioActual = usuarioActual;
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         cargarTabla();
     }

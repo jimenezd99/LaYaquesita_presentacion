@@ -33,7 +33,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     public FmAdminMenu(Usuarios usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
 //        localizarBtn();
         setIconBotones();
         usuarioActual = usuario;
