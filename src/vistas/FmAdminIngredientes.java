@@ -37,7 +37,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.usuarioActual = usuarioActual;
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         cargarTabla();
     }
@@ -346,7 +346,7 @@ public class FmAdminIngredientes extends javax.swing.JFrame {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+                getImage(ClassLoader.getSystemResource("images/icon.png"));
 
         return retValue;
     }

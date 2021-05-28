@@ -33,7 +33,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     public FmAdminMenu(Usuarios usuario) {
         initComponents();
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
 //        localizarBtn();
         setIconBotones();
         usuarioActual = usuario;
@@ -225,7 +225,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         consultar.setVisible(true);
-        dispose();
+        //dispose();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     /**
@@ -266,7 +266,7 @@ public class FmAdminMenu extends javax.swing.JFrame {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+                getImage(ClassLoader.getSystemResource("images/icon.png"));
 
         return retValue;
     }

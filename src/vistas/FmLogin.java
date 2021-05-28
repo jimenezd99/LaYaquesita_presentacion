@@ -35,7 +35,7 @@ public class FmLogin extends javax.swing.JFrame {
         initComponents();
         usuarios = FUsuarios.consultarUsuarios();
         this.setLocationRelativeTo(null);
-        tamPantalla();
+        //tamPantalla();
         setIconBotones();
         //
         //
@@ -154,7 +154,7 @@ public class FmLogin extends javax.swing.JFrame {
 
             for (Usuarios usuario : usuarios) {
                 if (txtUsuario.getText().equalsIgnoreCase(usuario.getNombre())
-                        && txtContrasena.getText().equalsIgnoreCase(usuario.getContraseña())) {
+                        && txtContrasena.getText().equals(usuario.getContraseña())) {
 
                     if (usuario.getPuesto().equalsIgnoreCase("CAJERO")) {
                         principal = new FmPrincipal(usuario);
@@ -227,7 +227,7 @@ public class FmLogin extends javax.swing.JFrame {
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("\\images\\icon.png"));
+                getImage(ClassLoader.getSystemResource("images/icon.png"));
 
         return retValue;
     }
