@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reportes.GenerarReporte;
 
@@ -179,14 +180,21 @@ public class FmConsultarOrden extends javax.swing.JFrame {
 
     private void btnConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarOrdenActionPerformed
 
-        ordenes1 = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
-        cargarTablaOrdenes(ordenes1);
-        this.ordenes = ordenes1;
-        fechaInicio = JdtFechaInicio.getDate();
-        fechaFin = JdtFechaFin.getDate();
-        calcularVentas();
-        if(!ordenes1.isEmpty()){
-            btnGenerarReporte.setEnabled(true);
+        if (JdtFechaInicio.getDate() == null || JdtFechaFin.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(null, "Seleccione ambas fechas. ");
+            
+        } else {
+
+            ordenes1 = COrden.consultarOrdenesPeriodo(JdtFechaInicio.getDate(), JdtFechaFin.getDate());
+            cargarTablaOrdenes(ordenes1);
+            this.ordenes = ordenes1;
+            fechaInicio = JdtFechaInicio.getDate();
+            fechaFin = JdtFechaFin.getDate();
+            calcularVentas();
+            if (!ordenes1.isEmpty()) {
+                btnGenerarReporte.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_btnConsultarOrdenActionPerformed
 

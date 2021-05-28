@@ -465,42 +465,47 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         Platillo platillo = new Platillo();
-        switch (cbxTipoProducto.getSelectedIndex()) {
-            case 0:
-                if (!ingredientesActuales.isEmpty()) {
+
+        if (txtNombrePlatillo.getText() == null || txtDescripcion.getText() == null || txtCosto.getText() == null) {
+                JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
+        } else {
+
+            switch (cbxTipoProducto.getSelectedIndex()) {
+                case 0:
+                    if (!ingredientesActuales.isEmpty()) {
+                        platillo.setNombre(txtNombrePlatillo.getText());
+                        platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                        platillo.setDescripcion(txtDescripcion.getText());
+                        platillo.setIngredientesList(ingredientesActuales);
+                        platillo.setTipoProducto("HOTDOG");
+                        platillos.registrarPlatillo(platillo);
+                        JOptionPane.showMessageDialog(null, "Se ha agregado el platillo.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
+                    }
+                    break;
+
+                case 1:
                     platillo.setNombre(txtNombrePlatillo.getText());
                     platillo.setCosto(Float.parseFloat(txtCosto.getText()));
                     platillo.setDescripcion(txtDescripcion.getText());
-                    platillo.setIngredientesList(ingredientesActuales);
-                    platillo.setTipoProducto("HOTDOG");
+                    platillo.setTipoProducto("BEBIDA");
+                    platillo.setIngredientesList(new ArrayList());
                     platillos.registrarPlatillo(platillo);
-                    JOptionPane.showMessageDialog(null, "Se ha agregado el platillo.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Agregue un ingrediente al platillo.");
-                }
-                break;
+                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+                    break;
 
-            case 1:
-                platillo.setNombre(txtNombrePlatillo.getText());
-                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                platillo.setDescripcion(txtDescripcion.getText());
-                platillo.setTipoProducto("BEBIDA");
-                platillo.setIngredientesList(new ArrayList());
-                platillos.registrarPlatillo(platillo);
-                JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
-                break;
-
-            case 2:
-                platillo.setNombre(txtNombrePlatillo.getText());
-                platillo.setCosto(Float.parseFloat(txtCosto.getText()));
-                platillo.setDescripcion(txtDescripcion.getText());
-                platillo.setTipoProducto("EXTRA");
-                platillo.setIngredientesList(new ArrayList());
-                platillos.registrarPlatillo(platillo);
-                JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
-                break;
+                case 2:
+                    platillo.setNombre(txtNombrePlatillo.getText());
+                    platillo.setCosto(Float.parseFloat(txtCosto.getText()));
+                    platillo.setDescripcion(txtDescripcion.getText());
+                    platillo.setTipoProducto("EXTRA");
+                    platillo.setIngredientesList(new ArrayList());
+                    platillos.registrarPlatillo(platillo);
+                    JOptionPane.showMessageDialog(null, "Se ha agregado la bebida.");
+                    break;
+            }
         }
-
         cargarTablaPlatillos();
         limpiar();
 
