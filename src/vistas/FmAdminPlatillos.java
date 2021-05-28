@@ -466,7 +466,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
 
         Platillo platillo = new Platillo();
 
-        if (txtNombrePlatillo.getText() == null || txtDescripcion.getText() == null || txtCosto.getText() == null) {
+        if (txtNombrePlatillo.getText().isEmpty() || txtDescripcion.getText().isEmpty() || txtCosto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
         } else {
 
@@ -557,7 +557,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
     //Tengo dudas en este actualizar
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         Platillo platillo = new Platillo();
-        if (txtNombrePlatillo.getText().isBlank() || txtDescripcion.getText().isBlank() || txtCosto.getText().isBlank()) {
+        if (txtNombrePlatillo.getText().isEmpty() || txtDescripcion.getText().isEmpty() || txtCosto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
         } else {
 
@@ -615,7 +615,7 @@ public class FmAdminPlatillos extends javax.swing.JFrame {
         int resp = JOptionPane.showConfirmDialog(this, "¿Estás seguro que deseas eliminar?", "Alerta", JOptionPane.INFORMATION_MESSAGE);
         
         if (resp == 0) {
-            if (txtNombrePlatillo.getText().isBlank() || txtDescripcion.getText().isBlank() || txtCosto.getText().isBlank()) {
+            if (txtNombrePlatillo.getText().isEmpty() || txtDescripcion.getText().isEmpty() || txtCosto.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor completa todos los campos.");
             } else {
                 platillo.setIdplatillo(Integer.parseInt(txtIdPlatillo.getText()));

@@ -188,7 +188,9 @@ public class PnlProductos extends JPanel {
                     personalizar.setVisible(true);
                     personalizar.setIngredientesPlatillo(getPlatillo(boton.getText()));
                 } else {
-                    tomarOrden.getPanelOrden().addPlatillo(getPlatillo(boton.getText()));
+                    Platillo platillo = getPlatillo(boton.getText());
+                    platillo.setCantidad(1);
+                    tomarOrden.getPanelOrden().addPlatillo(platillo);
                 }
                 boton.setSelected(false);
             }
